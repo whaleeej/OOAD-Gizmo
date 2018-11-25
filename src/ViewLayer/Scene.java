@@ -15,7 +15,7 @@ public class Scene extends JFrame
     {
         super("GizmoScene");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(1300, 700);
+        this.setSize(1300, 720);
         this.setLocationRelativeTo(null);
         this.add(jp);
         this.setVisible(true);
