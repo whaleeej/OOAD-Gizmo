@@ -104,7 +104,7 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
             {
                 radian=Math.PI/2.0;
                 direction=true;
-                //isRotate=false;
+                isRotate=false;
             }
             if(radian>=Math.PI)
             {
