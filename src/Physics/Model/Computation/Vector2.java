@@ -1,4 +1,4 @@
-package ModelLayer.Computation;
+package Physics.Model.Computation;
 
 import static java.lang.Math.sqrt;
 

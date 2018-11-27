@@ -1,6 +1,6 @@
-package ModelLayer.PhysicEngine;
+package Physics.Model.Elements;
 
-import ModelLayer.Computation.Vector2;
+import Physics.Model.Computation.Vector2;
 
 import java.awt.*;
 
@@ -9,8 +9,8 @@ public class AABB extends RigidBody implements Texture ,Geometry{
     public Vector2 max;
     public Color color;
 
-    public AABB(double m, Vector2 g, Vector2 v,double e, double x_min,double y_min,double width, double height) {
-        super(m, g, v,e);
+    public AABB(double m, Vector2 g, Vector2 v,double e, double x_min,double y_min,double width, double height,boolean isKe) {
+        super(m, g, v,e,isKe);
         color=new Color(0,0,0);
         min=new Vector2(x_min,y_min);
         max=new Vector2(x_min+width,y_min+height);

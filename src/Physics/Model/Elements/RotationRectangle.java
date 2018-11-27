@@ -1,12 +1,10 @@
-package ModelLayer.PhysicEngine;
+package Physics.Model.Elements;
 
-import ModelLayer.Computation.Vector2;
+import Physics.Model.Computation.Vector2;
 
 import java.awt.*;
 import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Vector;
 
 public class RotationRectangle extends RigidBody implements Geometry, Texture{
     public Vector2 endPoint;
@@ -23,12 +21,11 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
 
     public RotationRectangle(double endx,double endy, double w,double l,boolean isleft,char key) {
 
-        super(0, new Vector2(0,0), new Vector2(0,0), 1);
+        super(0, new Vector2(0,0), new Vector2(0,0), 1,true);
         endPoint=new Vector2(endx,endy);
         widtd=w;
         length=l;
         radian=Math.PI/2.0;
-        isKinematic=true;//Not to Collide with other Kenerma
         this.isLeft=isleft;
 
         //Add a Keyboard Listener

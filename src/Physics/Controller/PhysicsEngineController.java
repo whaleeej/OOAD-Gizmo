@@ -1,9 +1,7 @@
-package ControllerLayer;
+package Physics.Controller;
 
-import ModelLayer.Computation.Vector2;
-import ModelLayer.PhysicEngine.*;
-import ViewLayer.GeoRender;
-import ViewLayer.Scene;
+import Physics.Model.Computation.Vector2;
+import Physics.Model.Elements.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,38 +9,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class GameManager implements ActionListener {
-    private static int ticks;
+public class   PhysicsEngineController implements ActionListener {
+    public static int ticks=25; //frame rate is 40 FPS;
 
     Vector<RigidBody> rigids;
     Vector<RigidBody> flippers;
     private Timer timer;
-    public  GeoRender geoRender;
+    public  PhysicsRender phyRender;
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        geoRender.updateGeometries(rigids);
-        geoRender.repaint();
+        phyRender.updateGeometries(rigids);
+        phyRender.repaint();
         updateLocation();
     }
 
-    public GameManager()
+    public PhysicsEngineController(PhysicsRender pr)
     {
         //Initial the worlds
         rigids=new Vector<RigidBody>();
         worldInitial();
 
-        //new world renderer
-        geoRender=new GeoRender();
-
-        //New Container:Jframe for the geoRender;
-        Scene scene=new Scene(geoRender);
+        //give renderer
+        phyRender=pr;
 
         //Start the render
-        ticks=25; //frame rate is 40 FPS
         timer = new Timer(ticks,this);
         timer.start();
+
     }
 
     //Update the Location of all objs in the world by three steps
@@ -75,38 +70,38 @@ public class GameManager implements ActionListener {
         RigidBody rigid;
 
         //walls
-        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,0,0,1,63);//Left
+        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,0,0,1,63,false);//Left
         ((Texture)rigid).setColor(new Color(0,0,0));
         rigids.add(rigid);
-        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,0,63,128,1);//Middle
+        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,0,63,128,1,false);//Middle
         ((Texture)rigid).setColor(new Color(0,0,0));
         rigids.add(rigid);
-        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,127,0,1,63);//Right
+        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,127,0,1,63,false);//Right
         ((Texture)rigid).setColor(new Color(0,0,0));
         rigids.add(rigid);
-        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,0,-1,128,1);//Up
+        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,0,-1,128,1,false);//Up
         ((Texture)rigid).setColor(new Color(0,0,0));
         rigids.add(rigid);
 
         //Circles
-        rigid=new Circle(5,gravity,new Vector2(-5,5),0.7,100,0,2);
+        rigid=new Circle(5,gravity,new Vector2(-5,5),0.7,100,0,2,false);
         ((Texture)rigid).setColor(new Color(255,0,0));
         rigids.add(rigid);
-        rigid=new Circle(5,gravity,new Vector2(2,1),0.9,70,0,2);
+        rigid=new Circle(5,gravity,new Vector2(2,1),0.9,70,0,2,false);
         ((Texture)rigid).setColor(new Color(0,255,0));
         rigids.add(rigid);
-        rigid=new Circle(5,gravity,new Vector2(-2,-1),0.9,65,10,2);
+        rigid=new Circle(5,gravity,new Vector2(-2,-1),0.9,65,10,2,false);
         ((Texture)rigid).setColor(new Color(255,0,255));
         rigids.add(rigid);
 
         //Boxes
-        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,90,20,2,3);
+        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,90,20,2,3,true);
         ((Texture)rigid).setColor(new Color(255,0,0));
         rigids.add(rigid);
-        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,20,35,5,4);
+        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,20,35,5,4,true);
         ((Texture)rigid).setColor(new Color(0,255,0));
         rigids.add(rigid);
-        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,100,55,4,2);
+        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,100,55,4,2,true);
         ((Texture)rigid).setColor(new Color(255,0,255));
         rigids.add(rigid);
 

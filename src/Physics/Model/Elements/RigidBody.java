@@ -1,8 +1,6 @@
-package ModelLayer.PhysicEngine;
+package Physics.Model.Elements;
 
-import ModelLayer.Computation.Vector2;
-
-import java.awt.*;
+import Physics.Model.Computation.Vector2;
 
 //Abstract class of all objects in the Physical world
 //Mass=0 -> Mass=Inf -> Mass= 0
@@ -16,7 +14,7 @@ public abstract class RigidBody {
     public boolean isKinematic=false;
 
     //m=0, mass will be infinity
-    public RigidBody(double m,Vector2 g,Vector2 v,double e)
+    public RigidBody(double m,Vector2 g,Vector2 v,double e,boolean isKinematic)
     {
         if(m==0)
         {
@@ -28,6 +26,7 @@ public abstract class RigidBody {
             mass=m;
             massInv=1.0/mass;
         }
+        isKinematic=isKinematic;
         gravity=new Vector2(g);
         velocity=new Vector2(v);
         epsilon=e;
