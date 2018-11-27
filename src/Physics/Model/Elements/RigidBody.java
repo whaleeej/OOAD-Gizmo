@@ -26,7 +26,7 @@ public abstract class RigidBody {
             mass=m;
             massInv=1.0/mass;
         }
-        isKinematic=isKinematic;
+        this.isKinematic=isKinematic;
         gravity=new Vector2(g);
         velocity=new Vector2(v);
         epsilon=e;

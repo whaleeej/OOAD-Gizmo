@@ -55,7 +55,7 @@ public class   PhysicsEngineController implements ActionListener {
             {
                 for(int j=i+1;j<rigids.size();j++)
                 {
-                    if(!rigids.elementAt(i).isKinematic&&!rigids.elementAt(i).isKinematic)
+                    if(!rigids.elementAt(i).isKinematic||!rigids.elementAt(j).isKinematic)
                         new ImpulseResolutionModel(rigids.elementAt(i),rigids.elementAt(j));
                 }
             }
@@ -95,13 +95,13 @@ public class   PhysicsEngineController implements ActionListener {
         rigids.add(rigid);
 
         //Boxes
-        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,90,20,2,3,true);
+        rigid=new AABB(20,gravity0,new Vector2(-10,0),0.7,90,20,2,3,true);
         ((Texture)rigid).setColor(new Color(255,0,0));
         rigids.add(rigid);
-        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,20,35,5,4,true);
+        rigid=new AABB(20,gravity0,new Vector2(10,0),0.7,20,20,5,4,true);
         ((Texture)rigid).setColor(new Color(0,255,0));
         rigids.add(rigid);
-        rigid=new AABB(0,gravity0,new Vector2(0,0),0.7,100,55,4,2,true);
+        rigid=new AABB(20,gravity0,new Vector2(0,0),0.7,100,55,4,2,true);
         ((Texture)rigid).setColor(new Color(255,0,255));
         rigids.add(rigid);
 
