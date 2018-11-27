@@ -55,6 +55,7 @@ public class   PhysicsEngineController implements ActionListener {
             {
                 for(int j=i+1;j<rigids.size();j++)
                 {
+                    //aa
                     if(!rigids.elementAt(i).isKinematic||!rigids.elementAt(j).isKinematic)
                         new ImpulseResolutionModel(rigids.elementAt(i),rigids.elementAt(j));
                 }
