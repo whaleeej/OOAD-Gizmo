@@ -1,4 +1,4 @@
-package ModelLayer.PhysicEngine;
+package Physics.Model.Elements;
 
 import java.awt.*;
 

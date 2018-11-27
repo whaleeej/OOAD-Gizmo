@@ -1,24 +1,28 @@
-package ViewLayer;
+package Game;
 
-import ModelLayer.Computation.Vector2;
-import ModelLayer.PhysicEngine.*;
+import Physics.Controller.PhysicsEngineController;
+import Physics.Controller.PhysicsRender;
+import Physics.Model.Elements.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.Vector;
 
-public class GeoRender extends JPanel
+//The view of the game must implement Interface PhysicsRender to use the Physicworld
+public class GameRender extends JPanel implements PhysicsRender
 {
+
     private int frameCount;
     private double scale; // The scale of Screen size v.s. RealWorld
     private Vector<RigidBody> rigids;
-    public GeoRender()
+
+    public GameRender()
     {
         //Initial member
         scale=10.0;
         //Count the frames
         frameCount=0;
+
     }
 
     public void updateGeometries(Vector<RigidBody> g)
@@ -31,7 +35,6 @@ public class GeoRender extends JPanel
     {
         super.paintComponent(g);
         if(rigids==null) return;
-        frameCount++;
         for(RigidBody rigid:rigids)
         {
             Geometry geo=(Geometry)rigid;
@@ -77,6 +80,7 @@ public class GeoRender extends JPanel
             }
         }
     }
+
 
 
 }

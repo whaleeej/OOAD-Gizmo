@@ -1,8 +1,12 @@
-package ModelLayer.PhysicEngine;
+package Physics.Controller;
 
-import ModelLayer.Computation.MathD;
-import ModelLayer.Computation.Matrix2;
-import ModelLayer.Computation.Vector2;
+import Physics.Model.Computation.MathD;
+import Physics.Model.Computation.Matrix2;
+import Physics.Model.Computation.Vector2;
+import Physics.Model.Elements.AABB;
+import Physics.Model.Elements.Circle;
+import Physics.Model.Elements.RigidBody;
+import Physics.Model.Elements.RotationRectangle;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
@@ -37,7 +41,7 @@ public class ImpulseResolutionModel {
             A=C;
             isCollided=AABBvsCircle((AABB)A, (Circle)B);
         }
-        else if(A instanceof RotationRectangle&& B instanceof Circle){
+        else if(A instanceof RotationRectangle && B instanceof Circle){
            isCollided=RotationRectanglevsCircle((RotationRectangle)A, (Circle)B);
 
         }

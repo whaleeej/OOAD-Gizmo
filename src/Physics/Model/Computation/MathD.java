@@ -1,4 +1,4 @@
-package ModelLayer.Computation;
+package Physics.Model.Computation;
 
 public class MathD {
 
