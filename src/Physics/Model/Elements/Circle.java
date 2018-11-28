@@ -1,6 +1,6 @@
-package ModelLayer.PhysicEngine;
+package Physics.Model.Elements;
 
-import ModelLayer.Computation.Vector2;
+import Physics.Model.Computation.Vector2;
 
 import java.awt.*;
 
@@ -9,8 +9,8 @@ public class Circle extends RigidBody implements Texture, Geometry {
     public Vector2 position;
     public Color color;
 
-    public Circle(double m, Vector2 g,Vector2 v,double e,double posX,double posY,double r) {
-        super(m, g, v,e);
+    public Circle(double m, Vector2 g,Vector2 v,double e,double posX,double posY,double r,boolean isKe) {
+        super(m, g, v,e,isKe);
         color=new Color(0,0,0);
         position=new Vector2(posX,posY);
         radius=r;

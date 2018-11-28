@@ -1,6 +1,6 @@
-package ModelLayer.PhysicEngine;
+package Physics.Model.Elements;
 
-import ModelLayer.Computation.Vector2;
+import Physics.Model.Computation.Vector2;
 
 public interface Geometry {
     public static enum Shape{Circle, Rectangle,RotationRectangle};
