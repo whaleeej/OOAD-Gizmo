@@ -9,8 +9,8 @@ public class Circle extends RigidBody implements Texture, Geometry {
     public Vector2 position;
     public Color color;
 
-    public Circle(double m, Vector2 g,Vector2 v,double e,double posX,double posY,double r,boolean isKe) {
-        super(m, g, v,e,isKe);
+    public Circle(double m, Vector2 f,Vector2 v,double e,double posX,double posY,double r) {
+        super(m, f, v,e);
         color=new Color(0,0,0);
         position=new Vector2(posX,posY);
         radius=r;
@@ -19,11 +19,11 @@ public class Circle extends RigidBody implements Texture, Geometry {
     //Postion Update by Seconds
     @Override
     public void update(double ticks) {
-        position.x=position.x+velocity.x*ticks+0.5*gravity.x*ticks*ticks;
-        position.y=position.y+velocity.y*ticks+0.5*gravity.y*ticks*ticks;
+        position.x=position.x+velocity.x*ticks+0.5*force.x*massInv*ticks*ticks;
+        position.y=position.y+velocity.y*ticks+0.5*force.y*massInv*ticks*ticks;
 
-        velocity.x=velocity.x+gravity.x*ticks;
-        velocity.y=velocity.y+gravity.y*ticks;
+        velocity.x=velocity.x+force.x*massInv*ticks;
+        velocity.y=velocity.y+force.y*massInv*ticks;
     }
 
     @Override

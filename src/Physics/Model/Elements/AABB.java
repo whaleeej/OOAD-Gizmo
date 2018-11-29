@@ -9,8 +9,8 @@ public class AABB extends RigidBody implements Texture ,Geometry{
     public Vector2 max;
     public Color color;
 
-    public AABB(double m, Vector2 g, Vector2 v,double e, double x_min,double y_min,double width, double height,boolean isKe) {
-        super(m, g, v,e,isKe);
+    public AABB(double m, Vector2 f, Vector2 v,double e, double x_min,double y_min,double width, double height) {
+        super(m, f, v,e);
         color=new Color(0,0,0);
         min=new Vector2(x_min,y_min);
         max=new Vector2(x_min+width,y_min+height);
@@ -19,12 +19,12 @@ public class AABB extends RigidBody implements Texture ,Geometry{
     //Position update by ticks
     @Override
     public void update(double ticks) {
-        min.x=min.x+velocity.x*ticks+0.5*gravity.x*ticks*ticks;
-        min.y=min.y+velocity.y*ticks+0.5*gravity.y*ticks*ticks;
-        max.x=max.x+velocity.x*ticks+0.5*gravity.x*ticks*ticks;
-        max.y=max.y+velocity.y*ticks+0.5*gravity.y*ticks*ticks;
-        velocity.x=velocity.x+gravity.x*ticks;
-        velocity.y=velocity.y+gravity.y*ticks;
+        min.x=min.x+velocity.x*ticks+0.5*force.x*massInv*ticks*ticks;
+        min.y=min.y+velocity.y*ticks+0.5*force.y*massInv*ticks*ticks;
+        max.x=max.x+velocity.x*ticks+0.5*force.x*massInv*ticks*ticks;
+        max.y=max.y+velocity.y*ticks+0.5*force.y*massInv*ticks*ticks;
+        velocity.x=velocity.x+force.x*massInv*ticks;
+        velocity.y=velocity.y+force.y*massInv*ticks;
     }
 
     @Override
