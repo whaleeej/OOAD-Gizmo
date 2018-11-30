@@ -1,13 +1,0 @@
-
-qsquid:S1450"SRemove the "save" field and declare it as a local variable in the relevant methods.(ñşÒ®8›êÚÜô,
-nsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(¨œ±Óşÿÿÿÿ8ÆÃÛÜô,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ò€¤™øÿÿÿÿ
-[squid:UselessImportCheck"7Remove this unused import 'java.awt.event.KeyListener'.(ç„›û
-vsquid:S1450"SRemove the "load" field and declare it as a local variable in the relevant methods.(ÇÁ¨˜ùÿÿÿÿ8›êÚÜô,
-_squid:UselessImportCheck"<Remove this unused import 'java.awt.event.AWTEventListener'.(¾à£y
-Dsquid:S1068"-Remove this unused "geoRender" private field.(“Ôó¦
-nsquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(•ÍèÒşÿÿÿÿ8æíÛÜô,
-nsquid:CommentedOutCodeLine+"<This block of commented-out lines of code should be removed.(¥•õşûÿÿÿÿ8æíÛÜô,
-esquid:MaximumInheritanceDepth	"<This class has 6 parents which is greater than 5 authorized.(î‰şÓ
-isquid:CommentedOutCodeLine'"<This block of commented-out lines of code should be removed.(—òÕª8æ°ÛÜô,
-Xsquid:UselessImportCheck"4Remove this unused import 'java.awt.event.KeyEvent'.(¬ğİÍ

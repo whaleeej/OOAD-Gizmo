@@ -1,10 +1,0 @@
-
-gsquid:S1764?"KCorrect one of the identical sub-expressions on both sides of operator "&&"(ãŒýŒüÿÿÿÿ
-9squid:S3010+""Remove this assignment of "ticks".(Ù‹õû
-psquid:S2293!"YReplace the type specification in this constructor call with the diamond operator ("<>").(µžŒÚ
-asquid:CommentedOutCodeLine'"<This block of commented-out lines of code should be removed.(ÊÉàa
-ƒ"squid:ClassVariableVisibilityCheck"UMake geoRender a static final constant or non-public and provide accessors if needed.(´É÷Ý
-Asquid:S1481("*Remove this unused "scene" local variable.(Á»§
-qsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(»’
-squid:S1149"eReplace the synchronized class "Vector" by an unsynchronized one such as "ArrayList" or "LinkedList".(¥¨…ôùÿÿÿÿ
-squid:S1149"eReplace the synchronized class "Vector" by an unsynchronized one such as "ArrayList" or "LinkedList".(÷šä¡øÿÿÿÿ
