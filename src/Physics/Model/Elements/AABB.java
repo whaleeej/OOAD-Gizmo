@@ -4,6 +4,8 @@ import Physics.Model.Computation.Vector2;
 
 import java.awt.*;
 
+import static java.lang.Math.abs;
+
 public class AABB extends RigidBody implements Texture ,Geometry{
     public Vector2 min;
     public Vector2 max;
@@ -24,8 +26,31 @@ public class AABB extends RigidBody implements Texture ,Geometry{
         min.y=min.y+velocity.y*ticks+0.5*force.y*massInv*ticks*ticks;
         max.x=max.x+velocity.x*ticks+0.5*force.x*massInv*ticks*ticks;
         max.y=max.y+velocity.y*ticks+0.5*force.y*massInv*ticks*ticks;
-        velocity.x=velocity.x+force.x*massInv*ticks;
-        velocity.y=velocity.y+force.y*massInv*ticks;
+
+        Vector2 a=new Vector2(force.x*massInv,force.y*massInv);
+        Vector2 deltaAcc=new Vector2(-c*volume*velocity.x*abs(velocity.x)*massInv,-c*volume*velocity.y*abs(velocity.y)*massInv);
+        velocity.x=velocity.x+a.x*ticks;
+        velocity.y=velocity.y+a.y*ticks;
+        //air resistance
+        if(velocity.x!=0)
+        {
+            double delta=deltaAcc.x*ticks;
+
+            if(abs(delta)<0.005) { velocity.x=0;}//if the delta velocity is smaller than 0.005, then stop it to prevent chill
+            else if((velocity.x+delta)*(velocity.x)<0)
+                velocity.x=0;
+            else
+                velocity.x=velocity.x+delta;
+        }
+        if(velocity.y!=0)
+        {
+            double delta=deltaAcc.y*ticks;
+            if(abs(delta)<0.005) {velocity.y=0;}
+            else if((velocity.y+delta)*(velocity.y)<0)
+                velocity.y=0;
+            else
+                velocity.y=velocity.y+delta;
+        }
     }
 
     @Override

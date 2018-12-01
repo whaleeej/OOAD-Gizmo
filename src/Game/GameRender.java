@@ -25,6 +25,7 @@ public class GameRender extends JPanel implements PhysicsRender
 
     }
 
+    @Override
     public void updateGeometries(Vector<RigidBody> g)
     {
         rigids=g;

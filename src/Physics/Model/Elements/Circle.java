@@ -8,12 +8,14 @@ public class Circle extends RigidBody implements Texture, Geometry {
     public double radius;
     public Vector2 position;
     public Color color;
+    public double volume;
 
     public Circle(double m, Vector2 f,Vector2 v,double e,double posX,double posY,double r) {
         super(m, f, v,e);
         color=new Color(0,0,0);
         position=new Vector2(posX,posY);
         radius=r;
+        volume=Math.PI*radius*radius;
     }
 
     //Postion Update by Seconds

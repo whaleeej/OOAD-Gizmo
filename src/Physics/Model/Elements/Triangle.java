@@ -4,12 +4,15 @@ import Physics.Model.Computation.Vector2;
 
 import java.awt.*;
 
+import static java.lang.Math.abs;
+
 public class Triangle extends RigidBody  implements Texture ,Geometry{
     public Vector2 min;
     public double len1;
     public double len2;
     public Vector2 radian; // now it is (1,1), (1,-1),(-1,1),(-1,-1)
     public Color color;
+    public double volume;
 
     public Triangle(double m, Vector2 f, Vector2 v, double e,double x,double y,double l1,double l2,int type) {
         super(m, f, v, e);
@@ -17,6 +20,7 @@ public class Triangle extends RigidBody  implements Texture ,Geometry{
         min=new Vector2(x,y);
         len1=l1;
         len2=l2;
+        volume=len1*len2/2.0;
         switch(type)
         {
             case 1:
@@ -72,8 +76,29 @@ public class Triangle extends RigidBody  implements Texture ,Geometry{
     public void update(double ticks) {
         min.x=min.x+velocity.x*ticks+0.5*force.x*massInv*ticks*ticks;
         min.y=min.y+velocity.y*ticks+0.5*force.y*massInv*ticks*ticks;
-        velocity.x=velocity.x+force.x*massInv*ticks;
-        velocity.y=velocity.y+force.y*massInv*ticks;
+        Vector2 a=new Vector2(force.x*massInv,force.y*massInv);
+        Vector2 deltaAcc=new Vector2(-c*volume*velocity.x*abs(velocity.x)*massInv,-c*volume*velocity.y*abs(velocity.y)*massInv);
+        velocity.x=velocity.x+a.x*ticks;
+        velocity.y=velocity.y+a.y*ticks;
+        //air resistance
+        if(velocity.x!=0)
+        {
+            double delta=deltaAcc.x*ticks;
+            if(abs(delta)<0.005) {velocity.x=0;} //if the delta velocity is smaller than 0.005, then stop it to prevent chill
+            else if((velocity.x+delta)*(velocity.x)<0)
+                velocity.x=0;
+            else
+                velocity.x=velocity.x+delta;
+        }
+        if(velocity.y!=0)
+        {
+            double delta=deltaAcc.y*ticks;
+            if(abs(delta)<0.005) {velocity.y=0;}
+            else if((velocity.y+delta)*(velocity.y)<0)
+                velocity.y=0;
+            else
+                velocity.y=velocity.y+delta;
+        }
     }
 
     @Override

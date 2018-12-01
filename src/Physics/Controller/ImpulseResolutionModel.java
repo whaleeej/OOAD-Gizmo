@@ -541,7 +541,7 @@ public class ImpulseResolutionModel {
             double cosRadius=Math.cos(radian);
             double sinRadius=Math.sin(radian);
             Vector2 newP1=new Vector2(x1-x,y1-y);
-            Vector2 newP2=new Vector2(x2-x,y2-x);
+            Vector2 newP2=new Vector2(x2-x,y2-y);
             Vector2 newCircle=new Vector2(b.position.x-x,b.position.y-y);
 
             newP1= Matrix2.multiplyVector2(new Matrix2(cosRadius,sinRadius,-sinRadius,cosRadius), newP1);

@@ -63,6 +63,12 @@ public class   PhysicsEngineController implements ActionListener {
         gravity0=new Vector2(0,0);
     }
 
+    public void initialResistance(double u,double c)
+    {
+        RigidBody.setMu(u);
+        RigidBody.setC(c);
+    }
+
     //Update the Location of all objs in the world by three steps
     public void updateLocation() {
         for (int k = 1; k <= 3; k++) {
