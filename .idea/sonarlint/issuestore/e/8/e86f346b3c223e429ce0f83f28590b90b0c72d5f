@@ -1,12 +1,0 @@
-
-nsquid:CommentedOutCodeLine""<This block of commented-out lines of code should be removed.(¨œ±Óþÿÿÿÿ8£œŒðõ,
-nsquid:CommentedOutCodeLine$"<This block of commented-out lines of code should be removed.(¥•õþûÿÿÿÿ8£œŒðõ,
-Fsquid:S1068"(Remove this unused "mode" private field.(ÍýÇÍ8›àéõ,
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á žæùÿÿÿÿ
-qsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(‰œæâþÿÿÿÿ8¬äŸéõ,
-Dsquid:S3010"&Remove this assignment of "mainScene".(ÃÒù‰8Ë—þðõ,
-Psquid:S1068"-Remove this unused "mainScene" private field.(ÑŸØøÿÿÿÿ8•Öýðõ,
-isquid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(—òÕª8£œŒðõ,
-Rsquid:S1068	"/Remove this unused "buildRender" private field.(±ûìØûÿÿÿÿ8úÕ¸ùõ,
-Lsquid:S1068
-".Remove this unused "gameRender" private field.(’´µ«8úÕ¸ùõ,
