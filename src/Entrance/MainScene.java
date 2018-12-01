@@ -15,6 +15,8 @@ public class MainScene extends JFrame
     private String mode;
     private JMenu menu;
     private JPanel mainpanel;
+    private BuildController buildController;
+    private GameController gameController;
 
     public MainScene()
     {
@@ -34,8 +36,8 @@ public class MainScene extends JFrame
     public void initialization()
     {
         mode = "Build";
-        BuildController buildController = new BuildController(this);
-        GameController gameController = new GameController(this);
+        buildController = new BuildController(this);
+        gameController = new GameController(this);
 
         setMenu();
         changeToBuildMode();
@@ -103,5 +105,9 @@ public class MainScene extends JFrame
     public void addGameScene(GameScene gameScene)
     {
         mainpanel.add(gameScene,"Game");
+    }
+
+    public GameController getGameController() {
+        return gameController;
     }
 }
