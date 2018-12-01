@@ -8,12 +8,13 @@ public class AABB extends RigidBody implements Texture ,Geometry{
     public Vector2 min;
     public Vector2 max;
     public Color color;
-
+    public double volume;
     public AABB(double m, Vector2 f, Vector2 v,double e, double x_min,double y_min,double width, double height) {
         super(m, f, v,e);
         color=new Color(0,0,0);
         min=new Vector2(x_min,y_min);
         max=new Vector2(x_min+width,y_min+height);
+        volume=(max.x-min.x)*(max.y-min.y);
     }
 
     //Position update by ticks

@@ -12,6 +12,7 @@ public abstract class RigidBody {
     public Vector2 velocity;
     public double epsilon;
     public double mu=0.1;
+    public double c=0.1;
 
     //m=0, mass will be infinity
     public RigidBody(double m,Vector2 f,Vector2 v,double e)
@@ -29,6 +30,15 @@ public abstract class RigidBody {
         force=new Vector2(f);
         velocity=new Vector2(v);
         epsilon=e;
+    }
+    public void setMu(double u)
+    {
+        mu=u;
+    }
+
+    public void setC(double c)
+    {
+        this.c=c;
     }
 
     //Force add on a new Velocity manually
