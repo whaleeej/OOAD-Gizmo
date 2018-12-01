@@ -61,7 +61,7 @@ public class GameController {
     //Sterp 2
     public void initialGameWorld(double g,double u,double c)
     {
-        if(pc==null) {return;}
+        if(pc==null) return;
         pc.initialGravity(g);
         pc.initialResistance(u,c);
         pc.initialWall(-1, 0, 1, 80);//Left
