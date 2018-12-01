@@ -1,18 +1,22 @@
 package Game;
 
+import Entrance.MainScene;
 import Physics.Controller.PhysicsEngineController;
 
 import java.awt.*;
 
 public class GameController {
-    GameRender gr=null;
-    GameScene gs=null;
+    private GameRender gr = null;
+    private MainScene mainScene = null;
     PhysicsEngineController pc=null;
-    public GameController() {
-        gs = new GameScene();//JFrame
-        gr = new GameRender();//Jpanel
-        gs.add(gr);
-        gs.setVisible(true);
+    public GameController(MainScene mainScene)
+    {
+        //gs=new GameScene();
+        this.mainScene = mainScene;
+        gr=new GameRender();
+        this.mainScene.setGameRender(gr);
+        //gs.add(gr);
+        //gs.setVisible(true);
         //bind gameRneder(Interface Ehysics Eender) to Physics Engine
         pc = new PhysicsEngineController(gr);
         //initial objs
@@ -20,6 +24,7 @@ public class GameController {
         //start running
         pc.startPhysicsRunning();
     }
+
 
     //To initial the world add objs into physics engine and set gravity
     public void initialGameWorld()
