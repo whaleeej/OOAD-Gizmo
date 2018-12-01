@@ -64,10 +64,10 @@ public class GameController {
         if(pc==null) return;
         pc.initialGravity(g);
         pc.initialResistance(u,c);
-        pc.initialWall(-1, 1, 1, 72.5);//Left
-        pc.initialWall(0, 73.6, 118, 1);//Bottom
-        pc.initialWall(118, 1, 1, 72.5);//Right
-        pc.initialWall(0, -1, 118, 1);//Up
+        pc.initialWall(-1, 0, 1, 80);//Left
+        pc.initialWall(0, 80, 110, 1);//Bottom
+        pc.initialWall(110, 1, 1, 80);//Right
+        pc.initialWall(0, -1, 110, 1);//Up
 
 //
         pc.initialBall(1, -10, -10, 0.92, 80, 3, 2, new Color(255, 0, 0));
@@ -90,6 +90,26 @@ public class GameController {
     //Step 3.Instantiate Objects
     //TODO:: Added method for instantiation command in Build Layer
     //Demo 1
+    public void setBall(double x,double y,double r,Color color)
+    {
+        pc.initialBall( 1, 0, 0, 0.92, x/10, y/10, r/10, color);
+    }
+
+    public void setBox(double x,double y,double width,double height,Color color)
+    {
+        pc.initialBox(5, 0, 0, 0.9,  x/10, y/10, width/10, height/10, color);
+    }
+
+    public void setTriangle(double x,double y,double len1,double len2,int type,Color color)
+    {
+        pc.initialTriangle( 10,0,0,1,x/10, y/10, len1/10, len2/10, type, color);
+    }
+
+    public void setpcRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key)
+    {
+        pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
+    }
+
 
     //Step4. Tell me Instantiation is completed
     //Show the first frame
