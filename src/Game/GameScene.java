@@ -12,7 +12,7 @@ public class GameScene extends JFrame
     {
         super("GizmoScene");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(1300, 720);
+        this.setSize(1201, 801);
         this.setLocationRelativeTo(null);
     }
 

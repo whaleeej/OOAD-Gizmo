@@ -22,6 +22,7 @@ public class GameRender extends JPanel implements PhysicsRender
         scale=10.0;
         //Count the frames
         frameCount=0;
+        this.setSize(1200, 800);
 
     }
 
