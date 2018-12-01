@@ -1,11 +1,12 @@
 package Entrance;
 
 import Build.Controller.BuildController;
-import Build.View.BuildRender;
-import Game.GameController;
-import Game.GameRender;
+import Build.View.BuildScene;
+import Game.Controller.GameController;
+import Game.View.GameScene;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,17 +14,20 @@ public class MainScene extends JFrame
 {
     private String mode;
     private JMenu menu;
-    private BuildRender buildRender;
-    private GameRender gameRender;
+    private JPanel mainpanel;
 
     public MainScene()
     {
         super("BuildScene");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(1300, 720);
+        this.setSize(1200, 871);
         this.setLocationRelativeTo(null);
+        this.setBackground(Color.green);
+        mainpanel = new JPanel();
+        this.setContentPane(mainpanel);
+        System.out.println(mainpanel.getWidth()+" "+ mainpanel.getHeight());
+        mainpanel.setLayout(new CardLayout());
         initialization();
-
         this.setVisible(true);
     }
 
@@ -32,6 +36,7 @@ public class MainScene extends JFrame
         mode = "Build";
         BuildController buildController = new BuildController(this);
         GameController gameController = new GameController(this);
+
         setMenu();
         changeToBuildMode();
     }
@@ -77,11 +82,8 @@ public class MainScene extends JFrame
         mode = "Build";
         setTitle("BuildScene");
         menu.setEnabled(true);
-        //setContentPane(buildRender);
-        gameRender.setVisible(false);
-        gameRender.setEnabled(false);
-        buildRender.setVisible(true);
-        buildRender.setEnabled(true);
+        CardLayout cardLayout = (CardLayout) mainpanel.getLayout();
+        cardLayout.show(mainpanel,mode);
     }
 
     public void changeToGameMode()
@@ -89,22 +91,17 @@ public class MainScene extends JFrame
         mode = "Game";
         setTitle("GameScene");
         //menu.setEnabled(false);
-        //setContentPane(gameRender);
-        buildRender.setEnabled(false);
-        buildRender.setVisible(false);
-        gameRender.setVisible(true);
-        gameRender.setEnabled(true);
+        CardLayout cardLayout = (CardLayout) mainpanel.getLayout();
+        cardLayout.show(mainpanel,mode);
     }
 
-    public void setBuildRender(BuildRender buildRender)
+    public void addBuildScene(BuildScene buildScene)
     {
-        this.buildRender = buildRender;
-        add(buildRender);
+        mainpanel.add(buildScene,"Build");
     }
 
-    public void setGameRender(GameRender gameRender)
+    public void addGameScene(GameScene gameScene)
     {
-        this.gameRender = gameRender;
-        add(gameRender);
+        mainpanel.add(gameScene,"Game");
     }
 }

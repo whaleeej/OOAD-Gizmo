@@ -1,12 +1,15 @@
 
-nsquid:CommentedOutCodeLine""<This block of commented-out lines of code should be removed.(¨œ±Óþÿÿÿÿ8£œŒðõ,
-nsquid:CommentedOutCodeLine$"<This block of commented-out lines of code should be removed.(¥•õþûÿÿÿÿ8£œŒðõ,
-Fsquid:S1068"(Remove this unused "mode" private field.(ÍýÇÍ8›àéõ,
 wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á žæùÿÿÿÿ
-qsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(‰œæâþÿÿÿÿ8¬äŸéõ,
-Dsquid:S3010"&Remove this assignment of "mainScene".(ÃÒù‰8Ë—þðõ,
-Psquid:S1068"-Remove this unused "mainScene" private field.(ÑŸØøÿÿÿÿ8•Öýðõ,
-isquid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(—òÕª8£œŒðõ,
-Rsquid:S1068	"/Remove this unused "buildRender" private field.(±ûìØûÿÿÿÿ8úÕ¸ùõ,
-Lsquid:S1068
-".Remove this unused "gameRender" private field.(’´µ«8úÕ¸ùõ,
+isquid:CommentedOutCodeLineP"<This block of commented-out lines of code should be removed.(öžÔ’8‹¨ªö,
+nsquid:CommentedOutCodeLine?"<This block of commented-out lines of code should be removed.(¨œ±Óþÿÿÿÿ8êñ”¨ö,
+qsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(‰œæâþÿÿÿÿ8¬äŸéõ,
+Fsquid:S1604-"(Make this anonymous inner class a lambda(óä ‡8êñ”¨ö,
+nsquid:CommentedOutCodeLineA"<This block of commented-out lines of code should be removed.(¥•õþûÿÿÿÿ8êñ”¨ö,
+Qsquid:S1481!"4Remove this unused "buildController" local variable.(ÇÜív8¯µŒ¨ö,
+nsquid:CommentedOutCodeLine["<This block of commented-out lines of code should be removed.(áò²øÿÿÿÿ8•† ªö,
+`squid:S1854!"CRemove this useless assignment to local variable "buildController".(ÇÜív8¯µŒ¨ö,
+Qsquid:S1481""3Remove this unused "gameController" local variable.(Óˆ•8¢º¨ö,
+isquid:CommentedOutCodeLine5"<This block of commented-out lines of code should be removed.(—òÕª8êñ”¨ö,
+`squid:S1854""BRemove this useless assignment to local variable "gameController".(Óˆ•8¢º¨ö,
+Fsquid:S1068"(Remove this unused "mode" private field.(ÍýÇÍ8›àéõ,
+Fsquid:S16047"(Make this anonymous inner class a lambda(ð†Úý8â×¡ªö,

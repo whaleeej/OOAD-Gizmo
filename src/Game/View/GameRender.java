@@ -1,4 +1,4 @@
-package Game;
+package Game.View;
 
 import Physics.Controller.PhysicsEngineController;
 import Physics.Controller.PhysicsRender;
