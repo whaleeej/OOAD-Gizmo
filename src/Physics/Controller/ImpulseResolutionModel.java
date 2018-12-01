@@ -154,6 +154,7 @@ public class ImpulseResolutionModel {
         //and if delta velocity would modify the direction of original velocity
         //the velocity shoul be equal to zero(0)
         //this is the special case for discrete simulation
+        //becasue friction will decrese the velocity, but will not redirecte the velocity
         else if((A.velocity.x+vTangentModification.x)*(A.velocity.x)<0)
         {
             A.velocity.x=0;
