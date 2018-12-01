@@ -1,16 +1,0 @@
-
-wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á žæùÿÿÿÿ
-isquid:CommentedOutCodeLine:"<This block of commented-out lines of code should be removed.(—òÕª8êñ”¨ö,
-[
-squid:S106"9Replace this use of System.out or System.err by a logger.(ð”æœüÿÿÿÿ8ãÁþÀö,
-dsquid:S1192$"FDefine a constant instead of duplicating this literal "Build" 3 times.(ìÀáÆ8ü»¾ö,
-Fsquid:S1604<"(Make this anonymous inner class a lambda(ð†Úý8â×¡ªö,
-Qsquid:S1481&"3Remove this unused "gameController" local variable.(Óˆ•8¢º¨ö,
-Fsquid:S16042"(Make this anonymous inner class a lambda(óä ‡8êñ”¨ö,
-qsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(‰œæâþÿÿÿÿ8¬äŸéõ,
-nsquid:CommentedOutCodeLine]"<This block of commented-out lines of code should be removed.(áò²øÿÿÿÿ8ºº¶¾ö,
-`squid:S1854%"CRemove this useless assignment to local variable "buildController".(ÇÜív8¯µŒ¨ö,
-nsquid:CommentedOutCodeLineD"<This block of commented-out lines of code should be removed.(¨œ±Óþÿÿÿÿ8êñ”¨ö,
-`squid:S1854&"BRemove this useless assignment to local variable "gameController".(Óˆ•8¢º¨ö,
-Qsquid:S1481%"4Remove this unused "buildController" local variable.(ÇÜív8¯µŒ¨ö,
-nsquid:CommentedOutCodeLineF"<This block of commented-out lines of code should be removed.(¥•õþûÿÿÿÿ8êñ”¨ö,
