@@ -21,7 +21,7 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
 
     public RotationRectangle(double endx,double endy, double w,double l,boolean isleft,char key) {
 
-        super(0, new Vector2(0,0), new Vector2(0,0), 1,true);
+        super(0, new Vector2(0,0), new Vector2(0,0), 1);
         endPoint=new Vector2(endx,endy);
         widtd=w;
         length=l;

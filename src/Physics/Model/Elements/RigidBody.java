@@ -8,13 +8,14 @@ import Physics.Model.Computation.Vector2;
 public abstract class RigidBody {
     public double mass;
     public double massInv;
-    public Vector2 gravity;
+    public Vector2 force;
     public Vector2 velocity;
     public double epsilon;
-    public boolean isKinematic=false;
+    public static double mu=0.1;
+    public static double c=0.2;
 
     //m=0, mass will be infinity
-    public RigidBody(double m,Vector2 g,Vector2 v,double e,boolean isKinematic)
+    public RigidBody(double m,Vector2 f,Vector2 v,double e)
     {
         if(m==0)
         {
@@ -26,10 +27,20 @@ public abstract class RigidBody {
             mass=m;
             massInv=1.0/mass;
         }
-        this.isKinematic=isKinematic;
-        gravity=new Vector2(g);
+        force=new Vector2(f);
         velocity=new Vector2(v);
+        if(m==0)
+            velocity=new Vector2(0,0);
         epsilon=e;
+    }
+    public static void setMu(double u)
+    {
+        mu=u;
+    }
+
+    public static void setC(double c)
+    {
+        RigidBody.c=c;
     }
 
     //Force add on a new Velocity manually

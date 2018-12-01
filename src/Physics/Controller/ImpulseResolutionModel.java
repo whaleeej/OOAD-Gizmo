@@ -3,10 +3,7 @@ package Physics.Controller;
 import Physics.Model.Computation.MathD;
 import Physics.Model.Computation.Matrix2;
 import Physics.Model.Computation.Vector2;
-import Physics.Model.Elements.AABB;
-import Physics.Model.Elements.Circle;
-import Physics.Model.Elements.RigidBody;
-import Physics.Model.Elements.RotationRectangle;
+import Physics.Model.Elements.*;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
@@ -17,12 +14,13 @@ public class ImpulseResolutionModel {
     RigidBody B;
     double penetration;
     Vector2 normal;
-
-    public ImpulseResolutionModel(RigidBody a, RigidBody b)
+    double ticks;
+    public ImpulseResolutionModel(RigidBody a, RigidBody b,double ticks)
     {
         boolean isCollided=false;
         A=a;
         B=b;
+        this.ticks=ticks;
         if(A instanceof Circle && B instanceof Circle)
         {
             isCollided=CirclevsCircle((Circle) A, (Circle)B);
@@ -51,18 +49,30 @@ public class ImpulseResolutionModel {
             A=C;
             isCollided=RotationRectanglevsCircle((RotationRectangle)A, (Circle)B);
         }
+        else if(A instanceof Triangle && B instanceof Circle){
+            isCollided=RotationTrianglevsCircle((Triangle)A, (Circle)B);
+
+        }
+        else if(A instanceof Circle&& B instanceof Triangle){
+            RigidBody C=B;
+            B=A;
+            A=C;
+            isCollided=RotationTrianglevsCircle((Triangle)A, (Circle)B);
+        }
         if(isCollided)
         {
 
             ResolveCollision();
             PositionalCorrection();
+
         }
 
     }
 
+
     void PositionalCorrection( )
     {
-
+        if(A.massInv+B.massInv==0) return;
         double percent = 0.2; // usually 20% to 80%
         double slop = 0.01; // usually 0.01 to 0.1
         double thres= (penetration - slop)>= 0.0?(penetration - slop):0.0;
@@ -86,9 +96,9 @@ public class ImpulseResolutionModel {
 
     }
 
-
     void ResolveCollision()
     {
+        //For bounce velocity change
         // Calculate relative velocity
         Vector2 rv =Vector2.minus(B.velocity, A.velocity);
 
@@ -104,12 +114,83 @@ public class ImpulseResolutionModel {
 
         // Calculate impulse scalar
         double j = -(1 + e) * velAlongNormal;
-        j /=( A.massInv + B.massInv);
+        if(A.massInv==0&& B.massInv==0) {
+            j /= 2;
+            Vector2 impulse =Vector2.multiply(normal, j);
+            A.velocity.minusby(impulse);
+            B.velocity.addby(impulse);
+        }
+        else
+        {
+            j /=( A.massInv + B.massInv);
+            // Apply impulse
+            Vector2 impulse =Vector2.multiply(normal, j);
+            A.velocity.minusby(Vector2.multiply(impulse, A.massInv));
+            B.velocity.addby(Vector2.multiply(impulse, B.massInv));
+        }
 
-        // Apply impulse
-        Vector2 impulse =Vector2.multiply(normal, j);
-        A.velocity.minusby(Vector2.multiply(impulse, A.massInv));
-        B.velocity.addby(Vector2.multiply(impulse, B.massInv));
+        //for friction velocity change
+        //Solve for tangent Vector
+        Vector2 tangent=Vector2.minus(rv, Vector2.multiply(normal, rv.dot(normal)));
+
+        //Solve for j tangent
+        double jt=-rv.dot(tangent);
+        jt=jt/(A.massInv+B.massInv);
+
+        //Use (A.mu^2+B.mu^2)^(1/2)
+        double mu=(A.mu+B.mu)/2;
+
+        //Clamp jt to maximize friction provided by mu*j;
+        Vector2 frictionImpulse;
+        if(abs(jt)<abs(j)*mu)
+            frictionImpulse=Vector2.multiply(tangent, jt);
+        else
+        {
+            frictionImpulse = Vector2.multiply(tangent, j*mu);
+        }
+        //for a multiple ticks due to F/m=a and acceleration should be multiplied with with time interval to achieve delta velocity
+        Vector2 vTangentModification=Vector2.multiply(frictionImpulse, A.massInv*ticks);
+        if(A.velocity.x==0){}
+        //and if delta velocity would modify the direction of original velocity
+        //the velocity shoul be equal to zero(0)
+        //this is the special case for discrete simulation
+        //becasue friction will decrese the velocity, but will not redirecte the velocity
+        else if((A.velocity.x+vTangentModification.x)*(A.velocity.x)<0)
+        {
+            A.velocity.x=0;
+        }
+        else{
+            A.velocity.x=A.velocity.x+vTangentModification.x;
+        }
+
+        if(A.velocity.y==0){}
+        else if((A.velocity.y+vTangentModification.y)*(A.velocity.y)<0)
+        {
+            A.velocity.y=0;
+        }
+        else{
+            A.velocity.y=A.velocity.y+vTangentModification.y;
+        }
+        //for b
+        vTangentModification=Vector2.multiply(frictionImpulse, B.massInv*ticks);
+
+        if(B.velocity.x==0){}
+        else if((B.velocity.x-vTangentModification.x)*(B.velocity.x)<0)
+        {
+            B.velocity.x=0;
+        }
+        else{
+            B.velocity.x=B.velocity.x-vTangentModification.x;
+        }
+        if(B.velocity.y==0){}
+        else if((B.velocity.y-vTangentModification.y)*(B.velocity.y)<0)
+        {
+            B.velocity.y=0;
+        }
+        else{
+            B.velocity.y=B.velocity.y-vTangentModification.y;
+        }
+
     }
 
     boolean AABBvsAABB( AABB a, AABB b )
@@ -162,7 +243,8 @@ public class ImpulseResolutionModel {
         return false;
     }
 
-    boolean CirclevsCircle( Circle a, Circle b ) {
+    boolean CirclevsCircle( Circle a, Circle b )
+    {
         // Vector from A to B
         Vector2 n = Vector2.minus(b.position,a.position );
         double r = a.radius + b.radius;
@@ -265,7 +347,6 @@ public class ImpulseResolutionModel {
         return true;
     }
 
-
     boolean RotationRectanglevsCircle( RotationRectangle a, Circle b )
     {
 
@@ -348,4 +429,167 @@ public class ImpulseResolutionModel {
         return true;
     }
 
+    boolean RotationTrianglevsCircle( Triangle a, Circle b )
+    {
+        double x=a.getMin().x;
+        double y=a.getMin().y;
+        double cx=b.position.x;
+        double cy=b.position.y;
+        double x1=a.getMin().x+a.getMax().x*a.getExtra().x;
+        double y1=a.getMin().y;
+        double x2=a.getMin().x;
+        double y2=a.getMin().y+a.getMax().y*a.getExtra().y;
+        double coef1;
+        if(a.getExtra().x!=a.getExtra().y) coef1=a.len2/a.len1;
+        else coef1=-a.len2/a.len1;
+        double coef2=y1-coef1*x1;
+        // y-coef1*x-coef2
+        if(cy-coef1*cx-coef2==0)
+            return false;
+        else if((cy-coef1*cx-coef2)*(y-coef1*x-coef2)>0)
+        {
+            //at the same side
+            // Vector from A to B
+            Vector2 n = new Vector2(b.position.x-(x1+x2)/2.0,b.position.y-(y1+y2)/2.0);
+
+            // Closest point on A to center of B
+            Vector2 closest = new Vector2(n);
+
+            // Calculate half extents along each axis
+            double x_extent = a.len1/2.0;
+            double y_extent = a.len2/2.0;
+
+            // Clamp point to edges of the AABB
+            closest.x = MathD.clamp( closest.x,-x_extent, x_extent );
+            closest.y = MathD.clamp( closest.y, -y_extent, y_extent );
+
+            boolean inside = false;
+
+            // Circle is inside the AABB, so we need to clamp the circle's center
+            // to the closest edge
+            if(n .equals(closest) )
+            {
+                inside = true;
+
+                // Find closest axis
+                if(x_extent-abs( n.x ) < y_extent-abs( n.y ))
+                {
+                    // Clamp to closest extent
+                    if(closest.x > 0)
+                        closest.x = x_extent;
+                    else
+                        closest.x = -x_extent;
+                }
+                // y axis is shorter
+                else
+                {
+                    // Clamp to closest extent
+                    if(closest.y > 0)
+                        closest.y = y_extent;
+                    else
+                        closest.y = -y_extent;
+                }
+            }
+
+            normal = Vector2.minus(n, closest);
+            double d = normal.lengthSquared( );
+            double r = b.radius;
+
+            // Early out of the radius is shorter than distance to closest point and
+            // Circle not inside the AABB
+            if(d > r * r && !inside)
+                return false;
+
+            // Avoided sqrt until we needed
+            d = sqrt( d );
+
+            // Collision normal needs to be flipped to point outside if circle was
+            // inside the AABB
+            if(inside)
+            {
+                normal.multiplyBy(-1);
+                normal.normalize();
+                penetration = r - d;
+            }
+            else
+            {
+                normal.normalize();
+                penetration = r - d;
+            }
+            return true;
+        }
+        else
+        {
+            //at the different side
+            double radian;
+            if(a.getExtra().x==1&&a.getExtra().y==1)
+            {
+                radian=Math.atan(a.len1/a.len2);
+            }
+            else if(a.getExtra().x==-1&&a.getExtra().y==-1)
+            {
+                radian=-Math.PI/2.0-Math.atan(a.len2/a.len1);
+            }
+            else if(a.getExtra().x==1&&a.getExtra().y==-1)
+            {
+                radian=-Math.atan(a.len1/a.len2);
+            }
+            else
+            {
+                radian=Math.atan(a.len2/a.len1)+Math.PI/2.0;
+            }
+            double cosRadius=Math.cos(radian);
+            double sinRadius=Math.sin(radian);
+            Vector2 newP1=new Vector2(x1-x,y1-y);
+            Vector2 newP2=new Vector2(x2-x,y2-y);
+            Vector2 newCircle=new Vector2(b.position.x-x,b.position.y-y);
+
+            newP1= Matrix2.multiplyVector2(new Matrix2(cosRadius,sinRadius,-sinRadius,cosRadius), newP1);
+            newP2= Matrix2.multiplyVector2(new Matrix2(cosRadius,sinRadius,-sinRadius,cosRadius), newP2);
+            newCircle= Matrix2.multiplyVector2(new Matrix2(cosRadius,sinRadius,-sinRadius,cosRadius), newCircle);
+
+            if(newCircle.x-(newP1.x+newP2.x)/2.0>=b.radius)
+                return false;
+            else
+            {
+                Vector2 small=newP1.y>newP2.y?newP2:newP1;
+                Vector2 big=newP1.y<newP2.y?newP2:newP1;
+                if(newCircle.y<big.y&&newCircle.y>small.y)
+                {
+                    normal=new Vector2(1,0);
+                    normal= Matrix2.multiplyVector2(new Matrix2(cosRadius,-sinRadius,sinRadius,cosRadius), normal);
+                    penetration=b.radius-newCircle.x+(newP1.x+newP2.x)/2.0;
+                    return true;
+                }
+                else if(newCircle.y>=big.y){
+                    Vector2 tmp=Vector2.minus(newCircle, big);
+                    if(tmp.lengthSquared()>=b.radius*b.radius) return false;
+                    else{
+                        penetration=b.radius-tmp.length();
+                        tmp.normalize();
+                        normal=tmp;
+                        normal= Matrix2.multiplyVector2(new Matrix2(cosRadius,-sinRadius,sinRadius,cosRadius), normal);
+                        return true;
+                    }
+
+                }
+                else if(newCircle.y<=small.y)
+                {
+                    Vector2 tmp=Vector2.minus(newCircle, small);
+                    if(tmp.lengthSquared()>=b.radius*b.radius) return false;
+                    else{
+                        penetration=b.radius-tmp.length();
+                        tmp.normalize();
+                        normal=tmp;
+                        normal= Matrix2.multiplyVector2(new Matrix2(cosRadius,-sinRadius,sinRadius,cosRadius), normal);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
+
+    }
 }

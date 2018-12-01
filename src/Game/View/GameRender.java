@@ -25,6 +25,7 @@ public class GameRender extends JPanel implements PhysicsRender
 
     }
 
+    @Override
     public void updateGeometries(Vector<RigidBody> g)
     {
         rigids=g;
@@ -76,6 +77,26 @@ public class GameRender extends JPanel implements PhysicsRender
                     int yBuffer[]={(int)(y2),(int)(y1),(int)(y1+deltaY),(int)(y2+deltaY)};
                     g.fillPolygon(xBuffer,yBuffer,4);
 
+                }
+                case Triangle:
+                {
+
+                    double x1=geo.getMin().x*scale;
+                    double y1=geo.getMin().y*scale;
+                    double deltaX=geo.getMax().x*geo.getExtra().x*scale;
+                    double deltaY=geo.getMax().y*geo.getExtra().y*scale;
+                    if(geo.getExtra().x==geo.getExtra().y)
+                    {
+                        int xBuffer[]={(int)(x1),(int)(x1+deltaX),(int)(x1)};
+                        int yBuffer[]={(int)(y1),(int)(y1),(int)(y1+deltaY)};
+                        g.fillPolygon(xBuffer,yBuffer,3);
+                    }
+                    else {
+                        int xBuffer[]={(int)(x1),(int)(x1),(int)(x1+deltaX)};
+                        int yBuffer[]={(int)(y1),(int)(y1+deltaY),(int)(y1)};
+                        g.fillPolygon(xBuffer,yBuffer,3);
+                    }
+                    break;
                 }
             }
         }
