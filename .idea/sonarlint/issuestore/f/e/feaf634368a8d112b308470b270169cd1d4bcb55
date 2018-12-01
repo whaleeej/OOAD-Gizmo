@@ -1,9 +1,7 @@
 
-nsquid:CommentedOutCodeLine	"<This block of commented-out lines of code should be removed.(€Óˆùÿÿÿÿ8Š®¨éõ,
-Osquid:UselessImportCheck"+Remove this unused import 'Game.GameScene'.(Êó …
+[squid:S1854"=Remove this useless assignment to local variable "mainScene".(ïó‘Õ8ÄÈ‹¨ö,
 ~squid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á žæùÿÿÿÿ8Ô‹éõ,
-Lsquid:S1481
-".Remove this unused "mainScene" local variable.(ïó‘Õ8ÄÈ‹¨ö,
-[squid:S1854
-"=Remove this useless assignment to local variable "mainScene".(ïó‘Õ8ÄÈ‹¨ö,
 hsquid:UselessImportCheck"=Remove this unused import 'Build.Controller.BuildController'.(œ»Ü»8ÄÈ‹¨ö,
+Osquid:UselessImportCheck"+Remove this unused import 'Game.GameScene'.(Êó …
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(€Óˆùÿÿÿÿ8Š®¨éõ,
+Lsquid:S1481".Remove this unused "mainScene" local variable.(ïó‘Õ8ÄÈ‹¨ö,

@@ -1,0 +1,5 @@
+
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¾Ô·Ïùÿÿÿÿ
+esquid:UselessImportCheck":Remove this unused import 'java.awt.event.ActionListener'.(Ìä¹8ĞøşÆö,
+bsquid:UselessImportCheck"7Remove this unused import 'java.awt.event.ActionEvent'.(Úù“‘8ĞøşÆö,
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(€ÖØ¶ùÿÿÿÿ8íùêÆö,
