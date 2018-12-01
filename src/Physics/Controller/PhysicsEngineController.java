@@ -17,7 +17,7 @@ public class   PhysicsEngineController implements ActionListener {
     Vector<RigidBody> flippers;
     private Timer timer;
     public  PhysicsRender phyRender;
-    Vector2 gravity=new Vector2(0,1000);
+    Vector2 gravity=new Vector2(0,100);
     Vector2 gravity0=new Vector2(0,0);
 
     @Override
@@ -74,7 +74,7 @@ public class   PhysicsEngineController implements ActionListener {
             //collision handler
             for (int i = 0; i < rigids.size(); i++) {
                 for (int j = i + 1; j < rigids.size(); j++) {
-                        new ImpulseResolutionModel(rigids.elementAt(i), rigids.elementAt(j));
+                        new ImpulseResolutionModel(rigids.elementAt(i), rigids.elementAt(j),millsec/1000.0);
                 }
             }
         }

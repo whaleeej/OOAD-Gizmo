@@ -14,12 +14,13 @@ public class ImpulseResolutionModel {
     RigidBody B;
     double penetration;
     Vector2 normal;
-
-    public ImpulseResolutionModel(RigidBody a, RigidBody b)
+    double ticks;
+    public ImpulseResolutionModel(RigidBody a, RigidBody b,double ticks)
     {
         boolean isCollided=false;
         A=a;
         B=b;
+        this.ticks=ticks;
         if(A instanceof Circle && B instanceof Circle)
         {
             isCollided=CirclevsCircle((Circle) A, (Circle)B);
@@ -63,9 +64,11 @@ public class ImpulseResolutionModel {
 
             ResolveCollision();
             PositionalCorrection();
+
         }
 
     }
+
 
     void PositionalCorrection( )
     {
@@ -95,6 +98,7 @@ public class ImpulseResolutionModel {
 
     void ResolveCollision()
     {
+        //For bounce velocity change
         // Calculate relative velocity
         Vector2 rv =Vector2.minus(B.velocity, A.velocity);
 
@@ -124,6 +128,68 @@ public class ImpulseResolutionModel {
             A.velocity.minusby(Vector2.multiply(impulse, A.massInv));
             B.velocity.addby(Vector2.multiply(impulse, B.massInv));
         }
+
+        //for friction velocity change
+        //Solve for tangent Vector
+        Vector2 tangent=Vector2.minus(rv, Vector2.multiply(normal, rv.dot(normal)));
+
+        //Solve for j tangent
+        double jt=-rv.dot(tangent);
+        jt=jt/(A.massInv+B.massInv);
+
+        //Use (A.mu^2+B.mu^2)^(1/2)
+        double mu=(A.mu+B.mu)/2;
+
+        //Clamp jt to maximize friction provided by mu*j;
+        Vector2 frictionImpulse;
+        if(abs(jt)<abs(j)*mu)
+            frictionImpulse=Vector2.multiply(tangent, jt);
+        else
+        {
+            frictionImpulse = Vector2.multiply(tangent, j*mu);
+        }
+        //for a multiple ticks due to F/m=a and acceleration should be multiplied with with time interval to achieve delta velocity
+        Vector2 vTangentModification=Vector2.multiply(frictionImpulse, A.massInv*ticks);
+        if(A.velocity.x==0){}
+        //and if delta velocity would modify the direction of original velocity
+        //the velocity shoul be equal to zero(0)
+        //this is the special case for discrete simulation
+        else if((A.velocity.x+vTangentModification.x)*(A.velocity.x)<0)
+        {
+            A.velocity.x=0;
+        }
+        else{
+            A.velocity.x=A.velocity.x+vTangentModification.x;
+        }
+
+        if(A.velocity.y==0){}
+        else if((A.velocity.y+vTangentModification.y)*(A.velocity.y)<0)
+        {
+            A.velocity.y=0;
+        }
+        else{
+            A.velocity.y=A.velocity.y+vTangentModification.y;
+        }
+        //for b
+        vTangentModification=Vector2.multiply(frictionImpulse, B.massInv*ticks);
+
+        if(B.velocity.x==0){}
+        else if((B.velocity.x-vTangentModification.x)*(B.velocity.x)<0)
+        {
+            B.velocity.x=0;
+        }
+        else{
+            B.velocity.x=B.velocity.x-vTangentModification.x;
+        }
+        if(B.velocity.y==0){}
+        else if((B.velocity.y-vTangentModification.y)*(B.velocity.y)<0)
+        {
+            B.velocity.y=0;
+        }
+        else{
+            B.velocity.y=B.velocity.y-vTangentModification.y;
+        }
+
     }
 
     boolean AABBvsAABB( AABB a, AABB b )

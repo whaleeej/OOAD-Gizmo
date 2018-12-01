@@ -24,24 +24,24 @@ public class GameController {
     //To initial the world add objs into physics engine and set gravity
     public void initialGameWorld()
     {
-        pc.initialGravity(1000);
+        pc.initialGravity(100);
 
-        pc.initialWall(0, 10, 10, 640);//Left
-        pc.initialWall(0, 650, 1276, 10);//Bottom
-        pc.initialWall(1266, 10, 10, 640);//Right
-        pc.initialWall(0, 0, 1276, 10);//Up
+        pc.initialWall(0, 1, 1, 64);//Left
+        pc.initialWall(0, 65, 127.6, 1);//Bottom
+        pc.initialWall(126.6, 1, 1, 64);//Right
+        pc.initialWall(0, 0, 127.6, 1);//Up
 
-//        pc.initialBall(1, -500, 500, 0.9, 1000, 30, 20, new Color(255, 0, 0));
-//        pc.initialBall(1, 200, 100, 0.9, 700, 30, 20, new Color(0, 255, 0));
-        pc.initialBall(1, 0, 30, 0.9, 503, 100, 20, new Color(0, 0, 255));
-//
-//        pc.initialBox(1, 0, 0, 0.7, 500, 200, 20, 30, new Color(255, 255, 0));
-//        pc.initialBox(1, 100, 0, 0.7, 200, 200, 50, 40, new Color(255, 0, 255));
-//        pc.initialBox(1, 0, 0, 0.7, 1000, 550, 40, 20, new Color(0, 255, 255));
+        pc.initialBall(1, -50, 50, 0.8, 100, 3, 2, new Color(255, 0, 0));
+        pc.initialBall(1, 20, 10, 0.9, 70, 3, 2, new Color(0, 255, 0));
+        pc.initialBall(1, 0, 3, 0.9, 50.3, 10, 2, new Color(0, 0, 255));
 
-        pc.initialTriangle(0, 0, 0, 1, 500, 500,50 , 100, 2, new Color(87,145,4));
+        pc.initialBox(1, 0, 0, 0.7, 50, 20, 2, 3, new Color(255, 255, 0));
+        pc.initialBox(1, 10, 0, 0.7, 20, 20, 5, 4, new Color(255, 0, 255));
+        pc.initialBox(1, 0, 0, 0.7, 100, 55, 4, 2, new Color(0, 255, 255));
 
-//        pc.initialRotationRectangle(540, 500, 20, 100, false, 'z');
-//        pc.initialRotationRectangle(760, 500, 20, 100, true, 'x');
+        pc.initialTriangle(0, 0, 0, 1, 50, 50,5 , 10, 2, new Color(87,145,4));
+
+        pc.initialRotationRectangle(54, 50, 2, 10, false, 'z');
+        pc.initialRotationRectangle(76, 50, 2, 10, true, 'x');
     }
 }

@@ -11,6 +11,7 @@ public abstract class RigidBody {
     public Vector2 force;
     public Vector2 velocity;
     public double epsilon;
+    public double mu=0.1;
 
     //m=0, mass will be infinity
     public RigidBody(double m,Vector2 f,Vector2 v,double e)
