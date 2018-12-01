@@ -23,7 +23,7 @@ public class   PhysicsEngineController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         phyRender.updateGeometries(rigids);
-        phyRender.repaint();
+        display();
         updateLocation();
     }
 
@@ -35,11 +35,13 @@ public class   PhysicsEngineController implements ActionListener {
         rigids=new Vector<RigidBody>();
     }
 
+
     public void startPhysicsRunning()
     {
         //Start the render
         if(timer==null)
             timer = new Timer(ticks,this);
+        if(timer.isRunning()) return;
         timer.start();
     }
     public void pausePhysicsRunning()
@@ -51,10 +53,18 @@ public class   PhysicsEngineController implements ActionListener {
     }
     public void proceedOneFrame()
     {
+        if(timer==null) return;
+        if(timer.isRunning()) return;
         phyRender.updateGeometries(rigids);
-        phyRender.repaint();
+        display();
         updateLocation();
     }
+    public void display()
+    {
+        phyRender.repaint();
+    }
+
+
 
 
     public void initialGravity(double g)

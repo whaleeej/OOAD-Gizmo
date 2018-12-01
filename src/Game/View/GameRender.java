@@ -1,4 +1,4 @@
-package Game;
+package Game.View;
 
 import Physics.Controller.PhysicsEngineController;
 import Physics.Controller.PhysicsRender;
@@ -22,6 +22,7 @@ public class GameRender extends JPanel implements PhysicsRender
         scale=10.0;
         //Count the frames
         frameCount=0;
+        this.setSize(1100, 800);
 
     }
 
