@@ -54,4 +54,5 @@ public abstract class RigidBody {
 
     //Update by ticks(s) abstract
     public abstract void update(Vector2 vec);
+
 }

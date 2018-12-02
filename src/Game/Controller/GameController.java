@@ -1,6 +1,7 @@
 package Game.Controller;
 
 import Entrance.MainScene;
+import Game.Model.SmashBox;
 import Game.View.GameRender;
 import Game.View.GameScene;
 import Game.View.GameToolbar;
@@ -55,7 +56,8 @@ public class GameController {
     //Step 1.
     public void resetGameController()
     {
-        pc=new PhysicsEngineController(gameRender);
+        pc=PhysicsEngineController.getPhysicsEngineController();
+        pc.setRender(gameRender);
     }
 
     //Sterp 2
@@ -77,9 +79,11 @@ public class GameController {
         pc.initialBall(1, 20, 10, 0.92, 20, 3, 6, new Color(0, 255, 0));
         pc.initialBall(1, 10, 30, 0.92, 40, 30, 2, new Color(0, 0, 255));
 
-        pc.initialBox(5, -30, -10, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
-        pc.initialBox(5, 30, 0, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
-        pc.initialBox(5, -30, 20, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
+        pc.initialBox(0, -30, -10, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
+        pc.initialBox(0, 30, 0, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
+        pc.initialBox(0, -30, 20, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
+
+        pc.initialRigid(new SmashBox(20, 40,3,3));
 
         pc.initialTriangle(10, 0, 0, 1, 50, 40,10 , 10, 2, new Color(87,145,4));
 
@@ -141,7 +145,6 @@ public class GameController {
     public void destroyPhysicEngine()
     {
         if(pc==null) return;
-        pauseGame();
-        pc=null;
+        pc.resetPhysicEngine();
     }
 }

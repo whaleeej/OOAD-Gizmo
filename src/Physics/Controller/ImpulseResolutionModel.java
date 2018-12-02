@@ -15,9 +15,10 @@ public class ImpulseResolutionModel {
     double penetration;
     Vector2 normal;
     double ticks;
+    boolean isCollided;
     public ImpulseResolutionModel(RigidBody a, RigidBody b,double ticks)
     {
-        boolean isCollided=false;
+        isCollided=false;
         A=a;
         B=b;
         this.ticks=ticks;
