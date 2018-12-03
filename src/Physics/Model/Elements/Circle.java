@@ -18,6 +18,14 @@ public class Circle extends RigidBody implements Texture, Geometry {
         volume=Math.PI*radius*radius;
     }
 
+    public Circle(Circle circle) {
+        super(circle.massInv,circle.force,circle.velocity,circle.epsilon);
+        this.color=circle.getColor();
+        this.position=new Vector2(circle.position);
+        this.radius=circle.radius;
+        this.volume=circle.volume;
+    }
+
     //Postion Update by Seconds
     @Override
     public void update(double ticks) {

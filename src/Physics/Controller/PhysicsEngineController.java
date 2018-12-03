@@ -1,5 +1,6 @@
 package Physics.Controller;
 
+import Game.Model.Pipe;
 import Physics.Model.Computation.Vector2;
 import Physics.Model.Elements.*;
 
@@ -210,6 +211,21 @@ public class   PhysicsEngineController implements ActionListener {
     {
         rigids.add(rigid);
     }
+
+    //Maybe it works
+    public void initialPipe(double x, double y,double width, double len1,double len2,int type)
+    {
+        Pipe pipe=new Pipe(x, y, width,len1, len2, type);
+        rigid=new AABB((AABB)pipe.A);
+        rigids.add(rigid);
+        rigid=new AABB((AABB)pipe.B);
+        rigids.add(rigid);
+        rigid=new AABB(pipe.C);
+        rigids.add(rigid);
+        rigid=new AABB(pipe.D);
+        rigids.add(rigid);
+    }
+
 
     public void destroyRigid(RigidBody rigid)
     {

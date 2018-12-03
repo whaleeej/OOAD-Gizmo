@@ -2,6 +2,7 @@ package Game.Controller;
 
 import Entrance.MainScene;
 import Game.Model.SmashBox;
+import Game.Model.Pipe;
 import Game.View.GameRender;
 import Game.View.GameScene;
 import Game.View.GameToolbar;
@@ -89,6 +90,8 @@ public class GameController {
 
         pc.initialRotationRectangle(49, 55, 2, 15, false, 'z');
         pc.initialRotationRectangle(81, 55, 2, 15, true, 'x');
+
+        pc.initialPipe(5,20,10,30,30,4);
     }
 
     //Step 3.Instantiate Objects
@@ -112,6 +115,11 @@ public class GameController {
     public void setpcRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key)
     {
         pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
+    }
+
+    public void setSmashBox(double x_min, double y_min, double width, double height)
+    {
+        pc.initialRigid(new SmashBox(x_min,  y_min,  width,  height));
     }
 
 
