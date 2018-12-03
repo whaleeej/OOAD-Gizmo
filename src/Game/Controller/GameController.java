@@ -72,7 +72,9 @@ public class GameController {
         pc.initialWall(110, 1, 1, 80);//Right
         pc.initialWall(0, -1, 110, 1);//Up
 
-//
+        //TODO::Change these intialrigid to the moethod you provide for Build Level
+        //Edited by ceej
+        //Eg. setBall(x,y,r,color)
         pc.initialBall(1, -10, -10, 0.92, 80, 3, 2, new Color(255, 0, 0));
         pc.initialBall(1, 20, 10, 0.92, 70, 3, 2, new Color(0, 255, 0));
         pc.initialBall(1, 10, 30, 0.92, 50.3, 10, 2, new Color(0, 0, 255));
@@ -80,18 +82,28 @@ public class GameController {
         pc.initialBall(1, 20, 10, 0.92, 20, 3, 6, new Color(0, 255, 0));
         pc.initialBall(1, 10, 30, 0.92, 40, 30, 2, new Color(0, 0, 255));
 
+        //Eg. setBox()
         pc.initialBox(0, -30, -10, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
         pc.initialBox(0, 30, 0, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
         pc.initialBox(0, -30, 20, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
 
-        pc.initialRigid(new SmashBox(20, 40,3,3));
 
+        //Eg. setSmashBox
+        //Edited by ceej
+        pc.initialRigid(new SmashBox(80, 40,3,3));
+
+
+        //Eg. SetTriangle
         pc.initialTriangle(10, 0, 0, 1, 50, 40,10 , 10, 2, new Color(87,145,4));
 
+        //Eg. SetRotationRectangle
         pc.initialRotationRectangle(49, 55, 2, 15, false, 'z');
         pc.initialRotationRectangle(81, 55, 2, 15, true, 'x');
 
-        pc.initialPipe(5,20,10,30,30,4);
+        //Edited by ceej
+        //TODO: to create a new method to setPipe, provided for build layer
+        new Pipe(5,20,10,30,30,4);
+
     }
 
     //Step 3.Instantiate Objects

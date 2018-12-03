@@ -19,14 +19,6 @@ public class AABB extends RigidBody implements Texture ,Geometry{
         volume=(max.x-min.x)*(max.y-min.y);
     }
 
-    public AABB(AABB aabb) {
-        super(aabb.massInv, aabb.force, aabb.velocity,aabb.epsilon);
-        this.color=aabb.getColor();
-        this.min=new Vector2(aabb.min);
-        this.max=new Vector2(aabb.max);
-        this.volume=aabb.volume;
-    }
-
     //Position update by ticks
     @Override
     public void update(double ticks) {

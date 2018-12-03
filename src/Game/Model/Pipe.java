@@ -15,6 +15,7 @@ public class Pipe {
     public PipePort B;     //right port
     public AABB C;         //the longer one
     public AABB D;         //the other one
+    public PhysicsEngineController pc=PhysicsEngineController.getPhysicsEngineController();//Edited by ceej
 
     public Pipe(double x, double y,double width, double len1,double len2,int type) {
 
@@ -33,6 +34,11 @@ public class Pipe {
                 //set the initial direction of balls getting out of the port
                 A.setDirection(0,1);
                 B.setDirection(1,0);
+                //Edited by ceej
+                pc.initialRigid(A);
+                pc.initialRigid(B);
+                pc.initialRigid(C);
+                pc.initialRigid(D);
                 break;
             case 2:
                 A = new PipePort(0, new Vector2(0, 0), new Vector2(0, 0), 1, x, y,thickness,width);
@@ -43,6 +49,11 @@ public class Pipe {
                 B.bindPort(A);
                 A.setDirection(-1,0);
                 B.setDirection(0,1);
+                //Edited by ceej
+                pc.initialRigid(A);
+                pc.initialRigid(B);
+                pc.initialRigid(C);
+                pc.initialRigid(D);
                 break;
             case 3:
                 A = new PipePort(0, new Vector2(0, 0), new Vector2(0, 0), 1, x, y+len2-width, thickness, width);
@@ -53,6 +64,11 @@ public class Pipe {
                 B.bindPort(A);
                 A.setDirection(-1,0);
                 B.setDirection(0,-1);
+                //Edited by ceej
+                pc.initialRigid(A);
+                pc.initialRigid(B);
+                pc.initialRigid(C);
+                pc.initialRigid(D);
                 break;
             case 4:
                 A = new PipePort(0, new Vector2(0, 0), new Vector2(0, 0), 1, x, y, width, thickness);
@@ -63,6 +79,11 @@ public class Pipe {
                 B.bindPort(A);
                 A.setDirection(0,-1);
                 B.setDirection(1,0);
+                //Edited by ceej
+                pc.initialRigid(A);
+                pc.initialRigid(B);
+                pc.initialRigid(C);
+                pc.initialRigid(D);
                 break;
         }
 
