@@ -23,32 +23,35 @@ public class PipePort extends AABB implements Trigger  {
 
     @Override
     public void onTriggerEnter(RigidBody rigidBody) {
-        if(rigidBody instanceof Circle) {
-            //for test
-             //PhysicsEngineController.getPhysicsEngineController().destroyRigid(rigidBody);
+        if(rigidBody instanceof Circle ) {
+            double weidth;
+            weidth=this.max.x-this.min.x>this.max.y-this.min.y?this.max.x-this.min.x:this.max.y-this.min.y;
+            if(weidth>=((Circle) rigidBody).radius*2) {
+                //change the direction of velocity
+                double vel = rigidBody.velocity.length();
+                rigidBody.velocity.x = vel * pp.direction.x;
+                rigidBody.velocity.y = vel * pp.direction.y;
 
-            //change the direction of velocity
-            double vel = rigidBody.velocity.length();
-            rigidBody.velocity.x = vel * pp.direction.x;
-            rigidBody.velocity.y = vel * pp.direction.y;
+                //change the position
+                int tmp = 2 * (int) pp.direction.x - (int) pp.direction.y;
+                switch (tmp) {
+                    case 2://right port
+                        ((Circle) rigidBody).position.x = pp.max.x + ((Circle) rigidBody).radius + 0.01;
+                        ((Circle) rigidBody).position.y = (pp.min.y + pp.max.y) * 0.5;
+                        break;
+                    case -2://left port
+                        ((Circle) rigidBody).position.x = pp.min.x - ((Circle) rigidBody).radius - 0.01;
+                        ((Circle) rigidBody).position.y = (pp.min.y + pp.max.y) * 0.5;
+                        break;
+                    case 1://top port
+                        ((Circle) rigidBody).position.y = pp.min.y - ((Circle) rigidBody).radius - 0.01;
+                        ((Circle) rigidBody).position.x = (pp.min.x + pp.max.x) * 0.5;
+                        break;
+                    case -1://bottom port
+                        ((Circle) rigidBody).position.y = pp.max.y + ((Circle) rigidBody).radius + 0.01;
+                        ((Circle) rigidBody).position.x = (pp.min.x + pp.max.x) * 0.5;
 
-            //change the position
-            switch ((int) (2*pp.direction.x - pp.direction.y)) {
-                case 2://right port
-                    ((Circle) rigidBody).position.x = pp.max.x+((Circle) rigidBody).radius+0.01;
-                    ((Circle) rigidBody).position.y = (pp.min.y + pp.max.y) * 0.5;
-                    break;
-                case -2://left port
-                    ((Circle) rigidBody).position.x = pp.min.x-((Circle) rigidBody).radius-0.01;
-                    ((Circle) rigidBody).position.y = (pp.min.y + pp.max.y) * 0.5;
-                    break;
-                case 1://top port
-                    ((Circle) rigidBody).position.y = pp.min.y-((Circle) rigidBody).radius-0.01;
-                    ((Circle) rigidBody).position.x = (pp.min.x + pp.max.x) * 0.5;
-                    break;
-                case -1://bottom port
-                    ((Circle) rigidBody).position.y = pp.max.y+((Circle) rigidBody).radius+0.01;
-                    ((Circle) rigidBody).position.x = (pp.min.x + pp.max.x) * 0.5;
+                }
             }
         }
     }

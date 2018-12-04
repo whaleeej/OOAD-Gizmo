@@ -9,7 +9,9 @@ import Game.View.GameToolbar;
 import Physics.Controller.PhysicsEngineController;
 import Physics.Model.Computation.Vector2;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 public class GameController {
 
@@ -21,6 +23,12 @@ public class GameController {
     private GameToolbar gameToolbar = null;
     private PhysicsEngineController pc=null;
     //GameScene gs=null;
+
+    //Edited by vicki
+    private int totlePoint=0;
+    JTextField totlePointText;
+    PointListener pointListener=new PointListener(this);
+
     public GameController(MainScene mainScene)
     {
         //Frame and Jpanel instantiate and layout
@@ -37,11 +45,6 @@ public class GameController {
         //Toggle View button to Listener in Controller
         setListeners();
 
-        //StartGameControllerDemo
-//        resetGameController();
-//        initialGameWorld(200,0.1,0.1);
-
-//        instantiateCompleted();
     }
 
     //For adding all listners
@@ -72,8 +75,9 @@ public class GameController {
         pc.initialWall(0, 80, 110, 1);//Bottom
         pc.initialWall(110, 1, 1, 80);//Right
         pc.initialWall(0, -1, 110, 1);//Up
+        //Edited by vicki
+        initialTotlePoint();
 
-        //TODO::Change these intialrigid to the moethod you provide for Build Level
         //Edited by ceej
         //Eg. setBall(x,y,r,color)
         pc.initialBall(1, -10, -10, 0.92, 80, 3, 2, new Color(255, 0, 0));
@@ -81,40 +85,32 @@ public class GameController {
         pc.initialBall(1, 10, 30, 0.92, 50.3, 10, 2, new Color(0, 0, 255));
         pc.initialBall(1, -10, -10, 0.92, 10, 8, 2, new Color(255, 0, 0));
         pc.initialBall(1, 20, 10, 0.92, 20, 3, 6, new Color(0, 255, 0));
-        pc.initialBall(1, -30, 0, 0.92, 40, 45, 2, new Color(0, 0, 255));
-//
-//        //Eg. setBox()
-        pc.initialBox(10, 0, 30, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
-        pc.initialBox(10, 0, 30, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
-        pc.initialBox(10, -30, -30, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
+        pc.initialBall(1, 10, 30, 0.92, 40, 30, 2, new Color(0, 0, 255));
+
+        //Eg. setBox()
+        pc.initialBox(0, -30, -10, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
+        pc.initialBox(0, 30, 0, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
+        pc.initialBox(0, -30, 20, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
 
 
         //Eg. setSmashBox
         //Edited by ceej
-//        pc.initialRigid(new Absorber(80, 40,3,3));
+        pc.initialRigid(new Absorber(this,pointListener,65, 70,3,3,1));
 
 
         //Eg. SetTriangle
-        pc.initialTriangle(10, 0, -10, 1, 53.2, 42,10 , 10, 2, new Color(87,145,4));
-
-
-
-        //Edited by ceej
-        //TODO: to create a new method to setPipe, provided for build layer
-//        new Pipe(5,20,10,30,30,4);
-
-        //Add Polygon
-        Vector2[] buf=new Vector2[]{new Vector2(70,40),new Vector2(75,45),new Vector2(70,50),new Vector2(65,45)};
-        pc.initialPolygon(10, -20, 0, 1, buf, new Color(123,231,9));
-
+        pc.initialTriangle(10, 0, 0, 1, 50, 40,10 , 10, 2, new Color(87,145,4));
 
         //Eg. SetRotationRectangle
         pc.initialRotationRectangle(49, 55, 2, 15, false, 'z');
         pc.initialRotationRectangle(81, 55, 2, 15, true, 'x');
+
+
+        new Pipe(20,20,10,30,30,4);
+
     }
 
     //Step 3.Instantiate Objects
-    //TODO:: Added method for instantiation command in Build Layer
     //Demo 1
     public void setBall(double x,double y,double r,Color color)
     {
@@ -136,10 +132,16 @@ public class GameController {
         pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
     }
 
-    public void setSmashBox(double x_min, double y_min, double width, double height)
+    public void setSmashBox(double x_min, double y_min, double width, double height,int scale)
     {
-        pc.initialRigid(new Absorber(x_min,  y_min,  width,  height));
+        pc.initialRigid(new Absorber(this,pointListener,x_min/10,  y_min/10,  width/10,  height/10,1));
     }
+
+    public void setPipe(double x, double y,double width, double len1,double len2,int type)
+    {
+        new Pipe(x, y, width/10, len1/10, len2/10, type);
+    }
+
 
 
     //Step4. Tell me Instantiation is completed
@@ -174,4 +176,18 @@ public class GameController {
         if(pc==null) return;
         pc.resetPhysicEngine();
     }
+
+    //Other logic
+    public void initialTotlePoint() {totlePoint=0;}
+    public int getTotlePoint() {return totlePoint;}
+
+    //Change the value of totlePoint
+    public void updateTotlePoint(int scale) { totlePoint += scale; }
+
+    //Change the text of point
+    public void updateTotlePointText()
+    {
+        gameToolbar.changPointText(totlePoint);
+    }
+
 }

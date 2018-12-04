@@ -10,7 +10,7 @@ import Game.Model.PipePort;
 
 public class Pipe {
     //If circle collide the start of this pipe
-    //Smash will trigger the onTriggerEnter function
+    //pipe will trigger the onTriggerEnter function
     public PipePort A;     //left port
     public PipePort B;     //right port
     public AABB C;         //the longer one
