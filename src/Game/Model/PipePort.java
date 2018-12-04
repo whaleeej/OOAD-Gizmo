@@ -42,14 +42,13 @@ public class PipePort extends AABB implements Trigger  {
                     ((Circle) rigidBody).position.x = pp.min.x-((Circle) rigidBody).radius-0.01;
                     ((Circle) rigidBody).position.y = (pp.min.y + pp.max.y) * 0.5;
                     break;
-                case -1://top port
+                case 1://top port
                     ((Circle) rigidBody).position.y = pp.min.y-((Circle) rigidBody).radius-0.01;
                     ((Circle) rigidBody).position.x = (pp.min.x + pp.max.x) * 0.5;
                     break;
-                case 1://bottom port
+                case -1://bottom port
                     ((Circle) rigidBody).position.y = pp.max.y+((Circle) rigidBody).radius+0.01;
                     ((Circle) rigidBody).position.x = (pp.min.x + pp.max.x) * 0.5;
-
             }
         }
     }

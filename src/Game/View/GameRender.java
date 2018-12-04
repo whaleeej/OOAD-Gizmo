@@ -2,6 +2,7 @@ package Game.View;
 
 import Physics.Controller.PhysicsEngineController;
 import Physics.Controller.PhysicsRender;
+import Physics.Model.Computation.Vector2;
 import Physics.Model.Elements.*;
 
 import javax.swing.*;
@@ -98,6 +99,18 @@ public class GameRender extends JPanel implements PhysicsRender
                         g.fillPolygon(xBuffer,yBuffer,3);
                     }
                     break;
+                }
+                case Polygon:
+                {
+                    Vector2[] buf=geo.getPolygonBuffer();
+                    int xBuffer[]=new int[buf.length];
+                    int yBuffer[]=new int[buf.length];
+                    for(int i=0;i<buf.length;i++)
+                    {
+                        xBuffer[i]=(int)(buf[i].x*scale);
+                        yBuffer[i]=(int)(buf[i].y*scale);
+                    }
+                    g.fillPolygon(xBuffer,yBuffer,buf.length);
                 }
             }
         }

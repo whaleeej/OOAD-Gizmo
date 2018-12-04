@@ -92,4 +92,17 @@ public class Vector2 {
     {
         return new Vector2(v1.x*coe,v1.y*coe);
     }
+
+    public static Vector2 perpendicular(Vector2 v)
+    {
+        double len=v.length();
+        return new Vector2(v.y/len,-v.x/len);
+    }
+
+    public static Vector2 perpendicular(double x,double y)
+    {
+        Vector2 v=new Vector2(x,y);
+        double len=v.length();
+        return new Vector2(v.y/len,-v.x/len);
+    }
 }

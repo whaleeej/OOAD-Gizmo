@@ -143,6 +143,11 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
     }
 
     @Override
+    public Vector2[] getPolygonBuffer() {
+        return null;
+    }
+
+    @Override
     public Color getColor() {
         return new Color(0,0,0);
     }

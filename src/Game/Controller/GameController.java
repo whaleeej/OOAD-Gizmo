@@ -1,12 +1,13 @@
 package Game.Controller;
 
 import Entrance.MainScene;
-import Game.Model.SmashBox;
+import Game.Model.Absorber;
 import Game.Model.Pipe;
 import Game.View.GameRender;
 import Game.View.GameScene;
 import Game.View.GameToolbar;
 import Physics.Controller.PhysicsEngineController;
+import Physics.Model.Computation.Vector2;
 
 import java.awt.*;
 
@@ -80,30 +81,36 @@ public class GameController {
         pc.initialBall(1, 10, 30, 0.92, 50.3, 10, 2, new Color(0, 0, 255));
         pc.initialBall(1, -10, -10, 0.92, 10, 8, 2, new Color(255, 0, 0));
         pc.initialBall(1, 20, 10, 0.92, 20, 3, 6, new Color(0, 255, 0));
-        pc.initialBall(1, 10, 30, 0.92, 40, 30, 2, new Color(0, 0, 255));
-
-        //Eg. setBox()
-        pc.initialBox(0, -30, -10, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
-        pc.initialBox(0, 30, 0, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
-        pc.initialBox(0, -30, 20, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
+        pc.initialBall(1, -30, 0, 0.92, 40, 45, 2, new Color(0, 0, 255));
+//
+//        //Eg. setBox()
+        pc.initialBox(10, 0, 30, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
+        pc.initialBox(10, 0, 30, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
+        pc.initialBox(10, -30, -30, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
 
 
         //Eg. setSmashBox
         //Edited by ceej
-        pc.initialRigid(new SmashBox(80, 40,3,3));
+//        pc.initialRigid(new Absorber(80, 40,3,3));
 
 
         //Eg. SetTriangle
-        pc.initialTriangle(10, 0, 0, 1, 50, 40,10 , 10, 2, new Color(87,145,4));
+        pc.initialTriangle(10, 0, -10, 1, 53.2, 42,10 , 10, 2, new Color(87,145,4));
+
+
+
+        //Edited by ceej
+        //TODO: to create a new method to setPipe, provided for build layer
+//        new Pipe(5,20,10,30,30,4);
+
+        //Add Polygon
+        Vector2[] buf=new Vector2[]{new Vector2(70,40),new Vector2(75,45),new Vector2(70,50),new Vector2(65,45)};
+        pc.initialPolygon(10, -20, 0, 1, buf, new Color(123,231,9));
+
 
         //Eg. SetRotationRectangle
         pc.initialRotationRectangle(49, 55, 2, 15, false, 'z');
         pc.initialRotationRectangle(81, 55, 2, 15, true, 'x');
-
-        //Edited by ceej
-        //TODO: to create a new method to setPipe, provided for build layer
-        new Pipe(5,20,10,30,30,4);
-
     }
 
     //Step 3.Instantiate Objects
@@ -131,7 +138,7 @@ public class GameController {
 
     public void setSmashBox(double x_min, double y_min, double width, double height)
     {
-        pc.initialRigid(new SmashBox(x_min,  y_min,  width,  height));
+        pc.initialRigid(new Absorber(x_min,  y_min,  width,  height));
     }
 
 

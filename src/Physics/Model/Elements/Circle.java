@@ -32,7 +32,7 @@ public class Circle extends RigidBody implements Texture, Geometry {
     @Override
     public void update(Vector2 vec) {
         position.x=position.x+vec.x;
-        position.y=position.y+vec.y;
+        position.y=position.y+vec.y;;
 
     }
 
@@ -54,6 +54,11 @@ public class Circle extends RigidBody implements Texture, Geometry {
     @Override
     public Shape getShape() {
         return Shape.Circle;
+    }
+
+    @Override
+    public Vector2[] getPolygonBuffer() {
+        return null;
     }
 
     @Override

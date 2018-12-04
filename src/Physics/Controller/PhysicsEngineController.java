@@ -1,14 +1,13 @@
 package Physics.Controller;
 
-import Game.Model.Pipe;
 import Physics.Model.Computation.Vector2;
 import Physics.Model.Elements.*;
+import Physics.Model.Elements.Polygon;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Enumeration;
 import java.util.Vector;
 
 public class   PhysicsEngineController implements ActionListener {
@@ -113,7 +112,7 @@ public class   PhysicsEngineController implements ActionListener {
             //collision handler
             for (int i = 0; i < rigids.size(); i++) {
                 for (int j = i + 1; j < rigids.size(); j++) {
-                        ImpulseResolutionModel irm=new ImpulseResolutionModel(rigids.elementAt(i), rigids.elementAt(j),millsec/1000.0);
+                        ImpulseResolutionController irm=new ImpulseResolutionController(rigids.elementAt(i), rigids.elementAt(j),millsec/1000.0);
                         if(irm.isCollided) //if collision happen
                         {
                             if(rigids.elementAt(i) instanceof  Trigger)
@@ -162,6 +161,8 @@ public class   PhysicsEngineController implements ActionListener {
         rigids.add(rigid);
     }
 
+
+
     /**
      * add Boxes
      * @param m
@@ -203,6 +204,24 @@ public class   PhysicsEngineController implements ActionListener {
         Vector2 force=new Vector2(gravity0);
         force.multiplyBy(m);
         rigid=new Triangle(m,force,new Vector2(v_x,v_y),e,x,y,len1,len2,type);
+        ((Texture)rigid).setColor(color);
+        rigids.add(rigid);
+    }
+
+    /**
+     * add Polygon
+     * @param m
+     * @param v_x
+     * @param v_y
+     * @param e
+     * @param buf
+     * @param color
+     */
+    public void initialPolygon(double m,double v_x,double v_y,double e,Vector2[] buf,Color color)
+    {
+        Vector2 force=new Vector2(gravity0);
+        force.multiplyBy(m);
+        rigid=new Polygon(m,force,new Vector2(v_x,v_y),e,buf);
         ((Texture)rigid).setColor(color);
         rigids.add(rigid);
     }
