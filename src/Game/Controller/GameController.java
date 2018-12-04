@@ -75,29 +75,46 @@ public class GameController {
         pc.initialWall(0, -1, 110, 1);//Up
         totlePoint=0;
 
-//        //Eg. setBall(x,y,r,color)
-//        pc.initialBall(1, -10, -10, 0.92, 80, 3, 2, new Color(255, 0, 0));
-//        pc.initialBall(1, 20, 10, 0.92, 70, 3, 2, new Color(0, 255, 0));
-//        pc.initialBall(1, 10, 30, 0.92, 50.3, 10, 2, new Color(0, 0, 255));
-//        pc.initialBall(1, -10, -10, 0.92, 10, 8, 2, new Color(255, 0, 0));
-//        pc.initialBall(1, 20, 10, 0.92, 20, 3, 6, new Color(0, 255, 0));
-//        pc.initialBall(1, 10, 30, 0.92, 40, 30, 2, new Color(0, 0, 255));
-//        //Eg. setBox()
-//        pc.initialBox(0, -30, -10, 0.9, 70, 20, 2, 3, new Color(255, 255, 0));
-//        pc.initialBox(0, 30, 0, 0.9, 60, 20, 5, 4, new Color(255, 0, 255));
-//        pc.initialBox(0, -30, 20, 0.9, 100, 55, 4, 2, new Color(0, 255, 255));
-//        //Eg. setSmashBox
-//        pc.initialRigid(new Absorber(this,65, 70,3,3,1));
-//        //Eg. SetTriangle
-//        pc.initialTriangle(10, 0, 0, 1, 50, 40,10 , 10, 2, new Color(87,145,4));
-//        //Eg. SetRotationRectangle
-//        pc.initialRotationRectangle(49, 55, 2, 15, false, 'z');
-//        pc.initialRotationRectangle(81, 55, 2, 15, true, 'x');
-//        new Pipe(20,20,10,30,30,4);
+        //Eg. setBall(x,y,r,color)
+        setBall(800, 30, 20, new Color(255, 0, 0));
+        setBall(700, 30, 20, new Color(0, 255, 0));
+        setBall(503, 100,20, new Color(0, 0, 255));
+        setBall(100, 80, 20, new Color(255, 0, 0));
+        setBall( 200, 30, 30, new Color(0, 255, 0));
+        setBall(400, 300, 20, new Color(0, 0, 255));
+        //Eg. setBox()
+        setBox(700, 200, 20, 30, new Color(255, 255, 0),true);
+        setBox(600, 200, 50, 40, new Color(255, 0, 255),true);
+        setBox(1000, 550, 40, 20, new Color(0, 255, 255),true);
+        //Eg. setAbsorber
+        setAbsorber(650, 700,30,30,1);
+        //Eg. SetTriangle
+        setTriangle(500, 400,100, 100, 2, new Color(87,145,4),true);
+        //Eg. SetPipe
+        setPipe(200,200,100,300,300,4);
+        //Eg. SetPolygon
+        Vector2[] buf=new Vector2[6];
+        buf[0]=new Vector2(700,200);
+        buf[1]=new Vector2(750,200);
+        buf[2]=new Vector2(780,240);
+        buf[3]=new Vector2(750,280);
+        buf[4]=new Vector2(700,280);
+        buf[5]=new Vector2(670,240);
+        setPolygon(buf,new Color(87,125,125),true);
+        //Eg. SetRotationRectangle
+        setRotationRectangle(490, 550, 20, 150, false, 'z');
+        setRotationRectangle(810, 550, 20, 150, true, 'x');
     }
 
     //Step 3.Instantiate Objects
     //Demo 1
+
+    //Please set RotationRectangle at last
+    public void setRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key)
+    {
+        pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
+    }
+
     public void setBall(double x,double y,double r,Color color)
     {
         pc.initialBall( 1, 0, 0, 0.93, x/10, y/10, r/10, color);
@@ -117,23 +134,29 @@ public class GameController {
 
     public void setPolygon(Vector2[] buf,Color color,boolean isMovable)
     {
+        Vector2 buf2[]=new Vector2[buf.length];
+        for(int i=0;i<buf.length;i++)
+        {
+            buf2[i]=new Vector2(buf[i]);
+            buf2[i].x/=10;
+            buf2[i].y/=10;
+        }
         double m=isMovable?10:0;
-        pc.initialPolygon(m,0,0,1,buf,color);
-    }
-
-    public void setpcRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key)
-    {
-        pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
+        pc.initialPolygon(m,0,0,1,buf2,color);
     }
 
     public void setAbsorber(double x_min, double y_min, double width, double height,int scale)
     {
-        pc.initialRigid(new Absorber(this,x_min/10,  y_min/10,  width/10,  height/10,1));
+        Color color=new Color(0,125,125);
+        pc.initialRigid(new Absorber(this,x_min/10,  y_min/10,  width/10,  height/10,1,color));
+
     }
 
     public void setPipe(double x, double y,double width, double len1,double len2,int type)
     {
-        new Pipe(x, y, width/10, len1/10, len2/10, type);
+        Color color1=new Color(255,0,0);
+        Color color2=new Color(50,55,100);
+        new Pipe(x/10, y/10,width/10, len1/10, len2/10, type,color1,color2);
     }
 
     //Step4. Tell me Instantiation is completed

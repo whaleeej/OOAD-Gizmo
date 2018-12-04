@@ -10,6 +10,7 @@ import Physics.Model.Elements.RigidBody;
 import Physics.Model.Elements.Trigger;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Absorber extends Rectangle implements Trigger {
     //If circle collide this box
@@ -19,8 +20,9 @@ public class Absorber extends Rectangle implements Trigger {
     GameController gameController=null;
     public int scale;
 
-    public Absorber(GameController gameController,double x_min, double y_min, double width, double height,int scale) {
+    public Absorber(GameController gameController, double x_min, double y_min, double width, double height, int scale, Color color) {
         super(0, new Vector2(0,0), new Vector2(0,0), 1, x_min, y_min, width, height);
+        this.setColor(color);
         this.gameController=gameController;
         this.scale =scale;
     }

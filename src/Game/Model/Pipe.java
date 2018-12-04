@@ -4,6 +4,8 @@ import Physics.Controller.PhysicsEngineController;
 import Physics.Model.Computation.Vector2;
 import Physics.Model.Elements.Rectangle;
 
+import java.awt.*;
+
 public class Pipe {
     //If circle collide the start of this pipe
     //pipe will trigger the onTriggerEnter function
@@ -13,7 +15,7 @@ public class Pipe {
     public Rectangle D;         //the other one
     public PhysicsEngineController pc=PhysicsEngineController.getPhysicsEngineController();//Edited by ceej
 
-    public Pipe(double x, double y,double width, double len1,double len2,int type) {
+    public Pipe(double x, double y, double width, double len1, double len2, int type, Color color1, Color color2) {
 
 
         double thickness=1;
@@ -30,6 +32,10 @@ public class Pipe {
                 //set the initial direction of balls getting out of the port
                 A.setDirection(0,1);
                 B.setDirection(1,0);
+                A.setColor(color1);
+                B.setColor(color1);
+                C.setColor(color2);
+                D.setColor(color2);
                 pc.initialRigid(A);
                 pc.initialRigid(B);
                 pc.initialRigid(C);
@@ -44,6 +50,10 @@ public class Pipe {
                 B.bindPort(A);
                 A.setDirection(-1,0);
                 B.setDirection(0,1);
+                A.setColor(color1);
+                B.setColor(color1);
+                C.setColor(color2);
+                D.setColor(color2);
                 pc.initialRigid(A);
                 pc.initialRigid(B);
                 pc.initialRigid(C);
@@ -58,6 +68,10 @@ public class Pipe {
                 B.bindPort(A);
                 A.setDirection(-1,0);
                 B.setDirection(0,-1);
+                A.setColor(color1);
+                B.setColor(color1);
+                C.setColor(color2);
+                D.setColor(color2);
                 pc.initialRigid(A);
                 pc.initialRigid(B);
                 pc.initialRigid(C);
@@ -72,6 +86,10 @@ public class Pipe {
                 B.bindPort(A);
                 A.setDirection(0,-1);
                 B.setDirection(1,0);
+                A.setColor(color1);
+                B.setColor(color1);
+                C.setColor(color2);
+                D.setColor(color2);
                 pc.initialRigid(A);
                 pc.initialRigid(B);
                 pc.initialRigid(C);
