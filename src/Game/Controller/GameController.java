@@ -1,14 +1,16 @@
 package Game.Controller;
 
 import Entrance.MainScene;
-import Game.Model.SmashBox;
+import Game.Model.Absorber;
 import Game.Model.Pipe;
 import Game.View.GameRender;
 import Game.View.GameScene;
 import Game.View.GameToolbar;
 import Physics.Controller.PhysicsEngineController;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 public class GameController {
 
@@ -20,6 +22,12 @@ public class GameController {
     private GameToolbar gameToolbar = null;
     private PhysicsEngineController pc=null;
     //GameScene gs=null;
+
+    //Edited by vicki
+    private int totlePoint=0;
+    JTextField totlePointText;
+    PointListener pointListener=new PointListener(this);
+
     public GameController(MainScene mainScene)
     {
         //Frame and Jpanel instantiate and layout
@@ -71,12 +79,14 @@ public class GameController {
         pc.initialWall(0, 80, 110, 1);//Bottom
         pc.initialWall(110, 1, 1, 80);//Right
         pc.initialWall(0, -1, 110, 1);//Up
+        //Edited by vicki
+        initialTotlePoint();
 
         //TODO::Change these intialrigid to the moethod you provide for Build Level
         //Edited by ceej
         //Eg. setBall(x,y,r,color)
         pc.initialBall(1, -10, -10, 0.92, 80, 3, 2, new Color(255, 0, 0));
-        pc.initialBall(1, 20, 10, 0.92, 70, 3, 2, new Color(0, 255, 0));
+        //pc.initialBall(1, 20, 10, 0.92, 70, 3, 2, new Color(0, 255, 0));
         pc.initialBall(1, 10, 30, 0.92, 50.3, 10, 2, new Color(0, 0, 255));
         pc.initialBall(1, -10, -10, 0.92, 10, 8, 2, new Color(255, 0, 0));
         pc.initialBall(1, 20, 10, 0.92, 20, 3, 6, new Color(0, 255, 0));
@@ -90,7 +100,7 @@ public class GameController {
 
         //Eg. setSmashBox
         //Edited by ceej
-        pc.initialRigid(new SmashBox(80, 40,3,3));
+        pc.initialRigid(new Absorber(this,pointListener,65, 70,3,3,1));
 
 
         //Eg. SetTriangle
@@ -102,7 +112,7 @@ public class GameController {
 
         //Edited by ceej
         //TODO: to create a new method to setPipe, provided for build layer
-        new Pipe(5,20,10,30,30,4);
+        new Pipe(20,20,10,30,30,4);
 
     }
 
@@ -129,10 +139,16 @@ public class GameController {
         pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
     }
 
-    public void setSmashBox(double x_min, double y_min, double width, double height)
+    public void setSmashBox(double x_min, double y_min, double width, double height,int scale)
     {
-        pc.initialRigid(new SmashBox(x_min,  y_min,  width,  height));
+        pc.initialRigid(new Absorber(this,pointListener,x_min/10,  y_min/10,  width/10,  height/10,1));
     }
+
+    public void setPipe(double x, double y,double width, double len1,double len2,int type)
+    {
+        new Pipe(x, y, width/10, len1/10, len2/10, type);
+    }
+
 
 
     //Step4. Tell me Instantiation is completed
@@ -167,4 +183,18 @@ public class GameController {
         if(pc==null) return;
         pc.resetPhysicEngine();
     }
+
+    //Other logic
+    public void initialTotlePoint() {totlePoint=0;}
+    public int getTotlePoint() {return totlePoint;}
+
+    //Change the value of totlePoint
+    public void updateTotlePoint(int scale) { totlePoint += scale; }
+
+    //Change the text of point
+    public void updateTotlePointText()
+    {
+        gameToolbar.changPointText(totlePoint);
+    }
+
 }

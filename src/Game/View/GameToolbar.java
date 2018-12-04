@@ -21,6 +21,8 @@ public class GameToolbar extends JPanel
     private JButton startButton;
     private JButton pauseButton;
     private JButton proceedButton;
+    private JTextField point;
+
 
     public GameToolbar()
     {
@@ -34,9 +36,18 @@ public class GameToolbar extends JPanel
         proceedButton = new JButton("Proceed");
         this.add(proceedButton);
 
+        //Edicted by vicki
+        this.add(new JLabel("总分"));
+        point=new JTextField("0",2);
+        this.add(point);
+
     }
 
-
+    //Edicted by vicki
+    public void changPointText(int totlePoint)
+    {
+        this.point.setText(String.valueOf(totlePoint));
+    }
 
     public JButton getBuildingButton()
     {
