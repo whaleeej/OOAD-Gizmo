@@ -150,6 +150,18 @@ public class   PhysicsEngineController implements ActionListener {
     }
 
     /**
+     * add Circle
+     */
+    public void initialCircle(double m,double v_x,double v_y,double e,double x,double y,double r,Color color )
+    {
+        Vector2 force=new Vector2(gravity0);
+        force.multiplyBy(m);
+        rigid=new Circle(m,force,new Vector2(v_x,v_y),e,x,y,r);
+        ((Texture)rigid).setColor(color);
+        rigids.add(rigid);
+    }
+
+    /**
      * add Boxes
      */
     public void initialBox(double m,double v_x,double v_y,double e,double x,double y,double width,double height,Color color)

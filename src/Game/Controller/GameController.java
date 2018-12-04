@@ -75,36 +75,37 @@ public class GameController {
         pc.initialWall(0, -1, 110, 1);//Up
         totlePoint=0;
 
-        //Eg. setBall(x,y,r,color)
-        setBall(800, 30, 20, new Color(255, 0, 0));
-        setBall(700, 30, 20, new Color(0, 255, 0));
-        setBall(503, 100,20, new Color(0, 0, 255));
-        setBall(100, 80, 20, new Color(255, 0, 0));
-        setBall( 200, 30, 30, new Color(0, 255, 0));
-        setBall(400, 300, 20, new Color(0, 0, 255));
-        //Eg. setBox()
-        setBox(700, 200, 20, 30, new Color(255, 255, 0),true);
-        setBox(600, 200, 50, 40, new Color(255, 0, 255),true);
-        setBox(1000, 550, 40, 20, new Color(0, 255, 255),true);
-        //Eg. setAbsorber
-        setAbsorber(650, 700,30,30,1);
-        //Eg. SetTriangle
-        setTriangle(500, 400,100, 100, 3, new Color(87,145,4),true);
-        //Eg. SetPipe
-        setPipe(200,200,100,300,300,4);
-        //Eg. SetPolygon
-        Vector2[] buf=new Vector2[6];
-        buf[0]=new Vector2(700,200);
-        buf[1]=new Vector2(750,200);
-        buf[2]=new Vector2(780,240);
-        buf[3]=new Vector2(750,280);
-        buf[4]=new Vector2(700,280);
-        buf[5]=new Vector2(670,240);
-        setPolygon(buf,new Color(87,125,125),true);
-        //Eg. SetRotationRectangle
-        setRotationRectangle(490, 550, 20, 150, false, 'z');
-        setRotationRectangle(290, 550, 20, 150, false, 'a');
-        setRotationRectangle(810, 550, 20, 150, true, 'x');
+//        //Eg. setBall(x,y,r,color)
+//        setBall(0,0,800, 30, 20, new Color(255, 0, 0));
+//        setBall(0,0,700, 30, 20, new Color(0, 255, 0));
+//        setBall(0,0,503, 100,20, new Color(0, 0, 255));
+//        setBall(0,0,100, 80, 20, new Color(255, 0, 0));
+//        setBall(0,0, 200, 30, 30, new Color(0, 255, 0));
+//        //Eg. setCircle
+//        setCircle(700, 300, 40, new Color(0, 0, 255));
+//        //Eg. setBox()
+//        setBox(700, 200, 20, 30, new Color(255, 255, 0),true);
+//        setBox(600, 200, 50, 40, new Color(255, 0, 255),true);
+//        setBox(1000, 550, 40, 20, new Color(0, 255, 255),true);
+//        //Eg. setAbsorber
+//        setAbsorber(650, 700,30,30,1);
+//        //Eg. SetTriangle
+//        setTriangle(500, 400,100, 100, 2, new Color(87,145,4),true);
+//        //Eg. SetPipe
+//        setPipe(200,200,100,300,300,4);
+//        //Eg. SetPolygon
+//        Vector2[] buf=new Vector2[6];
+//        buf[0]=new Vector2(700,200);
+//        buf[1]=new Vector2(750,200);
+//        buf[2]=new Vector2(780,240);
+//        buf[3]=new Vector2(750,280);
+//        buf[4]=new Vector2(700,280);
+//        buf[5]=new Vector2(670,240);
+//        setPolygon(buf,new Color(87,125,125),true);
+//        //Eg. SetRotationRectangle
+//        setRotationRectangle(490, 550, 20, 150, false, 'z');
+//        setRotationRectangle(290, 550, 20, 150, false, 'a');
+//        setRotationRectangle(810, 550, 20, 150, true, 'x');
     }
 
     //Step 3.Instantiate Objects
@@ -116,9 +117,14 @@ public class GameController {
         pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
     }
 
-    public void setBall(double x,double y,double r,Color color)
+    public void setBall(double v_x,double v_y,double x,double y,double r,Color color)
     {
-        pc.initialBall( 1, 0, 0, 0.93, x/10, y/10, r/10, color);
+        pc.initialBall( 1, v_x/10.0, v_y/10.0, 0.93, x/10, y/10, r/10, color);
+    }
+
+    public void setCircle(double x,double y,double r,Color color)
+    {
+        pc.initialCircle( 0, 0, 0, 0.93, x/10, y/10, r/10, color);
     }
 
     public void setBox(double x,double y,double width,double height,Color color,boolean isMovable)
