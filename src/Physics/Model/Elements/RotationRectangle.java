@@ -117,7 +117,6 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
 
     @Override
     public void update(Vector2 vec) {
-        //TODO: none velocity update
         endPoint.x+=vec.x;
         endPoint.y+=vec.y;
     }
@@ -140,6 +139,11 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
     @Override
     public Shape getShape() {
         return Shape.RotationRectangle;
+    }
+
+    @Override
+    public Vector2[] getPolygonBuffer() {
+        return null;
     }
 
     @Override
