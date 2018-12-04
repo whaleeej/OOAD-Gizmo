@@ -3,6 +3,7 @@ package Physics.Controller;
 import Physics.Model.Computation.Vector2;
 import Physics.Model.Elements.*;
 import Physics.Model.Elements.Polygon;
+import Physics.Model.Elements.Rectangle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class   PhysicsEngineController implements ActionListener {
+    //Singleton Mode
     public static int ticks=20; //frame rate is 40 FPS;
     public static PhysicsEngineController pc=null;
     public static PhysicsEngineController getPhysicsEngineController()
@@ -19,6 +21,7 @@ public class   PhysicsEngineController implements ActionListener {
         return pc;
     }
 
+    //Parameter
     Vector<RigidBody> rigids;
     RigidBody rigid;
     Vector<RigidBody> flippers;
@@ -27,10 +30,7 @@ public class   PhysicsEngineController implements ActionListener {
     Vector2 gravity=new Vector2(0,100);
     Vector2 gravity0=new Vector2(0,0);
 
-
-
-
-
+    //Listener
     @Override
     public void actionPerformed(ActionEvent e) {
         phyRender.updateGeometries(rigids);
@@ -38,25 +38,40 @@ public class   PhysicsEngineController implements ActionListener {
         updateLocation();
     }
 
+    //Initial
     PhysicsEngineController()
     {
         //Initial the worlds
         rigids=new Vector<RigidBody>();
     }
-
     public void setRender(PhysicsRender pr)
     {
         //give renderer
         phyRender=pr;
     }
+    public void initialGravity(double g)
+    {
+        gravity=new Vector2(0,g);
+        gravity0=new Vector2(0,0);
+    }
 
+    public void initialResistance(double u,double c)
+    {
+        RigidBody.setMu(u);
+        RigidBody.setC(c);
+    }
+
+    //Control method for PhysicsEngine
     public void resetPhysicEngine()
     {
         rigids.clear();
         pausePhysicsRunning();
     }
-
-
+    public void readyPhysicsRunning()
+    {
+        phyRender.updateGeometries(rigids);
+        display();
+    }
     public void startPhysicsRunning()
     {
         //Start the render
@@ -86,21 +101,6 @@ public class   PhysicsEngineController implements ActionListener {
         phyRender.repaint();
     }
 
-
-
-
-    public void initialGravity(double g)
-    {
-        gravity=new Vector2(0,g);
-        gravity0=new Vector2(0,0);
-    }
-
-    public void initialResistance(double u,double c)
-    {
-        RigidBody.setMu(u);
-        RigidBody.setC(c);
-    }
-
     //Update the Location of all objs in the world by three steps
     public void updateLocation() {
         for (int k = 1; k <= 3; k++) {
@@ -125,32 +125,20 @@ public class   PhysicsEngineController implements ActionListener {
         }
     }
 
-    /////////add RigidBodies by users
 
+    //add RigidBodies by users
     /**
      * Add walls
-     * @param x_min
-     * @param y_min
-     * @param width
-     * @param height
      */
     public void initialWall(double x_min,double y_min,double width,double height)
     {
-        rigid=new AABB(0,gravity0,new Vector2(0,0),1.0,x_min,y_min,width,height);//Left
+        rigid=new Rectangle(0,gravity0,new Vector2(0,0),1.0,x_min,y_min,width,height);//Left
         ((Texture)rigid).setColor(new Color(0,0,0));
         rigids.add(rigid);
     }
 
     /**
      * add Balls
-     * @param m
-     * @param v_x
-     * @param v_y
-     * @param e
-     * @param x
-     * @param y
-     * @param r
-     * @param color
      */
     public void initialBall(double m,double v_x,double v_y,double e,double x,double y,double r,Color color )
     {
@@ -161,37 +149,20 @@ public class   PhysicsEngineController implements ActionListener {
         rigids.add(rigid);
     }
 
-
-
     /**
      * add Boxes
-     * @param m
-     * @param v_x
-     * @param v_y
-     * @param e
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param color
      */
     public void initialBox(double m,double v_x,double v_y,double e,double x,double y,double width,double height,Color color)
     {
         Vector2 force=new Vector2(gravity0);
         force.multiplyBy(m);
-        rigid=new AABB(m,force,new Vector2(v_x,v_y),e,x,y,width,height);
+        rigid=new Rectangle(m,force,new Vector2(v_x,v_y),e,x,y,width,height);
         ((Texture)rigid).setColor(color);
         rigids.add(rigid);
     }
 
     /**
      * add Flipper
-     * @param x
-     * @param y
-     * @param w
-     * @param l
-     * @param isLeft
-     * @param key
      */
     public void initialRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key)
     {
@@ -199,6 +170,9 @@ public class   PhysicsEngineController implements ActionListener {
         rigids.add(rigid);
     }
 
+    /**
+     *add Triangle
+     */
     public void initialTriangle(double m,double v_x,double v_y,double e,double x,double y,double len1,double len2,int type,Color color)
     {
         Vector2 force=new Vector2(gravity0);
@@ -210,12 +184,6 @@ public class   PhysicsEngineController implements ActionListener {
 
     /**
      * add Polygon
-     * @param m
-     * @param v_x
-     * @param v_y
-     * @param e
-     * @param buf
-     * @param color
      */
     public void initialPolygon(double m,double v_x,double v_y,double e,Vector2[] buf,Color color)
     {
@@ -226,14 +194,17 @@ public class   PhysicsEngineController implements ActionListener {
         rigids.add(rigid);
     }
 
-    //TO add a already instantiated obj into physicEngine;
+    /**
+     * TO add a already instantiated obj into physicEngine;
+     */
     public void initialRigid(RigidBody rigid)
     {
         rigids.add(rigid);
     }
 
-
-
+    /**
+     * Delete a rigid from PHYSIC
+     */
     public void destroyRigid(RigidBody rigid)
     {
         for (int i = 0; i < rigids.size(); i++) {

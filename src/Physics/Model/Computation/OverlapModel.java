@@ -41,12 +41,12 @@ public class OverlapModel {
         {
             isCollided=CirclevsCircle((Circle) A, (Circle)B);
         }
-        else if (A instanceof AABB && B instanceof AABB)
+        else if (A instanceof Rectangle && B instanceof Rectangle)
         {
-            isCollided=AABBvsAABB((AABB)A, (AABB)B);
+            isCollided=AABBvsAABB((Rectangle)A, (Rectangle)B);
         }
-        else if(A instanceof AABB&& B instanceof Circle){
-            isCollided=AABBvsCircle((AABB)A, (Circle)B);
+        else if(A instanceof Rectangle && B instanceof Circle){
+            isCollided=AABBvsCircle((Rectangle)A, (Circle)B);
 
         }
         else if(A instanceof RotationRectangle && B instanceof Circle){
@@ -67,7 +67,7 @@ public class OverlapModel {
         }
     }
 
-    boolean AABBvsAABB(AABB a, AABB b )
+    boolean AABBvsAABB(Rectangle a, Rectangle b )
     {
         // Vector from A to B
         Vector2 n =new Vector2((b.max.x+b.min.x)/2.0-(a.max.x+a.min.x)/2.0,(b.max.y+b.min.y)/2.0-(a.max.y+a.min.y)/2.0);
@@ -148,7 +148,7 @@ public class OverlapModel {
         }
     }
 
-    boolean AABBvsCircle( AABB a, Circle b )
+    boolean AABBvsCircle(Rectangle a, Circle b )
     {
 
         // Vector from A to B
@@ -161,13 +161,13 @@ public class OverlapModel {
         double x_extent = (a.max.x - a.min.x) / 2;
         double y_extent = (a.max.y - a.min.y) / 2;
 
-        // Clamp point to edges of the AABB
+        // Clamp point to edges of the Rectangle
         closest.x = MathD.clamp( closest.x,-x_extent, x_extent );
         closest.y = MathD.clamp( closest.y, -y_extent, y_extent );
 
         boolean inside = false;
 
-        // Circle is inside the AABB, so we need to clamp the circle's center
+        // Circle is inside the Rectangle, so we need to clamp the circle's center
         // to the closest edge
         if(n .equals(closest) )
         {
@@ -198,7 +198,7 @@ public class OverlapModel {
         double r = b.radius;
 
         // Early out of the radius is shorter than distance to closest point and
-        // Circle not inside the AABB
+        // Circle not inside the Rectangle
         if(d > r * r && !inside)
             return false;
 
@@ -206,7 +206,7 @@ public class OverlapModel {
         d = sqrt( d );
 
         // Collision normal needs to be flipped to point outside if circle was
-        // inside the AABB
+        // inside the Rectangle
         if(inside)
         {
             normal.multiplyBy(-1);
@@ -237,13 +237,13 @@ public class OverlapModel {
         double x_extent = a.widtd/2.0;
         double y_extent = a.length/2.0;
 
-        // Clamp point to edges of the AABB
+        // Clamp point to edges of the Rectangle
         closest.x = MathD.clamp( closest.x,-x_extent, x_extent );
         closest.y = MathD.clamp( closest.y, -y_extent, y_extent );
 
         boolean inside = false;
 
-        // Circle is inside the AABB, so we need to clamp the circle's center
+        // Circle is inside the Rectangle, so we need to clamp the circle's center
         // to the closest edge
         if(n .equals(closest) )
         {
@@ -274,7 +274,7 @@ public class OverlapModel {
         double r = b.radius;
 
         // Early out of the radius is shorter than distance to closest point and
-        // Circle not inside the AABB
+        // Circle not inside the Rectangle
         if(d > r * r && !inside)
             return false;
 
@@ -282,7 +282,7 @@ public class OverlapModel {
         d = sqrt( d );
 
         // Collision normal needs to be flipped to point outside if circle was
-        // inside the AABB
+        // inside the Rectangle
 
         double armforce=(y_extent+closest.y<a.length)?y_extent+closest.y:a.length;
         a.velocity=a.getSpeed(armforce);
@@ -333,13 +333,13 @@ public class OverlapModel {
             double x_extent = a.len1/2.0;
             double y_extent = a.len2/2.0;
 
-            // Clamp point to edges of the AABB
+            // Clamp point to edges of the Rectangle
             closest.x = MathD.clamp( closest.x,-x_extent, x_extent );
             closest.y = MathD.clamp( closest.y, -y_extent, y_extent );
 
             boolean inside = false;
 
-            // Circle is inside the AABB, so we need to clamp the circle's center
+            // Circle is inside the Rectangle, so we need to clamp the circle's center
             // to the closest edge
             if(n .equals(closest) )
             {
@@ -370,7 +370,7 @@ public class OverlapModel {
             double r = b.radius;
 
             // Early out of the radius is shorter than distance to closest point and
-            // Circle not inside the AABB
+            // Circle not inside the Rectangle
             if(d > r * r && !inside)
                 return false;
 
@@ -378,7 +378,7 @@ public class OverlapModel {
             d = sqrt( d );
 
             // Collision normal needs to be flipped to point outside if circle was
-            // inside the AABB
+            // inside the Rectangle
             if(inside)
             {
                 normal.multiplyBy(-1);
@@ -541,8 +541,8 @@ public class OverlapModel {
         return arr;
     }
 
-
-    double overlap(double[] a, double[] b){
+    double overlap(double[] a, double[] b)
+    {
         if(a[0]<=b[0])
         {
             if(a[1]<=b[0]) return 0.0;
@@ -556,7 +556,6 @@ public class OverlapModel {
         }
         return 0.0;
     }
-
 
     boolean PolygonvsCircle(Polygon a, Circle b)
     {

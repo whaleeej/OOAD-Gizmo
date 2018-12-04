@@ -6,11 +6,11 @@ import java.awt.*;
 
 import static java.lang.Math.abs;
 
-public class AABB extends Polygon implements Texture ,Geometry{
+public class Rectangle extends Polygon implements Texture ,Geometry{
     public Vector2 min;
     public Vector2 max;
 
-    public AABB(double m, Vector2 f, Vector2 v,double e, double x_min,double y_min,double width, double height) {
+    public Rectangle(double m, Vector2 f, Vector2 v, double e, double x_min, double y_min, double width, double height) {
         super(m, f, v,e,null);
         min=new Vector2(x_min,y_min);
         max=new Vector2(x_min+width,y_min+height);

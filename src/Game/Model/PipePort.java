@@ -1,14 +1,12 @@
 package Game.Model;
 
-import Physics.Controller.PhysicsEngineController;
 import Physics.Model.Computation.Vector2;
-import Physics.Model.Elements.AABB;
+import Physics.Model.Elements.Rectangle;
 import Physics.Model.Elements.Circle;
 import Physics.Model.Elements.RigidBody;
 import Physics.Model.Elements.Trigger;
-import java.awt.*;
 
-public class PipePort extends AABB implements Trigger  {
+public class PipePort extends Rectangle implements Trigger  {
     public PipePort(double m, Vector2 f, Vector2 v, double e, double x_min, double y_min, double width, double height) {
         super(0, new Vector2(0,0), new Vector2(0,0), 1, x_min, y_min, width, height);
     }

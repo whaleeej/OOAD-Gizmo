@@ -2,22 +2,22 @@ package Game.Controller;
 
 import Game.Model.Absorber;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Vector;
 
 public class PointListener {
+    //Subscriber-Listener Mode
     private GameController gameController;
-    public PointListener(GameController gameController)
+    JTextField pointText;
+    public PointListener(JTextField jTextField)
     {
-        this.gameController = gameController;
+        this.pointText=jTextField;
     }
 
-    public void updatePoint(Absorber ab)
+    public void onUpdateEvent(int score)
     {
-        //Update the value
-        ab.point+=ab.scale;
-        gameController.updateTotlePoint(ab.scale);
-        //Update the text
-        gameController.updateTotlePointText();
+        pointText.setText(score+"");
     }
 
 }
