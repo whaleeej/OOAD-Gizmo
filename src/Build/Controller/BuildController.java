@@ -1,12 +1,15 @@
 package Build.Controller;
 
+import Build.Model.Gizmo;
 import Build.View.BuildRender;
 import Build.View.BuildScene;
 import Build.View.BuildToolbar;
 import Entrance.MainScene;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class BuildController
 {
@@ -14,6 +17,8 @@ public class BuildController
     private MainScene mainScene;
     private BuildScene buildScene;
     private BuildToolbar buildToolbar;
+    private Gizmo tempGizmo;
+    private int state;
 
     public BuildController(MainScene mainScene)
     {
@@ -32,6 +37,9 @@ public class BuildController
 
     private void setListeners()
     {
+        //buildToolbar set Listeners
         buildToolbar.getGamingButton().addActionListener(new GamingListener(mainScene));
+
+        //buildRender.addMouseListener();
     }
 }
