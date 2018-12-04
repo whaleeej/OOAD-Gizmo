@@ -20,7 +20,7 @@ public class GamingListener implements ActionListener
         mainScene.changeToGameMode();
         GameController gameController = mainScene.getGameController();
         gameController.resetGameController();
-        gameController.initialGameWorld(200,0.1,0.05);
+        gameController.initialGameWorld(200,0.1,0.1);
         gameController.instantiateCompleted();
     }
 }

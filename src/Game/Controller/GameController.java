@@ -89,7 +89,7 @@ public class GameController {
         //Eg. setAbsorber
         setAbsorber(650, 700,30,30,1);
         //Eg. SetTriangle
-        setTriangle(500, 400,100, 100, 2, new Color(87,145,4),true);
+        setTriangle(500, 400,100, 100, 3, new Color(87,145,4),true);
         //Eg. SetPipe
         setPipe(200,200,100,300,300,4);
         //Eg. SetPolygon
@@ -103,6 +103,7 @@ public class GameController {
         setPolygon(buf,new Color(87,125,125),true);
         //Eg. SetRotationRectangle
         setRotationRectangle(490, 550, 20, 150, false, 'z');
+        setRotationRectangle(290, 550, 20, 150, false, 'a');
         setRotationRectangle(810, 550, 20, 150, true, 'x');
     }
 

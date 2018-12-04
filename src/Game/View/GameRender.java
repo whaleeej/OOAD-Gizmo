@@ -78,6 +78,7 @@ public class GameRender extends JPanel implements PhysicsRender
                     int xBuffer[]={(int)(x2),(int)(x1),(int)(x1+deltaX),(int)(x2+deltaX),};
                     int yBuffer[]={(int)(y2),(int)(y1),(int)(y1+deltaY),(int)(y2+deltaY)};
                     g.fillPolygon(xBuffer,yBuffer,4);
+                    break;
 
                 }
                 case Triangle:
@@ -111,6 +112,7 @@ public class GameRender extends JPanel implements PhysicsRender
                         yBuffer[i]=(int)(buf[i].y*scale);
                     }
                     g.fillPolygon(xBuffer,yBuffer,buf.length);
+                    break;
                 }
             }
         }
