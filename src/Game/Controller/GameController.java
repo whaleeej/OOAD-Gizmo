@@ -75,7 +75,7 @@ public class GameController {
         pc.initialWall(0, -1, 110, 1);//Up
         totlePoint=0;
 
-//        //Eg. setBall(x,y,r,color)
+        //Eg. setBall(x,y,r,color)
 //        setBall(0,0,800, 30, 20, new Color(255, 0, 0));
 //        setBall(0,0,700, 30, 20, new Color(0, 255, 0));
 //        setBall(0,0,503, 100,20, new Color(0, 0, 255));

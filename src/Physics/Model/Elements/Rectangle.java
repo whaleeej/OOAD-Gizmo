@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static java.lang.Math.abs;
 
-public class Rectangle extends Polygon implements Texture ,Geometry{
+public class Rectangle extends Polygon {
     public Vector2 min;
     public Vector2 max;
 
