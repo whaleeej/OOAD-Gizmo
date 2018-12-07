@@ -127,6 +127,18 @@ public class GameRender extends JPanel implements PhysicsRender
                     g.fillPolygon(xBuffer,yBuffer,buf.length);
                     break;
                 }
+                case Absorber:
+                {
+                    int x1=(int)((geo.getMin().x)*scale);
+                    int y1=(int)((geo.getMin().y)*scale);
+                    int x2=(int)((geo.getMax().x)*scale);
+                    int y2=(int)((geo.getMax().y)*scale);
+                    g.fillRect(x1, y1, x2-x1, y2-y1);
+                    g.setColor(new Color(255,255,255));
+                    g.fillOval(5*x1/6+x2/6, 5*y1/6+y2/6, 2*(x2-x1)/3, 2*(y2-y1)/3);
+                    break;
+                }
+
             }
         }
     }
