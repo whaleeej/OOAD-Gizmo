@@ -22,7 +22,7 @@ public class MainScene extends JFrame
     {
         super("BuildScene");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(1200, 871);
+        this.setSize(1239, 871);
         this.setLocationRelativeTo(null);
         this.setBackground(Color.green);
         mainpanel = new JPanel();
@@ -109,5 +109,10 @@ public class MainScene extends JFrame
 
     public GameController getGameController() {
         return gameController;
+    }
+
+    public BuildController getBuildController()
+    {
+        return buildController;
     }
 }
