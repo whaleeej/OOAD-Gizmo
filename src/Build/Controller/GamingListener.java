@@ -4,11 +4,14 @@ import Build.Model.Gizmo;
 import Build.Model.Grid;
 import Entrance.MainScene;
 import Game.Controller.GameController;
+import Physics.Model.Computation.Vector2;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import static java.lang.Math.sqrt;
 
 public class GamingListener implements ActionListener
 {
@@ -49,6 +52,7 @@ public class GamingListener implements ActionListener
                     gameController.setBox(x, y, (double) scale * size, (double) scale * size, color, movable);
                     break;
                 case "Triangle":
+                {
                     if (rotation == 1)
                     {
                         y += scale * size;
@@ -66,9 +70,62 @@ public class GamingListener implements ActionListener
                     }
                     gameController.setTriangle(x, y, (double) scale * size, (double) scale * size, rotation, color, movable);
                     break;
+                }
                 case "Hexagon":
+                {
+                    int dis = scale*size/2;
+                    double space = dis/2*sqrt(3);
+                    double cx = x+dis;
+                    double cy = y+dis;
+                    Vector2[] buf = new Vector2[6];
+                    if(rotation % 2 == 1)
+                    {
+                        double[] pointX = {x,x+dis/2,x+dis*3/2,x+dis*2,x+dis*3/2,x+dis/2};
+                        double[] pointY = {cy,cy-space,cy-space,cy,cy+space,cy+space};
+                        for(int i = 0; i < 6; i++)
+                            buf[i] = new Vector2(pointX[i],pointY[i]);
+                    }else
+                    {
+                        double[] pointX = {cx,cx+space,cx+space,cx,cx-space,cx-space};
+                        double[] pointY = {y,y+dis/2,y+dis*3/2,y+dis*2,y+dis*3/2,y+dis/2};
+                        for(int i = 0; i < 6; i++)
+                            buf[i] = new Vector2(pointX[i],pointY[i]);
+                    }
+                    gameController.setPolygon(buf,color,movable);
                     break;
-
+                }
+                case "Trapezoid":
+                {
+                    double dis = scale*size/2;
+                    Vector2[] buf = new Vector2[4];
+                    if(rotation == 1)
+                    {
+                        double[] pointX = {x,x+dis/2,x+dis*3/2,x+dis*2};
+                        double[] pointY = {y+dis*3/2,y+dis/2,y+dis/2,y+dis*3/2};
+                        for(int i = 0; i < 4; i++)
+                            buf[i] = new Vector2(pointX[i],pointY[i]);
+                    }else if(rotation == 2)
+                    {
+                        double[] pointX = {x+dis/2,x+dis*3/2,x+dis*3/2,x+dis/2};
+                        double[] pointY = {y,y+dis/2,y+dis*3/2,y+dis*2};
+                        for(int i = 0; i < 4; i++)
+                            buf[i] = new Vector2(pointX[i],pointY[i]);
+                    }else if(rotation == 3)
+                    {
+                        double[] pointX = {x,x+dis*2,x+dis*3/2,x+dis/2};
+                        double[] pointY = {y+dis/2,y+dis/2,y+dis*3/2,y+dis*3/2};
+                        for(int i = 0; i < 4; i++)
+                            buf[i] = new Vector2(pointX[i],pointY[i]);
+                    }else
+                    {
+                        double[] pointX = {x+dis/2,x+dis/2,x+dis*3/2,x+dis*3/2};
+                        double[] pointY = {y+dis*3/2,y+dis/2,y,y+dis*2};
+                        for(int i = 0; i < 4; i++)
+                            buf[i] = new Vector2(pointX[i],pointY[i]);
+                    }
+                    gameController.setPolygon(buf,color,movable);
+                    break;
+                }
             }
         }
         gameController.instantiateCompleted();

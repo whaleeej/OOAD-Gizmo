@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static Build.Controller.BuildController.Command.*;
+import static java.lang.Math.sqrt;
 
 public class BuildRender extends JPanel
 {
@@ -85,9 +86,11 @@ public class BuildRender extends JPanel
         switch (gizmo.getShape())
         {
             case "Ball":
+            {
                 int space = scale/5;
                 g.fillOval(x+space*size,y+space*size,size*scale*3/5,size*scale*3/5);
                 break;
+            }
             case "Circle":
                 g.fillOval(x,y,size*scale,size*scale);
                 break;
@@ -95,6 +98,7 @@ public class BuildRender extends JPanel
                 g.fillRect(x,y,size*scale,size*scale);
                 break;
             case "Triangle":
+            {
                 int[] pointX = new int[3];
                 int[] pointY = new int[3];
                 int[] bufferX = {x,x+size*scale,x+size*scale,x};
@@ -106,9 +110,53 @@ public class BuildRender extends JPanel
                 }
                 g.fillPolygon(pointX,pointY,3);
                 break;
+            }
             case "Hexagon":
-
+            {
+                int dis = scale*size/2;
+                int space = (int)(dis/2*sqrt(3));
+                int cx = x+dis;
+                int cy = y+dis;
+                if(rotation % 2 == 0)
+                {
+                    int[] pointX = {x,x+dis/2,x+dis*3/2,x+dis*2,x+dis*3/2,x+dis/2};
+                    int[] pointY = {cy,cy-space,cy-space,cy,cy+space,cy+space};
+                    g.fillPolygon(pointX,pointY,6);
+                }else
+                {
+                    int[] pointX = {cx,cx+space,cx+space,cx,cx-space,cx-space};
+                    int[] pointY = {y,y+dis/2,y+dis*3/2,y+dis*2,y+dis*3/2,y+dis/2};
+                    g.fillPolygon(pointX,pointY,6);
+                }
                 break;
+            }
+            case "Trapezoid":
+            {
+                int dis = scale*size/2;
+                if(rotation == 0)
+                {
+                    int[] pointX = {x,x+dis/2,x+dis*3/2,x+dis*2};
+                    int[] pointY = {y+dis*3/2,y+dis/2,y+dis/2,y+dis*3/2};
+                    g.fillPolygon(pointX,pointY,4);
+                }else if(rotation == 1)
+                {
+                    int[] pointX = {x+dis/2,x+dis*3/2,x+dis*3/2,x+dis/2};
+                    int[] pointY = {y,y+dis/2,y+dis*3/2,y+dis*2};
+                    g.fillPolygon(pointX,pointY,4);
+                }else if(rotation == 2)
+                {
+                    int[] pointX = {x,x+dis*2,x+dis*3/2,x+dis/2};
+                    int[] pointY = {y+dis/2,y+dis/2,y+dis*3/2,y+dis*3/2};
+                    g.fillPolygon(pointX,pointY,4);
+                }else
+                {
+                    int[] pointX = {x+dis/2,x+dis/2,x+dis*3/2,x+dis*3/2};
+                    int[] pointY = {y+dis*3/2,y+dis/2,y,y+dis*2};
+                    g.fillPolygon(pointX,pointY,4);
+                }
+                break;
+            }
+
         }
     }
 
