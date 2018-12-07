@@ -157,10 +157,8 @@ public class GameController {
         pc.initialRigid(new Absorber(this,x_min/10,  y_min/10,  width/10,  height/10,1,color));
     }
 
-    public void setPipe(double x, double y,double width, double len1,double len2,int type)
+    public void setPipe(double x, double y,double width, double len1,double len2,int type,Color color1, Color color2)
     {
-        Color color1=new Color(255,0,0);
-        Color color2=new Color(50,55,100);
         new Pipe(x/10, y/10,width/10, len1/10, len2/10, type,color1,color2);
     }
 

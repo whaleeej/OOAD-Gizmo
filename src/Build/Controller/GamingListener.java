@@ -29,7 +29,7 @@ public class GamingListener implements ActionListener
         GameController gameController = mainScene.getGameController();
         BuildController buildController = mainScene.getBuildController();
         gameController.resetGameController();
-        gameController.initialGameWorld(200, 0.1, 0.1);
+        gameController.initialGameWorld(200, 0, 0);
         ArrayList<Gizmo> gizmos = buildController.getBuildRender().getGizmos();
         for (Gizmo gizmo : gizmos)
         {
@@ -128,7 +128,11 @@ public class GamingListener implements ActionListener
                 }
                 case "Pipe":
                 {
-
+                    Color color2 = Gizmo.colorMap.get(color);
+                    rotation--;
+                    if(rotation == 0)
+                        rotation = 4;
+                    gameController.setPipe(x,y,(double)size*scale/4,(double)size*scale,(double) size*scale,rotation,color2,color);
                     break;
                 }
                 case "Absorb":

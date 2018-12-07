@@ -1,11 +1,14 @@
 package Build.Model;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Gizmo
 {
     public static final Color[] colorArray = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
             Color.CYAN, Color.BLUE, Color.MAGENTA, Color.GRAY, Color.BLACK};
+    public static final Map<Color,Color> colorMap;
     public static final String[] shapeArray = {"Ball","Circle","Square","Triangle","Hexagon",
             "Trapezoid","Pipe","Absorb","LeftFlipper","RightFlipper"};
     private String shape;
@@ -17,6 +20,14 @@ public class Gizmo
     private char key;
     private boolean movable;
 
+    static
+    {
+        colorMap = new HashMap<>();
+        for(int i = 0; i < colorArray.length; i++)
+        {
+            colorMap.put(colorArray[i],colorArray[(i+1)%colorArray.length]);
+        }
+    }
     public Gizmo(String shape, Color color,int x, int y)
     {
         this.shape = shape;

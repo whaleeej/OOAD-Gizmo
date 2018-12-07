@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static Build.Controller.BuildController.Command.*;
+import static java.lang.Math.cos;
 import static java.lang.Math.sqrt;
 
 public class BuildRender extends JPanel
@@ -158,10 +159,40 @@ public class BuildRender extends JPanel
             }
             case "Pipe":
             {
-//                int dis = scale*size/2;
-//                int[] pointX = {x+dis/2,x+dis/2,x+dis*3/2,x+dis*3/2};
-//                int[] pointY = {y+dis*3/2,y+dis/2,y,y+dis*2};
-//                g.fillPolygon(pointX,pointY,6);
+                int dis = scale*size/2;
+                if(rotation == 0)
+                {
+                    int[] pointX = {x,x+dis/2,x+dis/2,x+dis*2,x+dis*2,x};
+                    int[] pointY = {y,y,y+dis*3/2,y+dis*3/2,y+dis*2,y+dis*2};
+                    g.fillPolygon(pointX,pointY,6);
+                    g.setColor(Gizmo.colorMap.get(gizmo.getColor()));
+                    g.fillRect(x,y,dis/2,10);
+                    g.fillRect(x+dis*2-10,y+dis*3/2,10,dis/2);
+                }else if(rotation == 1)
+                {
+                    int[] pointX = {x,x+dis*2,x+dis*2,x+dis/2,x+dis/2,x};
+                    int[] pointY = {y,y,y+dis/2,y+dis/2,y+dis*2,y+dis*2};
+                    g.fillPolygon(pointX,pointY,6);
+                    g.setColor(Gizmo.colorMap.get(gizmo.getColor()));
+                    g.fillRect(x,y+dis*2-10,dis/2,10);
+                    g.fillRect(x+dis*2-10,y,10,dis/2);
+                }else if(rotation == 2)
+                {
+                    int[] pointX = {x,x+dis*2,x+dis*2,x+dis*3/2,x+dis*3/2,x};
+                    int[] pointY = {y,y,y+dis*2,y+dis*2,y+dis/2,y+dis/2};
+                    g.fillPolygon(pointX,pointY,6);
+                    g.setColor(Gizmo.colorMap.get(gizmo.getColor()));
+                    g.fillRect(x+dis*3/2,y+dis*2-10,dis/2,10);
+                    g.fillRect(x,y,10,dis/2);
+                }else
+                {
+                    int[] pointX = {x,x+dis*3/2,x+dis*3/2,x+dis*2,x+dis*2,x};
+                    int[] pointY = {y+dis*3/2,y+dis*3/2,y,y,y+dis*2,y+dis*2};
+                    g.fillPolygon(pointX,pointY,6);
+                    g.setColor(Gizmo.colorMap.get(gizmo.getColor()));
+                    g.fillRect(x+dis*3/2,y,dis/2,10);
+                    g.fillRect(x,y+dis*3/2,10,dis/2);
+                }
                 break;
             }
             case "Absorb":
