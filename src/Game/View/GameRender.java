@@ -75,9 +75,22 @@ public class GameRender extends JPanel implements PhysicsRender
 
                     double deltaX=geo.getMax().y*Math.cos(geo.getExtra().x)*scale;
                     double deltaY=geo.getMax().y*Math.sin(geo.getExtra().x)*scale;
-                    int xBuffer[]={(int)(x2),(int)(x1),(int)(x1+deltaX),(int)(x2+deltaX),};
-                    int yBuffer[]={(int)(y2),(int)(y1),(int)(y1+deltaY),(int)(y2+deltaY)};
+
+                    double radian=geo.getExtra().x;
+                    double radius=geo.getMax().x/2*scale;
+
+                    double minordeltaX=radius*Math.cos(radian);
+                    double minordeltaY=radius*Math.sin(radian);
+//                    int xBuffer[]={(int)(x2),(int)(x1),(int)(x1+deltaX),(int)(x2+deltaX),};
+//                    int yBuffer[]={(int)(y2),(int)(y1),(int)(y1+deltaY),(int)(y2+deltaY)};
+//                    g.drawPolygon(xBuffer,yBuffer,4);
+                    int xBuffer[]={(int)(x1+minordeltaX),(int)(x1+deltaX-minordeltaX) ,(int)(x2+deltaX-minordeltaX) ,(int)(x2+minordeltaX)};
+                    int yBuffer[]={(int)(y1+minordeltaY),(int)(y1+deltaY-minordeltaY) ,(int)(y2+deltaY-minordeltaY) ,(int)(y2+minordeltaY )};
                     g.fillPolygon(xBuffer,yBuffer,4);
+//                    g.drawLine((int)(x1+minordeltaX),(int)(y1+minordeltaY ),(int)(x1+deltaX-minordeltaX) ,(int)(y1+deltaY-minordeltaY) );
+//                    g.drawLine((int)(x2+minordeltaX),(int)(y2+minordeltaY ),(int)(x2+deltaX-minordeltaX) ,(int)(y2+deltaY-minordeltaY) );
+                    g.fillOval((int)((x1+x2)/2+minordeltaX-radius),(int)((y1+y2)/2+minordeltaY-radius),(int)(2*radius),(int)(2*radius));
+                    g.fillOval((int)((x1+x2)/2-minordeltaX+deltaX-radius),(int)((y1+y2)/2-minordeltaY+deltaY-radius),(int)(2*radius),(int)(2*radius));
                     break;
 
                 }
@@ -114,6 +127,18 @@ public class GameRender extends JPanel implements PhysicsRender
                     g.fillPolygon(xBuffer,yBuffer,buf.length);
                     break;
                 }
+                case Absorber:
+                {
+                    int x1=(int)((geo.getMin().x)*scale);
+                    int y1=(int)((geo.getMin().y)*scale);
+                    int x2=(int)((geo.getMax().x)*scale);
+                    int y2=(int)((geo.getMax().y)*scale);
+                    g.fillRect(x1, y1, x2-x1, y2-y1);
+                    g.setColor(new Color(255,255,255));
+                    g.fillOval(5*x1/6+x2/6, 5*y1/6+y2/6, 2*(x2-x1)/3, 2*(y2-y1)/3);
+                    break;
+                }
+
             }
         }
     }

@@ -36,4 +36,9 @@ public class Absorber extends Rectangle implements Trigger {
             gameController.updateTotlePoint(scale);
         }
     }
+
+    @Override
+    public Shape getShape() {
+        return Shape.Absorber;
+    }
 }
