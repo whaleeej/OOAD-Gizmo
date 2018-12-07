@@ -136,7 +136,7 @@ public class GameController {
     public void setTriangle(double x,double y,double len1,double len2,int type,Color color,boolean isMovable)
     {
         double m=isMovable?10:0;
-        pc.initialTriangle( 10,0,0,1.0,x/10, y/10, len1/10, len2/10, type, color);
+        pc.initialTriangle( m,0,0,1.0,x/10, y/10, len1/10, len2/10, type, color);
     }
 
     public void setPolygon(Vector2[] buf,Color color,boolean isMovable)
