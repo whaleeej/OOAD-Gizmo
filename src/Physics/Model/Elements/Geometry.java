@@ -3,7 +3,7 @@ package Physics.Model.Elements;
 import Physics.Model.Computation.Vector2;
 
 public interface Geometry {
-    public static enum Shape{Circle, Rectangle,RotationRectangle,Triangle,Polygon};
+    public static enum Shape{Circle, Rectangle,RotationRectangle,Triangle,Polygon,Absorber};
     //Get the upper-left point position info
     public Vector2 getMin();
     //Get the bottom-right point position info

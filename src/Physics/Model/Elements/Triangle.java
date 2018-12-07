@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static java.lang.Math.abs;
 
-public class Triangle extends Polygon  implements Texture ,Geometry{
+public class Triangle extends Polygon {
     public Vector2 min;
     public double len1;
     public double len2;
