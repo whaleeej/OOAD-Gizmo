@@ -126,6 +126,16 @@ public class GamingListener implements ActionListener
                     gameController.setPolygon(buf,color,movable);
                     break;
                 }
+                case "Pipe":
+                {
+
+                    break;
+                }
+                case "Absorb":
+                {
+                    gameController.setAbsorber(x,y,(double) scale * size, (double) scale * size, color);
+                    break;
+                }
             }
         }
         gameController.instantiateCompleted();

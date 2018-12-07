@@ -156,6 +156,21 @@ public class BuildRender extends JPanel
                 }
                 break;
             }
+            case "Pipe":
+            {
+//                int dis = scale*size/2;
+//                int[] pointX = {x+dis/2,x+dis/2,x+dis*3/2,x+dis*3/2};
+//                int[] pointY = {y+dis*3/2,y+dis/2,y,y+dis*2};
+//                g.fillPolygon(pointX,pointY,6);
+                break;
+            }
+            case "Absorb":
+            {
+                g.fillRect(x,y,size*scale,size*scale);
+                g.setColor(Color.white);
+                g.fillOval(x+size*scale/6,y+size*scale/6,size*scale*2/3,size*scale*2/3);
+                break;
+            }
 
         }
     }

@@ -152,11 +152,9 @@ public class GameController {
         pc.initialPolygon(m,0,0,1,buf2,color);
     }
 
-    public void setAbsorber(double x_min, double y_min, double width, double height,int scale)
+    public void setAbsorber(double x_min, double y_min, double width, double height, Color color)
     {
-        Color color=new Color(0,125,125);
         pc.initialRigid(new Absorber(this,x_min/10,  y_min/10,  width/10,  height/10,1,color));
-
     }
 
     public void setPipe(double x, double y,double width, double len1,double len2,int type)
