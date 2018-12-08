@@ -115,10 +115,14 @@ public class   PhysicsEngineController implements ActionListener {
                         ImpulseResolutionController irm=new ImpulseResolutionController(rigids.elementAt(i), rigids.elementAt(j),millsec/1000.0);
                         if(irm.isCollided) //if collision happen
                         {
-                            if(rigids.elementAt(i) instanceof  Trigger)
-                                ((Trigger) rigids.elementAt(i)).onTriggerEnter(rigids.elementAt(j));
-                            if(rigids.elementAt(j) instanceof  Trigger)
-                                ((Trigger) rigids.elementAt(j)).onTriggerEnter(rigids.elementAt(i));
+                            RigidBody r1=rigids.elementAt(i);
+                            RigidBody r2=rigids.elementAt(j);
+                            if(r1 instanceof  Trigger&&!(r2 instanceof Trigger))
+                                ((Trigger) r1).onTriggerEnter(r2);
+                            else if(r2 instanceof  Trigger&&!(r1 instanceof Trigger))
+                                ((Trigger) r2).onTriggerEnter(r1);
+                            else if(r2 instanceof  Trigger&&(r1 instanceof Trigger))
+                                ((Trigger) r2).onTriggerEnter(r1);
                         }
                 }
             }
