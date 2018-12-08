@@ -153,12 +153,12 @@ public class GamingListener implements ActionListener
             {
                 case "LeftFlipper":
                 {
-                    gameController.setRotationRectangle(x+length/12,y+length/12, length/6,length-length/12,false,'z');
+                    gameController.setRotationRectangle(x+length/12,y+length/12, length/6,length-length/12,false,'z',color);
                     break;
                 }
                 case "RightFlipper":
                 {
-                    gameController.setRotationRectangle(x+length-length/12,y+length/12, length/6,length-length/12,true,'x');
+                    gameController.setRotationRectangle(x+length-length/12,y+length/12, length/6,length-length/12,true,'x',color);
                     break;
                 }
             }
