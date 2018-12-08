@@ -103,7 +103,7 @@ public class GameController {
 //        buf[5]=new Vector2(670,240);
 //        setPolygon(buf,new Color(87,125,125),true);
 //        //Eg. SetRotationRectangle
-//        setRotationRectangle(490, 550, 20, 150, false, 'z');
+//        setRotationRectangle(490, 550, 20, 150, false, 'z',new Color(255,0,0));
 //        setRotationRectangle(290, 550, 20, 150, false, 'a');
 //        setRotationRectangle(810, 550, 20, 150, true, 'x');
     }
@@ -112,9 +112,9 @@ public class GameController {
     //Demo 1
 
     //Please set RotationRectangle at last
-    public void setRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key)
+    public void setRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key,Color color)
     {
-        pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key);
+        pc.initialRotationRectangle(x/10, y/10, w/10, l/10, isLeft, key,color);
     }
 
     public void setBall(double v_x,double v_y,double x,double y,double r,Color color)

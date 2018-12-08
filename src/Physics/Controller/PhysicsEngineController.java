@@ -176,9 +176,9 @@ public class   PhysicsEngineController implements ActionListener {
     /**
      * add Flipper
      */
-    public void initialRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key)
+    public void initialRotationRectangle(double x,double y,double w,double l,boolean isLeft,char key,Color color)
     {
-        rigid=new RotationRectangle(x,y,w,l,isLeft,key);
+        rigid=new RotationRectangle(x,y,w,l,isLeft,key,color);
         rigids.add(rigid);
     }
 
