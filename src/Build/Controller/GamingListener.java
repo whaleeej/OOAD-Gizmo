@@ -33,47 +33,46 @@ public class GamingListener implements ActionListener
         ArrayList<Gizmo> gizmos = buildController.getBuildRender().getGizmos();
         for (Gizmo gizmo : gizmos)
         {
-            int size = gizmo.getSize();
-            int scale = Grid.SCALE;
-            double x = (double) gizmo.getX() * scale;
-            double y = (double) gizmo.getY() * scale;
+            double length = gizmo.getSize()*Grid.SCALE;
+            double x = (double) gizmo.getX() * Grid.SCALE;
+            double y = (double) gizmo.getY() * Grid.SCALE;
             Color color = gizmo.getColor();
             int rotation = gizmo.getRotation() + 1;
             boolean movable = gizmo.isMovable();
             switch (gizmo.getShape())
             {
                 case "Ball":
-                    gameController.setBall(0, 0, x + scale * size / 2, y + scale * size / 2, scale * size * 3 / 10, color);
+                    gameController.setBall(0, 0, x + length / 2, y + length / 2, length * 3 / 10, color);
                     break;
                 case "Circle":
-                    gameController.setCircle(x + scale * size / 2, y + scale * size / 2, scale * size / 2, color);
+                    gameController.setCircle(x + length / 2, y + length / 2, length / 2, color);
                     break;
                 case "Square":
-                    gameController.setBox(x, y, (double) scale * size, (double) scale * size, color, movable);
+                    gameController.setBox(x, y, length, length, color, movable);
                     break;
                 case "Triangle":
                 {
                     if (rotation == 1)
                     {
-                        y += scale * size;
+                        y += length;
                         rotation = 2;
                     } else if(rotation == 2)
                     {
                         rotation = 1;
                     }else if(rotation == 3)
                     {
-                        x += scale * size;
+                        x += length;
                     }else
                     {
-                        x += scale * size;
-                        y += scale * size;
+                        x += length;
+                        y += length;
                     }
-                    gameController.setTriangle(x, y, (double) scale * size, (double) scale * size, rotation, color, movable);
+                    gameController.setTriangle(x, y, length, length, rotation, color, movable);
                     break;
                 }
                 case "Hexagon":
                 {
-                    int dis = scale*size/2;
+                    double dis = length/2;
                     double space = dis/2*sqrt(3);
                     double cx = x+dis;
                     double cy = y+dis;
@@ -96,7 +95,7 @@ public class GamingListener implements ActionListener
                 }
                 case "Trapezoid":
                 {
-                    double dis = scale*size/2;
+                    double dis = length/2;
                     Vector2[] buf = new Vector2[4];
                     if(rotation == 1)
                     {
@@ -132,12 +131,34 @@ public class GamingListener implements ActionListener
                     rotation--;
                     if(rotation == 0)
                         rotation = 4;
-                    gameController.setPipe(x,y,(double)size*scale/4,(double)size*scale,(double) size*scale,rotation,color2,color);
+                    gameController.setPipe(x,y,length/4,length,length,rotation,color2,color);
                     break;
                 }
                 case "Absorb":
                 {
-                    gameController.setAbsorber(x,y,(double) scale * size, (double) scale * size, color);
+                    gameController.setAbsorber(x,y,length, length, color);
+                    break;
+                }
+            }
+        }
+        for(Gizmo gizmo : gizmos)
+        {
+            double length = gizmo.getSize() * Grid.SCALE;
+            double x = (double) gizmo.getX() * Grid.SCALE;
+            double y = (double) gizmo.getY() * Grid.SCALE;
+            Color color = gizmo.getColor();
+            int rotation = gizmo.getRotation() + 1;
+            boolean movable = gizmo.isMovable();
+            switch (gizmo.getShape())
+            {
+                case "LeftFlipper":
+                {
+                    gameController.setRotationRectangle(x+length/12,y+length/12, length/6,length-length/12,false,'z');
+                    break;
+                }
+                case "RightFlipper":
+                {
+                    gameController.setRotationRectangle(x+length-length/12,y+length/12, length/6,length-length/12,true,'x');
                     break;
                 }
             }

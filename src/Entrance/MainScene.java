@@ -14,6 +14,10 @@ public class MainScene extends JFrame
 {
     private String mode;
     private JMenu menu;
+    private JMenuItem newBoard;
+    private JMenuItem load;
+    private JMenuItem save;
+
     private JPanel mainpanel;
     private BuildController buildController;
     private GameController gameController;
@@ -48,28 +52,9 @@ public class MainScene extends JFrame
         JMenuBar menuBar = new JMenuBar();
         menu = new JMenu("File");
 
-        JMenuItem newBoard = new JMenuItem("New");
-        newBoard.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                changeToGameMode();
-            }
-        });
-        //newBoard.addActionListener(listeners.get("nBL"));
-        JMenuItem load = new JMenuItem("Load");
-        load.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                changeToBuildMode();
-            }
-        });
-        //load.addActionListener(listeners.get("lL"));
-        JMenuItem save = new JMenuItem("Save");
-        //save.addActionListener(listeners.get("sL"));
+        newBoard = new JMenuItem("New");
+        load = new JMenuItem("Load");
+        save = new JMenuItem("Save");
 
         menu.add(newBoard);
         menu.add(load);
@@ -92,9 +77,24 @@ public class MainScene extends JFrame
     {
         mode = "Game";
         setTitle("GameScene");
-        //menu.setEnabled(false);
+        menu.setEnabled(false);
         CardLayout cardLayout = (CardLayout) mainpanel.getLayout();
         cardLayout.show(mainpanel,mode);
+    }
+
+    public JMenuItem getNewBoard()
+    {
+        return newBoard;
+    }
+
+    public JMenuItem getLoad()
+    {
+        return load;
+    }
+
+    public JMenuItem getSave()
+    {
+        return save;
     }
 
     public void addBuildScene(BuildScene buildScene)

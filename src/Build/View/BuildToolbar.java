@@ -77,8 +77,8 @@ public class BuildToolbar extends JPanel
         chooseButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Choose.png")));
         chooseButton.setContentAreaFilled(false);
         chooseButton.setBounds(10, 400, 30, 30);
-        rotateButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Rotate.png")));
-        rotateButton.setActionCommand("Rotate");
+        rotateButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/RotateRight.png")));
+        rotateButton.setActionCommand("RotateRight");
         rotateButton.setContentAreaFilled(false);
         rotateButton.setBounds(45, 400, 30, 30);
         deleteButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Delete.png")));

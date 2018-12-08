@@ -79,31 +79,30 @@ public class BuildRender extends JPanel
     private void draw(Gizmo gizmo, Graphics g)
     {
         g.setColor(gizmo.getColor());
-        int size = gizmo.getSize();
-        int scale = Grid.SCALE;
+        int length = gizmo.getSize()*Grid.SCALE;
         int rotation = gizmo.getRotation();
-        int x = gizmo.getX()*scale;
-        int y = gizmo.getY()*scale;
+        int x = gizmo.getX()*Grid.SCALE;
+        int y = gizmo.getY()*Grid.SCALE;
         switch (gizmo.getShape())
         {
             case "Ball":
             {
-                int space = scale/5;
-                g.fillOval(x+space*size,y+space*size,size*scale*3/5,size*scale*3/5);
+                int space = length/5;
+                g.fillOval(x+space,y+space,space*3,space*3);
                 break;
             }
             case "Circle":
-                g.fillOval(x,y,size*scale,size*scale);
+                g.fillOval(x,y,length,length);
                 break;
             case "Square":
-                g.fillRect(x,y,size*scale,size*scale);
+                g.fillRect(x,y,length,length);
                 break;
             case "Triangle":
             {
                 int[] pointX = new int[3];
                 int[] pointY = new int[3];
-                int[] bufferX = {x,x+size*scale,x+size*scale,x};
-                int[] bufferY = {y,y,y+size*scale,y+size*scale};
+                int[] bufferX = {x,x+length,x+length,x};
+                int[] bufferY = {y,y,y+length,y+length};
                 for(int i = 0; i < 3; i++)
                 {
                     pointX[i] = bufferX[(i+rotation+2)%4];
@@ -114,7 +113,7 @@ public class BuildRender extends JPanel
             }
             case "Hexagon":
             {
-                int dis = scale*size/2;
+                int dis = length/2;
                 int space = (int)(dis/2*sqrt(3));
                 int cx = x+dis;
                 int cy = y+dis;
@@ -133,7 +132,7 @@ public class BuildRender extends JPanel
             }
             case "Trapezoid":
             {
-                int dis = scale*size/2;
+                int dis = length/2;
                 if(rotation == 0)
                 {
                     int[] pointX = {x,x+dis/2,x+dis*3/2,x+dis*2};
@@ -159,7 +158,7 @@ public class BuildRender extends JPanel
             }
             case "Pipe":
             {
-                int dis = scale*size/2;
+                int dis = length/2;
                 if(rotation == 0)
                 {
                     int[] pointX = {x,x+dis/2,x+dis/2,x+dis*2,x+dis*2,x};
@@ -197,12 +196,25 @@ public class BuildRender extends JPanel
             }
             case "Absorb":
             {
-                g.fillRect(x,y,size*scale,size*scale);
+                g.fillRect(x,y,length,length);
                 g.setColor(Color.white);
-                g.fillOval(x+size*scale/6,y+size*scale/6,size*scale*2/3,size*scale*2/3);
+                g.fillOval(x+length/6,y+length/6,length*2/3,length*2/3);
                 break;
             }
-
+            case "LeftFlipper":
+            {
+                g.fillOval(x,y+length/12,length/6,length/6);
+                g.fillOval(x,y+length-length/6,length/6,length/6);
+                g.fillRect(x,y+length/6,length/6,length-length/12-length/6);
+                break;
+            }
+            case "RightFlipper":
+            {
+                g.fillOval(x+length-length/6,y+length/12,length/6,length/6);
+                g.fillOval(x+length-length/6,y+length-length/6,length/6,length/6);
+                g.fillRect(x+length-length/6,y+length/6,length/6,length-length/12-length/6);
+                break;
+            }
         }
     }
 

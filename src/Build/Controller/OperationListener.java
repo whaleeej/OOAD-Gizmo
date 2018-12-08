@@ -36,7 +36,7 @@ public class OperationListener implements ActionListener
         Gizmo chosenGizmo = buildController.getChosenGizmo();
         switch (e.getActionCommand())
         {
-            case "Rotate":
+            case "RotateRight":
                 chosenGizmo.rotate();
                 break;
             case "+":
