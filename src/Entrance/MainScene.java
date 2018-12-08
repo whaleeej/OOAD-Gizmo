@@ -31,7 +31,6 @@ public class MainScene extends JFrame
         this.setBackground(Color.green);
         mainpanel = new JPanel();
         this.setContentPane(mainpanel);
-        System.out.println(mainpanel.getWidth()+" "+ mainpanel.getHeight());
         mainpanel.setLayout(new CardLayout());
         initialization();
         this.setVisible(true);
@@ -40,10 +39,9 @@ public class MainScene extends JFrame
     public void initialization()
     {
         mode = "Build";
+        setMenu();
         buildController = new BuildController(this);
         gameController = new GameController(this);
-
-        setMenu();
         changeToBuildMode();
     }
 

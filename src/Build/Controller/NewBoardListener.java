@@ -3,20 +3,20 @@ package Build.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static Build.Controller.BuildController.Command.Choose;
-
-public class ChooseListener implements ActionListener
+public class NewBoardListener implements ActionListener
 {
     private BuildController buildController;
 
-    public ChooseListener(BuildController buildController)
+    public NewBoardListener(BuildController buildController)
     {
         this.buildController = buildController;
     }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        buildController.setCommand(Choose);
+        buildController.getBuildRender().getGizmos().clear();
+        buildController.getBuildRender().getGrid().clear();
         buildController.getBuildRender().repaint();
     }
 }

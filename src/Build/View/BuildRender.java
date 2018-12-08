@@ -28,7 +28,7 @@ public class BuildRender extends JPanel
         gizmos = new ArrayList<Gizmo>();
         Gizmo gizmo = new Gizmo("Ball",Color.red,3,3);
         gizmos.add(gizmo);
-        gizmo = new Gizmo("Square",Color.yellow,5,3,2,0,'\0',true);
+        gizmo = new Gizmo("Square",Color.yellow,5,3,2,0,' ',true);
         gizmos.add(gizmo);
         gizmo = new Gizmo("Square",Color.CYAN,3,6);
         gizmos.add(gizmo);
@@ -36,7 +36,7 @@ public class BuildRender extends JPanel
         gizmos.add(gizmo);
         gizmo = new Gizmo("Circle",Color.green,3,13);
         gizmos.add(gizmo);
-        gizmo = new Gizmo("Circle",Color.blue,17,5,3,0,'\0',false);
+        gizmo = new Gizmo("Circle",Color.blue,17,5,3,0,' ',false);
         gizmos.add(gizmo);
         grid.cover(gizmos);
     }
@@ -58,21 +58,18 @@ public class BuildRender extends JPanel
         if(buildController.getCommand().equals(Add))
         {
             draw(addingGizmo,g);
-        }else
+        }
+        Gizmo chosenGizmo = buildController.getChosenGizmo();
+        if(chosenGizmo != null)
         {
-
-            Gizmo chosenGizmo = buildController.getChosenGizmo();
-            if(chosenGizmo != null)
-            {
-                draw(chosenGizmo,g);
-                g.setColor(new Color(255,154,97));
-                int x = chosenGizmo.getX()*scale;
-                int y = chosenGizmo.getY()*scale;
-                int size = chosenGizmo.getSize()*scale;
-                g.drawRect(x,y,size,size);
-                g.drawRect(x+1,y+1,size-2,size-2);
-                g.drawRect(x+2,y+2,size-4,size-4);
-            }
+            draw(chosenGizmo,g);
+            g.setColor(new Color(255,154,97));
+            int x = chosenGizmo.getX()*scale;
+            int y = chosenGizmo.getY()*scale;
+            int size = chosenGizmo.getSize()*scale;
+            g.drawRect(x,y,size,size);
+            g.drawRect(x+1,y+1,size-2,size-2);
+            g.drawRect(x+2,y+2,size-4,size-4);
         }
     }
 

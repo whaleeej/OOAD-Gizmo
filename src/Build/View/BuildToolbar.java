@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 public class BuildToolbar extends JPanel
 {
@@ -18,15 +19,21 @@ public class BuildToolbar extends JPanel
     private JButton largeButton;
     private JButton smallButton;
     private JButton deleteButton;
-    private JButton rotateButton;
+    private JButton rotateRightButton;
+    private JButton rotateLeftButton;
     private JButton bindButton;
     private JLabel bindLabel;
     private JButton movableButton;
-    private JLabel movableLabel;
     //setting
     private JButton gravityButton;
     private JButton frictionButton;
     private JButton airFrictionButton;
+    private JSlider gravitySlider;
+    private JSlider frictionSlider;
+    private JSlider airFrictionSlider;
+    private JLabel gravityLabel;
+    private JLabel frictionLabel;
+    private JLabel airFrictionLabel;
     //run
     private JButton gamingButton;
 
@@ -62,10 +69,11 @@ public class BuildToolbar extends JPanel
         {
             shapeButtons[i] = new JButton(new ImageIcon(getClass().getResource("/Icon/gizmo/"+shapeArray[i]+".png")));
             shapeButtons[i].setActionCommand(shapeArray[i]);
+            shapeButtons[i].setToolTipText(shapeArray[i]);
             shapeButtons[i].setContentAreaFilled(false);
 //            shapeButtons[i].setBorderPainted(false);
             if(i == 0)
-                shapeButtons[i].setBounds(45,30,30,30);
+                shapeButtons[i].setBounds(10,30,30,30);
             else
                 shapeButtons[i].setBounds(10+(i-1)%3*35,100+(i-1)/3*40,30,30);
             this.add(shapeButtons[i]);
@@ -75,70 +83,115 @@ public class BuildToolbar extends JPanel
     private void setOperationButton()
     {
         chooseButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Choose.png")));
+        chooseButton.setToolTipText("Choose Gizmo to operate,or drag gizmo to move.");
         chooseButton.setContentAreaFilled(false);
         chooseButton.setBounds(10, 400, 30, 30);
-        rotateButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/RotateRight.png")));
-        rotateButton.setActionCommand("RotateRight");
-        rotateButton.setContentAreaFilled(false);
-        rotateButton.setBounds(45, 400, 30, 30);
+        rotateRightButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/RotateRight.png")));
+        rotateRightButton.setToolTipText("RotateRigth（→）");
+        rotateRightButton.setActionCommand("RotateRight");
+        rotateRightButton.setContentAreaFilled(false);
+        rotateRightButton.setBounds(80, 400, 30, 30);
+        rotateLeftButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/RotateLeft.png")));
+        rotateLeftButton.setToolTipText("RotateLeft(←)");
+        rotateLeftButton.setActionCommand("RotateLeft");
+        rotateLeftButton.setContentAreaFilled(false);
+        rotateLeftButton.setBounds(45, 400, 30, 30);
         deleteButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Delete.png")));
+        deleteButton.setToolTipText("Delete(Del)");
         deleteButton.setActionCommand("Delete");
         deleteButton.setContentAreaFilled(false);
-        deleteButton.setBounds(80, 400, 30, 30);
+        deleteButton.setBounds(80, 440, 30, 30);
         largeButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/+.png")));
+        largeButton.setToolTipText("Larger size (+)");
         largeButton.setActionCommand("+");
         largeButton.setContentAreaFilled(false);
         largeButton.setBounds(10, 440, 30, 30);
         bindButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Bind.png")));
         bindButton.setActionCommand("Bind");
         bindButton.setContentAreaFilled(false);
-        bindButton.setBounds(45, 440, 30, 30);
-        bindLabel = new JLabel("   z");
-        bindLabel.setBounds(80,440,30,30);
+        bindButton.setBounds(45, 480, 30, 30);
+        bindLabel = new JLabel("key:");
+        bindLabel.setFont(new Font("宋体",1,10));
+        bindLabel.setToolTipText("Bind.(Click and then type the key(a-z))");
+        bindLabel.setBounds(80,480,30,30);
 
         smallButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/-.png")));
+        smallButton.setToolTipText("Smaller size(-)");
         smallButton.setActionCommand("-");
         smallButton.setContentAreaFilled(false);
         smallButton.setBounds(10, 480, 30, 30);
         movableButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Movable.png")));
-        movableButton.setActionCommand("Movable");
+        movableButton.setActionCommand("Movable(↓)");
         movableButton.setContentAreaFilled(false);
-        movableButton.setBounds(45, 480, 30, 30);
-        movableLabel = new JLabel("  √");
-        movableLabel.setBounds(80,480,30,30);
+        movableButton.setBounds(45, 440, 30, 30);
+
 
         this.add(chooseButton);
-        this.add(rotateButton);
+        this.add(rotateRightButton);
+        this.add(rotateLeftButton);
         this.add(movableButton);
         this.add(largeButton);
         this.add(smallButton);
         this.add(deleteButton);
         this.add(bindButton);
         this.add(bindLabel);
-        this.add(movableLabel);
     }
 
     private void setSettingButton()
     {
         gravityButton = new JButton(new ImageIcon(getClass().getResource("/Icon/setting/Gravity.png")));
         gravityButton.setContentAreaFilled(false);
+        gravityButton.setActionCommand("g");
         gravityButton.setBounds(10, 550, 30, 30);
         frictionButton = new JButton(new ImageIcon(getClass().getResource("/Icon/setting/Friction.png")));
         frictionButton.setContentAreaFilled(false);
+        frictionButton.setActionCommand("u");
         frictionButton.setBounds(10, 590, 30, 30);
         airFrictionButton = new JButton(new ImageIcon(getClass().getResource("/Icon/setting/AirFriction.png")));
         airFrictionButton.setContentAreaFilled(false);
+        airFrictionButton.setActionCommand("c");
         airFrictionButton.setBounds(10,630,30,30);
+
+        gravitySlider = new JSlider(0,20,10);
+        gravitySlider.setBounds(45,548,65,40);
+        gravitySlider.setLabelTable(gravitySlider.createStandardLabels(10));
+        gravitySlider.setPaintLabels(true);
+        gravitySlider.setName("g");
+        frictionSlider = new JSlider(1,99,1);
+        frictionSlider.setBounds(45,588,65,40);
+        frictionSlider.setLabelTable(frictionSlider.createStandardLabels(49));
+        frictionSlider.setPaintLabels(true);
+        frictionSlider.setName("u");
+        airFrictionSlider = new JSlider(1,99,1);
+        airFrictionSlider.setBounds(45,628,65,40);
+        airFrictionSlider.setLabelTable(airFrictionSlider.createStandardLabels(49));
+        airFrictionSlider.setPaintLabels(true);
+        airFrictionSlider.setName("c");
+
+        Font font = new Font("宋体",1,10);
+        gravityLabel = new JLabel("g: 10");
+        gravityLabel.setBackground(Color.gray);
+        gravityLabel.setBounds(10,670,30,30);
+        frictionLabel = new JLabel("u: 1");
+        frictionLabel.setBounds(48,670,30,30);
+        airFrictionLabel = new JLabel("c: 1");
+        airFrictionLabel.setBounds(84,670,30,30);
 
         this.add(gravityButton);
         this.add(frictionButton);
         this.add(airFrictionButton);
+        this.add(gravitySlider);
+        this.add(frictionSlider);
+        this.add(airFrictionSlider);
+        this.add(gravityLabel);
+        this.add(frictionLabel);
+        this.add(airFrictionLabel);
     }
 
     private void setRunButton()
     {
         gamingButton = new JButton("Run");
-        gamingButton.setBounds(30, 700, 60, 60);
+        gamingButton.setBounds(30, 740, 60, 60);
         this.add(gamingButton);
     }
 
@@ -161,10 +214,58 @@ public class BuildToolbar extends JPanel
         //400-510
         g.drawLine(5, 520, 115, 520);
         g.drawString("Setting", 5, 540);
-        //550-660
-        g.drawLine(5, 670, 115, 670);
-        g.drawString("Run", 5, 690);
-        //700-760
+        //550-660+40
+        g.drawLine(5, 710, 115, 710);
+        g.drawString("Run", 5, 730);
+        //740-770
+    }
+
+    public void setMovableIcon(boolean movable)
+    {
+        if(movable)
+            movableButton.setIcon(new ImageIcon(getClass().getResource("/Icon/operation/Movable.png")));
+        else
+            movableButton.setIcon(new ImageIcon(getClass().getResource("/Icon/operation/Immovable.png")));
+    }
+
+    public void setOperation(Gizmo gizmo)
+    {
+        rotateLeftButton.setEnabled(!gizmo.isFlipper());
+        rotateRightButton.setEnabled(!gizmo.isFlipper());
+        this.setMovableIcon(gizmo.isMovable());
+        movableButton.setEnabled(gizmo.movableCanChange());
+        bindButton.setEnabled(gizmo.isFlipper());
+        bindLabel.setText("key:"+gizmo.getKey());
+    }
+
+    public JSlider getGravitySlider()
+    {
+        return gravitySlider;
+    }
+
+    public JSlider getFrictionSlider()
+    {
+        return frictionSlider;
+    }
+
+    public JSlider getAirFrictionSlider()
+    {
+        return airFrictionSlider;
+    }
+
+    public JLabel getGravityLabel()
+    {
+        return gravityLabel;
+    }
+
+    public JLabel getFrictionLabel()
+    {
+        return frictionLabel;
+    }
+
+    public JLabel getAirFrictionLabel()
+    {
+        return airFrictionLabel;
     }
 
     public JButton getGamingButton()
@@ -207,9 +308,14 @@ public class BuildToolbar extends JPanel
         return deleteButton;
     }
 
-    public JButton getRotateButton()
+    public JButton getRotateRightButton()
     {
-        return rotateButton;
+        return rotateRightButton;
+    }
+
+    public JButton getRotateLeftButton()
+    {
+        return rotateLeftButton;
     }
 
     public JButton getBindButton()
@@ -220,11 +326,6 @@ public class BuildToolbar extends JPanel
     public JLabel getBindLabel()
     {
         return bindLabel;
-    }
-
-    public JLabel getMovableLabel()
-    {
-        return movableLabel;
     }
 
     public JButton getGravityButton()

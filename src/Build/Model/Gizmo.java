@@ -1,6 +1,7 @@
 package Build.Model;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +37,12 @@ public class Gizmo
         this.y = y;
         this.size = 1;
         this.rotation = 0;
-        key = '\0';
+        if(shape.equals("LeftFlipper"))
+            key = 'z';
+        else if(shape.equals("RightFlipper"))
+            key = 'x';
+        else
+            key = ' ';
         if(shape.equals("Ball"))
             movable = true;
         else
@@ -55,16 +61,31 @@ public class Gizmo
         this.movable = movable;
     }
 
-    public void rotate()
+    public void rotate(boolean isRight)
     {
-        rotation++;
-        if(rotation == 4)
-            rotation = 0;
+        if(isRight)
+        {
+            rotation++;
+            if(rotation == 4)
+                rotation = 0;
+        }else
+        {
+            if(rotation == 0)
+                rotation = 4;
+            rotation--;
+        }
     }
 
     public boolean movableCanChange()
     {
         if(shape.equals("Square")||shape.equals("Triangle")||shape.equals("Hexagon")||shape.equals("Trapezoid"))
+            return true;
+        return false;
+    }
+
+    public boolean isFlipper()
+    {
+        if(shape.equals("LeftFlipper") || shape.equals("RightFlipper"))
             return true;
         return false;
     }

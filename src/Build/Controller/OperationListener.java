@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import static Build.Controller.BuildController.Command.Add;
+import static Build.Controller.BuildController.Command.*;
 
 public class OperationListener implements ActionListener
 {
@@ -22,10 +22,9 @@ public class OperationListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if(buildController.getCommand().equals(Add))
+        if(buildController.getCommand().equals(Bind))
         {
-            JOptionPane.showMessageDialog(buildController.getMainScene(),"Use choose button to choose a gizmo first!");
-            return;
+            buildController.setCommand(Choose);
         }
         if(buildController.getChosenGizmo() == null)
         {
@@ -37,7 +36,10 @@ public class OperationListener implements ActionListener
         switch (e.getActionCommand())
         {
             case "RotateRight":
-                chosenGizmo.rotate();
+                chosenGizmo.rotate(true);
+                break;
+            case "RotateLeft":
+                chosenGizmo.rotate(false);
                 break;
             case "+":
                 chosenGizmo.resize(true);
@@ -68,7 +70,10 @@ public class OperationListener implements ActionListener
                 break;
             case "Movable":
                 chosenGizmo.changeMovable();
-                buildController.getBuildToolbar().getMovableLabel().setText("  "+(chosenGizmo.isMovable()?"√":"×"));
+                buildController.getBuildToolbar().setMovableIcon(chosenGizmo.isMovable());
+                break;
+            case "Bind":
+                buildController.setCommand(Bind);
                 break;
         }
         buildController.getBuildRender().repaint();

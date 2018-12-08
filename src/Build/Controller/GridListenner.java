@@ -24,10 +24,7 @@ public class GridListenner implements MouseInputListener
     private int spaceX;
     private int spaceY;
     private int scale;
-    private JButton movableButton;
-    private JButton bindButton;
-    private JLabel movableLable;
-    private JLabel bindLable;
+    private BuildToolbar buildToolbar;
 
     public GridListenner(BuildController buildController)
     {
@@ -36,11 +33,7 @@ public class GridListenner implements MouseInputListener
         gizmos = buildController.getBuildRender().getGizmos();
         addingGizmo = buildController.getBuildRender().getAddingGizmo();
         scale = Grid.SCALE;
-        BuildToolbar buildToolbar = buildController.getBuildToolbar();
-        movableButton = buildToolbar.getMovableButton();
-        movableLable = buildToolbar.getMovableLabel();
-        bindButton = buildToolbar.getBindButton();
-        bindLable = buildToolbar.getBindLabel();
+        buildToolbar = buildController.getBuildToolbar();
     }
 
     @Override
@@ -57,9 +50,13 @@ public class GridListenner implements MouseInputListener
             case Add:
                 if (grid.check(addingGizmo))
                 {
-                    Gizmo gizmo = new Gizmo(addingGizmo.getShape(), addingGizmo.getColor(), addingGizmo.getX(), addingGizmo.getY());
+                    Gizmo gizmo = new Gizmo(addingGizmo.getShape(), addingGizmo.getColor(), addingGizmo.getX(), addingGizmo.getY(),
+                            addingGizmo.getSize(),addingGizmo.getRotation(),addingGizmo.getKey(),addingGizmo.isMovable());
                     grid.cover(gizmo);
                     gizmos.add(gizmo);
+                    buildController.setChosenGizmo(gizmo);
+                    tempGizmo = gizmo;
+                    buildToolbar.setOperation(tempGizmo);
                 } else
                 {
                     JOptionPane.showMessageDialog(buildController.getMainScene(), "This grid has been covered by other gizmo!");
@@ -76,11 +73,10 @@ public class GridListenner implements MouseInputListener
                 markY = tempGizmo.getY();
                 spaceX = x-markX;
                 spaceY = y-markY;
-                movableLable.setText("  "+(tempGizmo.isMovable()?"√":"×"));
-                if(tempGizmo.movableCanChange())
-                    movableButton.setEnabled(true);
-                else
-                    movableButton.setEnabled(false);
+                buildToolbar.setOperation(tempGizmo);
+                break;
+            case Bind:
+                buildController.setCommand(Choose);
                 break;
         }
     }
@@ -109,7 +105,7 @@ public class GridListenner implements MouseInputListener
     @Override
     public void mouseEntered(MouseEvent e)
     {
-
+        tempGizmo = buildController.getChosenGizmo();
     }
 
     @Override
@@ -117,8 +113,10 @@ public class GridListenner implements MouseInputListener
     {
         if (buildController.getCommand().equals(Add))
         {
-            addingGizmo.setX(-1);
-            addingGizmo.setY(-1);
+            addingGizmo.setX(Grid.NUMBERX);
+            addingGizmo.setY(Grid.NUMBERY);
+            buildController.setChosenGizmo(tempGizmo);
+            buildToolbar.setOperation(tempGizmo);
             repaint();
         }
     }
@@ -147,6 +145,8 @@ public class GridListenner implements MouseInputListener
             int y = e.getY();
             addingGizmo.setX(x/ scale);
             addingGizmo.setY(y/ scale);
+            buildController.setChosenGizmo(addingGizmo);
+            buildToolbar.setOperation(addingGizmo);
             repaint();
         }
     }

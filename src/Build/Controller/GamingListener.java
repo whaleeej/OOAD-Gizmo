@@ -2,6 +2,7 @@ package Build.Controller;
 
 import Build.Model.Gizmo;
 import Build.Model.Grid;
+import Build.Model.Setting;
 import Entrance.MainScene;
 import Game.Controller.GameController;
 import Physics.Model.Computation.Vector2;
@@ -29,7 +30,9 @@ public class GamingListener implements ActionListener
         GameController gameController = mainScene.getGameController();
         BuildController buildController = mainScene.getBuildController();
         gameController.resetGameController();
-        gameController.initialGameWorld(200, 0, 0);
+        Setting setting = buildController.getSetting();
+        //gameController.initialGameWorld(200,0.1,0.1);
+        gameController.initialGameWorld(setting.getRealGravity(), setting.getRealU(), setting.getRealC());
         ArrayList<Gizmo> gizmos = buildController.getBuildRender().getGizmos();
         for (Gizmo gizmo : gizmos)
         {
@@ -147,18 +150,17 @@ public class GamingListener implements ActionListener
             double x = (double) gizmo.getX() * Grid.SCALE;
             double y = (double) gizmo.getY() * Grid.SCALE;
             Color color = gizmo.getColor();
-            int rotation = gizmo.getRotation() + 1;
-            boolean movable = gizmo.isMovable();
+            char key = gizmo.getKey();
             switch (gizmo.getShape())
             {
                 case "LeftFlipper":
                 {
-                    gameController.setRotationRectangle(x+length/12,y+length/12, length/6,length-length/12,false,'z',color);
+                    gameController.setRotationRectangle(x+length/12,y+length/12, length/6,length-length/12,false,key,color);
                     break;
                 }
                 case "RightFlipper":
                 {
-                    gameController.setRotationRectangle(x+length-length/12,y+length/12, length/6,length-length/12,true,'x',color);
+                    gameController.setRotationRectangle(x+length-length/12,y+length/12, length/6,length-length/12,true,key,color);
                     break;
                 }
             }

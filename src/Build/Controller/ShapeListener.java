@@ -24,5 +24,13 @@ public class ShapeListener implements ActionListener
     {
         buildController.setCommand(Add);
         addingGizmo.setShape(e.getActionCommand());
+        String shape = addingGizmo.getShape();
+        if(shape.equals("LeftFlipper"))
+            addingGizmo.setKey('z');
+        else if(shape.equals("RightFlipper"))
+            addingGizmo.setKey('x');
+        else
+            addingGizmo.setKey(' ');
+        addingGizmo.setMovable(shape.equals("Ball"));
     }
 }
