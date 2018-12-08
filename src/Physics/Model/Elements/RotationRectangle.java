@@ -18,10 +18,12 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
     public boolean isRotate=false;
     public boolean isLeft=true;
     public boolean frozen=true;
+    public Color color;
 
-    public RotationRectangle(double endx,double endy, double w,double l,boolean isleft,char key) {
+    public RotationRectangle(double endx,double endy, double w,double l,boolean isleft,char key,Color color) {
 
         super(0, new Vector2(0,0), new Vector2(0,0), 1);
+        this.color=color;
         endPoint=new Vector2(endx,endy);
         widtd=w;
         length=l;
@@ -148,12 +150,12 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
 
     @Override
     public Color getColor() {
-        return new Color(0,0,0);
+        return color;
     }
 
     @Override
     public void setColor(Color color) {
-
+        this.color=color;
     }
 
     public Vector2 getSpeed(double l)
