@@ -107,12 +107,12 @@ public class BuildToolbar extends JPanel
         largeButton.setContentAreaFilled(false);
         largeButton.setBounds(10, 440, 30, 30);
         bindButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Bind.png")));
+        bindButton.setToolTipText("Bind.(Click and then type the key(a-z))");
         bindButton.setActionCommand("Bind");
         bindButton.setContentAreaFilled(false);
         bindButton.setBounds(45, 480, 30, 30);
         bindLabel = new JLabel("key:");
         bindLabel.setFont(new Font("宋体",1,10));
-        bindLabel.setToolTipText("Bind.(Click and then type the key(a-z))");
         bindLabel.setBounds(80,480,30,30);
 
         smallButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/-.png")));
@@ -121,7 +121,8 @@ public class BuildToolbar extends JPanel
         smallButton.setContentAreaFilled(false);
         smallButton.setBounds(10, 480, 30, 30);
         movableButton = new JButton(new ImageIcon(getClass().getResource("/Icon/operation/Movable.png")));
-        movableButton.setActionCommand("Movable(↓)");
+        movableButton.setActionCommand("Movable");
+        movableButton.setToolTipText("Movable(↓)");
         movableButton.setContentAreaFilled(false);
         movableButton.setBounds(45, 440, 30, 30);
 

@@ -30,10 +30,13 @@ public class GamingListener implements ActionListener
         GameController gameController = mainScene.getGameController();
         BuildController buildController = mainScene.getBuildController();
 
+        //step1
         gameController.resetGameController();
+        //step2
         Setting setting = buildController.getSetting();
         //gameController.initialGameWorld(200,0.1,0.1);
         gameController.initialGameWorld(setting.getRealGravity(), setting.getRealU(), setting.getRealC());
+        //step3
         ArrayList<Gizmo> gizmos = buildController.getBuildRender().getGizmos();
         for (Gizmo gizmo : gizmos)
         {
@@ -166,6 +169,7 @@ public class GamingListener implements ActionListener
                 }
             }
         }
+        //step4
         gameController.instantiateCompleted();
     }
 }
