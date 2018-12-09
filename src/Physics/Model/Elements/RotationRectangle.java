@@ -11,7 +11,7 @@ public class RotationRectangle extends RigidBody implements Geometry, Texture{
     public double widtd;
     public double length;
     public double radian;
-    public static int roundInterval=150;
+    public static int roundInterval=200;
 
     //for all direction ,true indicates clockwise, false indicates vise clockvise
     public boolean direction=false;

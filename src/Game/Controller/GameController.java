@@ -74,7 +74,7 @@ public class GameController {
         pc.initialResistance(u,c);
         pc.initialWall(-1, 0, 1, 80);//Left
         pc.initialWall(0, 80, 110, 1);//Bottom
-        pc.initialWall(110, 1, 1, 80);//Right
+        pc.initialWall(110, 0, 1, 80);//Right
         pc.initialWall(0, -1, 110, 1);//Up
         totlePoint=0;
         updateTotlePoint(0);

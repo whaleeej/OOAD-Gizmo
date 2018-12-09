@@ -13,7 +13,7 @@ import java.util.Vector;
 
 public class   PhysicsEngineController implements ActionListener {
     //Singleton Mode
-    public static int ticks=20; //frame rate is 40 FPS;
+    public static int ticks=16; //frame rate is 50 FPS;
     public static PhysicsEngineController pc=null;
     public static PhysicsEngineController getPhysicsEngineController()
     {
