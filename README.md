@@ -25,8 +25,8 @@ Build your gizmo game scene here with the provided tools.
 #### Demo
 ![](img/use01.jpg)
 #### How to use
-![](img/use02.jpg)  
-![](img/use03.jpg)  
-![](img/use04.jpg)  
+![](img/use02.jpg)
+![](img/use03.jpg)
+![](img/use04.jpg)
 ## Note  
 Reference-[SAT-Separating Axis Theorem](https://en.wikipedia.org/wiki/Hyperplane_separation_theorem)
