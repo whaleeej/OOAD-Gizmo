@@ -6,7 +6,7 @@ Object Oriented Analysis Design: Gizmo Game.
    - [vickiii7](https://github.com/vickiii7)    
 ## Architecture
 Design the three-layer stucture with MVC pattern for apllication development and management. 
-![](img/Archi.png)
+![](img/Arc.png)
 ### 1. Physic Layer
 Simulate a 2D physic based world including transition motion, trigger, resistance, collision(Algorithm SAT) and etc.  
 For my more elaborate one, please turn to [SPEJ-Physics2D](https://github.com/ceej7/SPEJ-Physics2D)
