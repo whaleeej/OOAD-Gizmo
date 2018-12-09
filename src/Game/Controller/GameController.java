@@ -125,7 +125,7 @@ public class GameController {
 
     public void setBall(double v_x,double v_y,double x,double y,double r,Color color)
     {
-        pc.initialBall( 1, v_x/10.0, v_y/10.0, 0.93, x/10, y/10, r/10, color);
+        pc.initialBall( 1, v_x/10.0, v_y/10.0, 0.95, x/10, y/10, r/10, color);
     }
 
     public void setCircle(double x,double y,double r,Color color)
