@@ -9,15 +9,15 @@ import java.util.Vector;
 public class PointListener {
     //Subscriber-Listener Mode
     private GameController gameController;
-    JTextField pointText;
-    public PointListener(JTextField jTextField)
+    JLabel pointText;
+    public PointListener(JLabel pointText)
     {
-        this.pointText=jTextField;
+        this.pointText = pointText;
     }
 
     public void onUpdateEvent(int score)
     {
-        pointText.setText(score+"");
+        pointText.setText("Score: "+score);
     }
 
 }

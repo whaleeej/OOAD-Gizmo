@@ -17,6 +17,7 @@ public class NewBoardListener implements ActionListener
     {
         buildController.getBuildRender().getGizmos().clear();
         buildController.getBuildRender().getGrid().clear();
+        buildController.setChosenGizmo(null);
         buildController.getBuildRender().repaint();
     }
 }

@@ -190,7 +190,8 @@ public class BuildToolbar extends JPanel
 
     private void setRunButton()
     {
-        gamingButton = new JButton("Run");
+        gamingButton = new JButton(new ImageIcon(getClass().getResource("/Icon/game/run.png")));
+        gamingButton.setContentAreaFilled(false);
         gamingButton.setBounds(30, 740, 60, 60);
         this.add(gamingButton);
     }
@@ -230,12 +231,15 @@ public class BuildToolbar extends JPanel
 
     public void setOperation(Gizmo gizmo)
     {
-        rotateLeftButton.setEnabled(!gizmo.isFlipper());
-        rotateRightButton.setEnabled(!gizmo.isFlipper());
-        this.setMovableIcon(gizmo.isMovable());
-        movableButton.setEnabled(gizmo.movableCanChange());
-        bindButton.setEnabled(gizmo.isFlipper());
-        bindLabel.setText("key:"+gizmo.getKey());
+        if(gizmo != null)
+        {
+            rotateLeftButton.setEnabled(!gizmo.isFlipper());
+            rotateRightButton.setEnabled(!gizmo.isFlipper());
+            this.setMovableIcon(gizmo.isMovable());
+            movableButton.setEnabled(gizmo.movableCanChange());
+            bindButton.setEnabled(gizmo.isFlipper());
+            bindLabel.setText("key:"+gizmo.getKey());
+        }
     }
 
     public JSlider getGravitySlider()

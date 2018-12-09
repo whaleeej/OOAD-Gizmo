@@ -3,9 +3,9 @@ package Game.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PauseListener implements ActionListener {
+public class StartPauseListener implements ActionListener {
     private GameController gameController;
-    public PauseListener(GameController gameController)
+    public StartPauseListener(GameController gameController)
     {
         this.gameController = gameController;
     }
@@ -14,6 +14,9 @@ public class PauseListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gameController.pauseGame();
+        if(gameController.isRunning())
+            gameController.pauseGame();
+        else
+            gameController.startGame();
     }
 }

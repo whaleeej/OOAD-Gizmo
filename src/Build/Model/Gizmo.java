@@ -29,25 +29,6 @@ public class Gizmo
             colorMap.put(colorArray[i],colorArray[(i+1)%colorArray.length]);
         }
     }
-    public Gizmo(String shape, Color color,int x, int y)
-    {
-        this.shape = shape;
-        this.color = color;
-        this.x = x;
-        this.y = y;
-        this.size = 1;
-        this.rotation = 0;
-        if(shape.equals("LeftFlipper"))
-            key = 'z';
-        else if(shape.equals("RightFlipper"))
-            key = 'x';
-        else
-            key = ' ';
-        if(shape.equals("Ball"))
-            movable = true;
-        else
-            movable = false;
-    }
 
     public Gizmo(String shape, Color color, int x, int y, int size, int rotation, char key, boolean movable)
     {

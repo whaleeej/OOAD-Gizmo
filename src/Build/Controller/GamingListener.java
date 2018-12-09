@@ -29,6 +29,7 @@ public class GamingListener implements ActionListener
         mainScene.changeToGameMode();
         GameController gameController = mainScene.getGameController();
         BuildController buildController = mainScene.getBuildController();
+
         gameController.resetGameController();
         Setting setting = buildController.getSetting();
         //gameController.initialGameWorld(200,0.1,0.1);

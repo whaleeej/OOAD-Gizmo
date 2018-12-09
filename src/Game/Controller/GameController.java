@@ -11,7 +11,7 @@ import Physics.Model.Computation.Vector2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Vector;
+import java.awt.event.KeyEvent;
 
 public class GameController {
 
@@ -22,6 +22,7 @@ public class GameController {
     private GameScene gameScene = null;
     private GameToolbar gameToolbar = null;
     private PhysicsEngineController pc=null;
+    private boolean running;
 
     private int totlePoint=0;
     //Listener lists
@@ -40,6 +41,7 @@ public class GameController {
         gameScene.add(gameRender);
         gameScene.add(gameToolbar);
         this.mainScene.addGameScene(gameScene);
+        running = false;
         //Toggle View button to Listener in Controller
         setListeners();
     }
@@ -50,9 +52,10 @@ public class GameController {
         //Intial button Listener action to perform logic operation
         //Avoid logic opetation
         gameToolbar.getBuildingButton().addActionListener(new BuildingListener(mainScene,this));
-        gameToolbar.getPauseButton().addActionListener(new PauseListener(this));
         gameToolbar.getProceedButton().addActionListener(new ProceedListener(this));
-        gameToolbar.getStartButton().addActionListener(new StartListener(this));
+        StartPauseListener startPauseListener = new StartPauseListener(this);
+        gameToolbar.getStartPauseButton().addActionListener(startPauseListener);
+        //gameToolbar.getStartPauseButton().registerKeyboardAction(startPauseListener, KeyStroke.getKeyStroke(KeyEvent.VK_SPACE,0),JComponent.WHEN_IN_FOCUSED_WINDOW);
         pointListener=new PointListener(gameToolbar.getPointText());
     }
 
@@ -74,6 +77,9 @@ public class GameController {
         pc.initialWall(110, 1, 1, 80);//Right
         pc.initialWall(0, -1, 110, 1);//Up
         totlePoint=0;
+        updateTotlePoint(0);
+        running = false;
+        gameToolbar.setRunning(running);
 
         //Eg. setBall(x,y,r,color)
 //        setBall(0,0,800, 30, 20, new Color(255, 0, 0));
@@ -174,11 +180,15 @@ public class GameController {
     {
         if(pc==null) return;
         pc.startPhysicsRunning();
+        running = true;
+        gameToolbar.setRunning(running);
     }
     public void  pauseGame()
     {
         if(pc==null) return;
         pc.pausePhysicsRunning();
+        running = false;
+        gameToolbar.setRunning(running);
     }
 
     public void proceedGame()
@@ -193,14 +203,14 @@ public class GameController {
         pc.resetPhysicEngine();
     }
 
-
+    public boolean isRunning()
+    {
+        return running;
+    }
 
     //Change the value of totlePoint
     public void updateTotlePoint(int scale) {
         totlePoint += scale;
         pointListener.onUpdateEvent(totlePoint);
     }
-
-
-
 }

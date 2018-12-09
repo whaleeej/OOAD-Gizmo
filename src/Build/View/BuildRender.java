@@ -24,21 +24,21 @@ public class BuildRender extends JPanel
         super();
         this.buildController = buildController;
         grid = new Grid();
-        addingGizmo = new Gizmo("Ball",Color.red,0,0);
+        addingGizmo = new Gizmo("Ball",Color.red,0,0,1,0,' ',true);
         gizmos = new ArrayList<Gizmo>();
-        Gizmo gizmo = new Gizmo("Ball",Color.red,3,3);
-        gizmos.add(gizmo);
-        gizmo = new Gizmo("Square",Color.yellow,5,3,2,0,' ',true);
-        gizmos.add(gizmo);
-        gizmo = new Gizmo("Square",Color.CYAN,3,6);
-        gizmos.add(gizmo);
-        gizmo = new Gizmo("Square",Color.ORANGE,3,10);
-        gizmos.add(gizmo);
-        gizmo = new Gizmo("Circle",Color.green,3,13);
-        gizmos.add(gizmo);
-        gizmo = new Gizmo("Circle",Color.blue,17,5,3,0,' ',false);
-        gizmos.add(gizmo);
-        grid.cover(gizmos);
+//        Gizmo gizmo = new Gizmo("Ball",Color.red,3,3);
+//        gizmos.add(gizmo);
+//        gizmo = new Gizmo("Square",Color.yellow,5,3,2,0,' ',true);
+//        gizmos.add(gizmo);
+//        gizmo = new Gizmo("Square",Color.CYAN,3,6);
+//        gizmos.add(gizmo);
+//        gizmo = new Gizmo("Square",Color.ORANGE,3,10);
+//        gizmos.add(gizmo);
+//        gizmo = new Gizmo("Circle",Color.green,3,13);
+//        gizmos.add(gizmo);
+//        gizmo = new Gizmo("Circle",Color.blue,17,5,3,0,' ',false);
+//        gizmos.add(gizmo);
+//        grid.cover(gizmos);
     }
 
     @Override

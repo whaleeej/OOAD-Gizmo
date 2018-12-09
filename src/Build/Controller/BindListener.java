@@ -27,7 +27,7 @@ public class BindListener implements KeyListener
     {
         if(buildController.getCommand().equals(Bind))
         {
-            System.out.println("P "+e.getKeyChar()+ " "+e.getKeyCode());
+            //System.out.println("P "+e.getKeyChar()+ " "+e.getKeyCode());
             int key = e.getKeyCode();
             if(key > 64 && key < 91)
             {

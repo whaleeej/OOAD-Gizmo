@@ -43,20 +43,24 @@ public class OperationListener implements ActionListener
                 break;
             case "+":
                 chosenGizmo.resize(true);
-                if (grid.check(chosenGizmo))
+                if(buildController.getCommand().equals(Choose))
                 {
-                    grid.replace(chosenGizmo);
-                } else
-                {
-                    chosenGizmo.resize(false);
-                    JOptionPane.showMessageDialog(buildController.getMainScene(), "This grid has been covered by other gizmo!");
+                    if (grid.check(chosenGizmo))
+                    {
+                        grid.replace(chosenGizmo);
+                    } else
+                    {
+                        chosenGizmo.resize(false);
+                        JOptionPane.showMessageDialog(buildController.getMainScene(), "This grid has been covered by other gizmo!");
+                    }
                 }
                 break;
             case "-":
                 if (chosenGizmo.getSize()>1)
                 {
                     chosenGizmo.resize(false);
-                    grid.replace(chosenGizmo);
+                    if(buildController.getCommand().equals(Choose))
+                       grid.replace(chosenGizmo);
                 } else
                 {
                     JOptionPane.showMessageDialog(buildController.getMainScene(), "This gizmo can't be smaller!");
