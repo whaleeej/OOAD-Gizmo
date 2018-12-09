@@ -47,6 +47,8 @@ public class BuildController
     {
         //File
         mainScene.getNewBoard().addActionListener(new NewBoardListener(this));
+        mainScene.getSave().addActionListener(new SaveBoardListner(this));
+        mainScene.getLoad().addActionListener(new LoadBoardListner(this));
 
         //buildToolbar set Listeners
         //Shape and Color
