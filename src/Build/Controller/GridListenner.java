@@ -62,6 +62,8 @@ public class GridListenner implements MouseInputListener
                     JOptionPane.showMessageDialog(buildController.getMainScene(), "This grid has been covered by other gizmo!");
                 }
                 break;
+            case Bind:
+                buildController.setCommand(Choose);
             case Choose:
                 int x = e.getX() / scale;
                 int y = e.getY() / scale;
@@ -74,9 +76,6 @@ public class GridListenner implements MouseInputListener
                 spaceX = x-markX;
                 spaceY = y-markY;
                 buildToolbar.setOperation(tempGizmo);
-                break;
-            case Bind:
-                buildController.setCommand(Choose);
                 break;
         }
     }
