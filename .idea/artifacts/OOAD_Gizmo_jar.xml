@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="OOAD-Gizmo:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/OOAD_Gizmo_jar</output-path>
-    <root id="archive" name="OOAD-Gizmo.jar">
-      <element id="module-output" name="OOAD-Gizmo" />
-    </root>
-  </artifact>
-</component>
