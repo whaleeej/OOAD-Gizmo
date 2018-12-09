@@ -11,17 +11,17 @@ Design the three-layer stucture with MVC pattern for apllication development and
 Simulate a 2D physic based world including transition motion, trigger, resistance, collision(Algorithm SAT) and etc.  
 For my more elaborate one, please turn to [SPEJ-Physics2D](https://github.com/ceej7/SPEJ-Physics2D)
 #### DCD
-![](img/DCD-Phy.jpg)
+![](img/DCD-Phy.png)
 ### 2. Game Layer
 An instant game will be started. Rotate your flippers to hit the little balls. Once the ball is assimilated by the absorter, you simply win 1 score.
 #### DCD
-![](img/DCD-Game.jpg)
+![](img/DCD-Game.png)
 #### Demo
 ![](img/use05.jpg)
 ### 3. Build Layer
 Build your gizmo game scene here with the provided tools.
 #### DCD
-![](img/DCD-Build.jpg)
+![](img/DCD-Build.png)
 #### Demo
 ![](img/use01.jpg)
 #### How to use
