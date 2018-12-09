@@ -6,7 +6,7 @@ Object Oriented Analysis Design: Gizmo Game.
    - [vickiii7](https://github.com/vickiii7)    
 ## Architecture
 Design the three-layer stucture with MVC pattern for apllication development and management. 
-![](img/Archi.jpg)
+![](img/Archi.png)
 ### 1. Physic Layer
 Simulate a 2D physic based world including transition motion, trigger, resistance, collision(Algorithm SAT) and etc.  
 For my more elaborate one, please turn to [SPEJ-Physics2D](https://github.com/ceej7/SPEJ-Physics2D)
@@ -25,8 +25,8 @@ Build your gizmo game scene here with the provided tools.
 #### Demo
 ![](img/use01.jpg)
 #### How to use
-![](img/use02.jpg)
-![](img/use03.jpg)
-![](img/use04.jpg)
-## Note 
+![](img/use02.jpg)  
+![](img/use03.jpg)  
+![](img/use04.jpg)  
+## Note  
 Reference-[SAT-Separating Axis Theorem](https://en.wikipedia.org/wiki/Hyperplane_separation_theorem)
