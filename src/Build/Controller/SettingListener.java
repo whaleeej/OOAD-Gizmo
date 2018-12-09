@@ -53,20 +53,20 @@ public class SettingListener implements ChangeListener,ActionListener
             case "g":
                 slider = buildToolbar.getGravitySlider();
                 slider.setValue(10);
-                buildToolbar.getGravityLabel().setText("g: "+slider.getValue());
-                setting.setGravity(10);
+                //buildToolbar.getGravityLabel().setText("g: "+slider.getValue());
+                //setting.setGravity(10);
                 break;
             case "u":
                 slider = buildToolbar.getFrictionSlider();
                 slider.setValue(1);
-                buildToolbar.getFrictionLabel().setText("u: "+slider.getValue());
-                setting.setU(1);
+                //buildToolbar.getFrictionLabel().setText("u: "+slider.getValue());
+                //setting.setU(1);
                 break;
             case "c":
                 slider =buildToolbar.getAirFrictionSlider();
                 slider.setValue(1);
-                buildToolbar.getAirFrictionLabel().setText("c: "+slider.getValue());
-                setting.setC(1);
+                //buildToolbar.getAirFrictionLabel().setText("c: "+slider.getValue());
+                //setting.setC(1);
                 break;
         }
     }
