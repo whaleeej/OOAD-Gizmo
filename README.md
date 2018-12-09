@@ -24,7 +24,7 @@ Build your gizmo game scene here with the provided tools.
 ![](img/DCD-Build.png)
 - Demo
 ![](img/use01.jpg)
-- How to use
+- How to use  
 ![](img/use02.jpg)
 ![](img/use03.jpg)
 ![](img/use04.jpg)
